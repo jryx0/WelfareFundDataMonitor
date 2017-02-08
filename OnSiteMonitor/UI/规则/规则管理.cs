@@ -131,7 +131,27 @@ namespace OnSiteFundComparer.UI
             {
                 DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
                 configDB.ExecuteNonQuery("delete from CompareAim where rowid = " + rowid);
-                Init();
+
+
+                ReSetGridView();
+                //int index = dataGridView1.FirstDisplayedScrollingRowIndex;
+                //int cIndex = -1;
+                //if (this.dataGridView1.CurrentCell != null)
+                //    cIndex = this.dataGridView1.CurrentCell.RowIndex;
+
+                //Init();
+
+                //if (cIndex > 0 && cIndex < this.dataGridView1.Rows.Count)
+                //    this.dataGridView1.CurrentCell = this.dataGridView1.Rows[cIndex].Cells[1];
+                //if (index > -1)
+                //    dataGridView1.FirstDisplayedScrollingRowIndex = index;
+
+
+
+
+
+
+                
             }
             catch(Exception ex)
             {
@@ -149,18 +169,18 @@ namespace OnSiteFundComparer.UI
             int.TryParse(rowid, out dlg.CurrentRuleID);
             dlg.ShowDialog();
 
+            ReSetGridView();
+            //int index = dataGridView1.FirstDisplayedScrollingRowIndex;
+            //int cIndex = -1;
+            //if (this.dataGridView1.CurrentCell != null)
+            //    cIndex = this.dataGridView1.CurrentCell.RowIndex;
 
-            int index = dataGridView1.FirstDisplayedScrollingRowIndex;
-            int cIndex = -1;
-            if (this.dataGridView1.CurrentCell != null)
-                cIndex = this.dataGridView1.CurrentCell.RowIndex;
+            //Init();
 
-            Init();
-
-            if (cIndex > 0 && cIndex < this.dataGridView1.Rows.Count)
-                this.dataGridView1.CurrentCell = this.dataGridView1.Rows[cIndex].Cells[1];
-            if (index > -1)
-                dataGridView1.FirstDisplayedScrollingRowIndex = index;
+            //if (cIndex > 0 && cIndex < this.dataGridView1.Rows.Count)
+            //    this.dataGridView1.CurrentCell = this.dataGridView1.Rows[cIndex].Cells[1];
+            //if (index > -1)
+            //    dataGridView1.FirstDisplayedScrollingRowIndex = index;
 
         }
 
@@ -194,6 +214,21 @@ namespace OnSiteFundComparer.UI
                 this.configDB = tf.configDB;
                 this.ImportDB = tf.ImportDB;
             }
+        }
+
+        private void ReSetGridView()
+        {
+            int index = dataGridView1.FirstDisplayedScrollingRowIndex;
+            int cIndex = -1;
+            if (this.dataGridView1.CurrentCell != null)
+                cIndex = this.dataGridView1.CurrentCell.RowIndex;
+
+            Init();
+
+            if (cIndex > 0 && cIndex < this.dataGridView1.Rows.Count)
+                this.dataGridView1.CurrentCell = this.dataGridView1.Rows[cIndex].Cells[1];
+            if (index > -1)
+                dataGridView1.FirstDisplayedScrollingRowIndex = index;
         }
 
        
