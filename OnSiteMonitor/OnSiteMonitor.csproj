@@ -530,7 +530,8 @@
       <SubType>Designer</SubType>
     </None>
     <EmbeddedResource Include="PanoramaDemo.tssp" />
-    <None Include="Data\OnSiteFundComparer.db" />
+    <None Include="Data\config.tmpa" />
+    <None Include="Data\config.wfm" />
     <None Include="OnSiteMonitor_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
