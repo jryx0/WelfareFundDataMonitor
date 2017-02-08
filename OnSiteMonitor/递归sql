@@ -1,0 +1,57 @@
+--表结构
+CREATE TABLE HB_Region (RowID      INTEGER      PRIMARY KEY AUTOINCREMENT,
+                        ParentID   INTEGER,
+                        RegionCode CHAR (10),
+                        RegionName CHAR (25),
+                        Level      INTEGER,
+                        IP         VARCHAR (50),
+                        Seq        INTEGER,
+                        Status     INTEGER      DEFAULT (1) );
+--深度递归查询
+WITH RECURSIVE org (rowid,
+                    parentid,
+                    regioncode,
+                    regionname,
+                    level,
+                    seq) AS (VALUES (1,
+- 1,
+'HB',
+'湖北省',
+0,
+0) 
+UNION ALL
+SELECT hb_region.RowID,
+       hb_region.ParentID,
+       hb_region.RegionCode,
+       hb_region.RegionName,
+       hb_region.Level + 1 AS lev,
+       hb_region.seq
+  FROM hb_region
+       JOIN
+       org ON hb_region.parentid = org.rowid
+ ORDER BY lev DESC,
+          hb_region.seq) SELECT substr('...................', 1, level * 3) || regionname AS 地区
+                           FROM org;
+--新增
+INSERT INTO hb_region (RegionCode,
+                      RegionName,
+                      ParentID,
+                      Level,
+                      seq) SELECT RegionCode,
+                                  RegionName,
+                                  4,
+                                  Level,
+                                  seq
+                             FROM region
+                            WHERE level = 2 AND 
+                                  parentid = 6;
+
+SELECT *
+  FROM hb_region
+ ORDER BY parentid,
+          seq;
+
+SELECT *
+  FROM region
+ WHERE level = 2
+ ORDER BY seq;

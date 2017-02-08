@@ -1,0 +1,644 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B182F937-E55E-406A-851F-9464B6F8B620}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OnSiteFundComparer</RootNamespace>
+    <AssemblyName>湖北纪委精准扶贫政策落实情况监督检查%28单机版%29</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\admin\Desktop\发布\Client\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>0A0987592426CB717F0EE64897941506A7D31903</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>OnSiteMonitor_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\..\..\..\Downloads\NPOI binary 2.1.3.1\dotnet4\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.5\lib\net40-client\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\..\..\..\..\Downloads\NPOI binary 2.1.3.1\dotnet4\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\..\..\..\..\Downloads\NPOI binary 2.1.3.1\dotnet4\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\..\..\..\..\Downloads\NPOI binary 2.1.3.1\dotnet4\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\..\..\..\..\Downloads\NPOI binary 2.1.3.1\dotnet4\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.101.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.101.0\lib\net40\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.101.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.101.0\lib\net40\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.101.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.101.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.WinControls, Version=2015.1.225.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.GridView, Version=2015.1.225.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.WinControls.Themes.TelerikMetroBlue, Version=2015.1.225.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.WinControls.UI, Version=2015.1.225.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="TelerikCommon, Version=2015.1.225.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\DataCheck.cs" />
+    <Compile Include="Business\MultiCalculate.cs" />
+    <Compile Include="ImportExcelPO.cs" />
+    <Compile Include="Models\Clues.cs" />
+    <Compile Include="Models\DataHelper.cs" />
+    <Compile Include="Models\DataSetting.cs" />
+    <Compile Include="Models\ExcelHelper.cs" />
+    <Compile Include="Service\CompareAimService.cs" />
+    <Compile Include="Service\DataCheckService.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Test\Sql工具窗口.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\Sql工具窗口.Designer.cs">
+      <DependentUpon>Sql工具窗口.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test\TestForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\TestForm1.Designer.cs">
+      <DependentUpon>TestForm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DataStandardize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\DataStandardize.Designer.cs">
+      <DependentUpon>DataStandardize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\login\AddUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\login\AddUser.Designer.cs">
+      <DependentUpon>AddUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\DataMgr.cs" />
+    <Compile Include="Business\FundComparing.cs" />
+    <Compile Include="DAL\MySqlite.cs" />
+    <Compile Include="DAL\MySqliteORM.cs" />
+    <Compile Include="UI\login\ConnectService.cs" />
+    <Compile Include="UI\login\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\login\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\login\LoginContext.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataItem.cs" />
+    <Compile Include="Models\Task.cs" />
+    <Compile Include="UI\login\ModifyPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\login\ModifyPassword.Designer.cs">
+      <DependentUpon>ModifyPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\CollisionAimService.cs" />
+    <Compile Include="Service\DataFormatService.cs" />
+    <Compile Include="Service\DataItemStuctServices.cs" />
+    <Compile Include="Service\LoginServices.cs" />
+    <Compile Include="UI\login\StartUp.cs" />
+    <Compile Include="UI\UploadResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UploadResult.Designer.cs">
+      <DependentUpon>UploadResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\任务.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\任务.Designer.cs">
+      <DependentUpon>任务.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\地区设置.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\地区设置.Designer.cs">
+      <DependentUpon>地区设置.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\数据查询.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\数据查询.Designer.cs">
+      <DependentUpon>数据查询.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\数据比对.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\数据比对.Designer.cs">
+      <DependentUpon>数据比对.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\数据设置.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\数据设置.Designer.cs">
+      <DependentUpon>数据设置.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\线索管理\ImportCluePO.cs" />
+    <Compile Include="UI\线索管理\ImportCluePO_bak.cs" />
+    <Compile Include="UI\线索管理\ImportExcelCluesPO.cs" />
+    <Compile Include="UI\线索管理\ImportResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\线索管理\ImportResult.Designer.cs">
+      <DependentUpon>ImportResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\线索管理\UploadCluePO.cs" />
+    <Compile Include="UI\线索管理\线索核查结果录入.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\线索管理\线索核查结果录入.Designer.cs">
+      <DependentUpon>线索核查结果录入.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\线索管理\核查录入.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\线索管理\核查录入.Designer.cs">
+      <DependentUpon>核查录入.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\线索管理\核查批量导入.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\线索管理\核查批量导入.Designer.cs">
+      <DependentUpon>核查批量导入.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\线索管理\线索查询.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\线索管理\线索查询.Designer.cs">
+      <DependentUpon>线索查询.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\结果上报.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\结果上报.Designer.cs">
+      <DependentUpon>结果上报.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\结果数据库管理.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\结果数据库管理.Designer.cs">
+      <DependentUpon>结果数据库管理.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\规则\规则.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\规则\规则.Designer.cs">
+      <DependentUpon>规则.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\系统设置.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\系统设置.Designer.cs">
+      <DependentUpon>系统设置.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\显示数据列表.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\显示数据列表.Designer.cs">
+      <DependentUpon>显示数据列表.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\规则\比对项目.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\规则\比对项目.Designer.cs">
+      <DependentUpon>比对项目.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\规则\比对项目设置.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\规则\比对项目设置.Designer.cs">
+      <DependentUpon>比对项目设置.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\添加文件分类.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\添加文件分类.Designer.cs">
+      <DependentUpon>添加文件分类.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\目录设置.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\目录设置.Designer.cs">
+      <DependentUpon>目录设置.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\规则\规则模板.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\规则\规则模板.Designer.cs">
+      <DependentUpon>规则模板.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\规则\规则模板添加.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\规则\规则模板添加.Designer.cs">
+      <DependentUpon>规则模板添加.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\规则\规则管理.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\规则\规则管理.Designer.cs">
+      <DependentUpon>规则管理.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\设置时间范围.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\设置时间范围.Designer.cs">
+      <DependentUpon>设置时间范围.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\输入目录设置.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\输入目录设置.Designer.cs">
+      <DependentUpon>输入目录设置.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\输出目录设置.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\输出目录设置.Designer.cs">
+      <DependentUpon>输出目录设置.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\项目管理\项目管理.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\项目管理\项目管理.Designer.cs">
+      <DependentUpon>项目管理.cs</DependentUpon>
+    </Compile>
+    <Compile Include="比对数据管理\UI\CompareDataSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="比对数据管理\UI\CompareDataSettingForm.Designer.cs">
+      <DependentUpon>CompareDataSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="比对数据管理\UI\比对数据格式编辑.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="比对数据管理\UI\比对数据格式编辑.Designer.cs">
+      <DependentUpon>比对数据格式编辑.cs</DependentUpon>
+    </Compile>
+    <Compile Include="源数据管理\UI\SourceDataSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="源数据管理\UI\SourceDataSettingForm.Designer.cs">
+      <DependentUpon>SourceDataSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="源数据管理\UI\日期标签管理.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="源数据管理\UI\日期标签管理.Designer.cs">
+      <DependentUpon>日期标签管理.cs</DependentUpon>
+    </Compile>
+    <Compile Include="源数据管理\UI\添加源数据文件.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="源数据管理\UI\添加源数据文件.Designer.cs">
+      <DependentUpon>添加源数据文件.cs</DependentUpon>
+    </Compile>
+    <Compile Include="源数据管理\UI\源数据格式编辑.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="源数据管理\UI\源数据格式编辑.Designer.cs">
+      <DependentUpon>源数据格式编辑.cs</DependentUpon>
+    </Compile>
+    <Compile Include="源数据管理\UI\选择标签.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="源数据管理\UI\选择标签.Designer.cs">
+      <DependentUpon>选择标签.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Test\Sql工具窗口.resx">
+      <DependentUpon>Sql工具窗口.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\TestForm1.resx">
+      <DependentUpon>TestForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\DataStandardize.resx">
+      <DependentUpon>DataStandardize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\login\AddUser.resx">
+      <DependentUpon>AddUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\login\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\login\ModifyPassword.resx">
+      <DependentUpon>ModifyPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UploadResult.resx">
+      <DependentUpon>UploadResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\任务.resx">
+      <DependentUpon>任务.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\地区设置.resx">
+      <DependentUpon>地区设置.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\数据查询.resx">
+      <DependentUpon>数据查询.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\数据比对.resx">
+      <DependentUpon>数据比对.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\数据设置.resx">
+      <DependentUpon>数据设置.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\线索管理\ImportResult.resx">
+      <DependentUpon>ImportResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\线索管理\线索核查结果录入.resx">
+      <DependentUpon>线索核查结果录入.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\线索管理\核查录入.resx">
+      <DependentUpon>核查录入.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\线索管理\线索查询.resx">
+      <DependentUpon>线索查询.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\结果上报.resx">
+      <DependentUpon>结果上报.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\结果数据库管理.resx">
+      <DependentUpon>结果数据库管理.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\规则\规则.resx">
+      <DependentUpon>规则.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\系统设置.resx">
+      <DependentUpon>系统设置.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\显示数据列表.resx">
+      <DependentUpon>显示数据列表.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\规则\比对项目.resx">
+      <DependentUpon>比对项目.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\规则\比对项目设置.resx">
+      <DependentUpon>比对项目设置.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\添加文件分类.resx">
+      <DependentUpon>添加文件分类.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\目录设置.resx">
+      <DependentUpon>目录设置.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\规则\规则模板.resx">
+      <DependentUpon>规则模板.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\规则\规则模板添加.resx">
+      <DependentUpon>规则模板添加.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\规则\规则管理.resx">
+      <DependentUpon>规则管理.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\设置时间范围.resx">
+      <DependentUpon>设置时间范围.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\输入目录设置.resx">
+      <DependentUpon>输入目录设置.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\输出目录设置.resx">
+      <DependentUpon>输出目录设置.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\项目管理\项目管理.resx">
+      <DependentUpon>项目管理.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="比对数据管理\UI\CompareDataSettingForm.resx">
+      <DependentUpon>CompareDataSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="比对数据管理\UI\比对数据格式编辑.resx">
+      <DependentUpon>比对数据格式编辑.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="源数据管理\UI\SourceDataSettingForm.resx">
+      <DependentUpon>SourceDataSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="源数据管理\UI\日期标签管理.resx">
+      <DependentUpon>日期标签管理.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="源数据管理\UI\添加源数据文件.resx">
+      <DependentUpon>添加源数据文件.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="源数据管理\UI\源数据格式编辑.resx">
+      <DependentUpon>源数据格式编辑.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="源数据管理\UI\选择标签.resx">
+      <DependentUpon>选择标签.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EmbeddedResource Include="PanoramaDemo.tssp" />
+    <None Include="Data\OnSiteFundComparer.db" />
+    <None Include="OnSiteMonitor_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\5.png" />
+    <Content Include="Resources\AllTelerikProducts.png" />
+    <Content Include="Resources\back.png" />
+    <Content Include="Resources\Background.png" />
+    <Content Include="Resources\bg-pattern.png" />
+    <Content Include="Resources\bug-tracker-icon.png" />
+    <Content Include="Resources\Chart.png" />
+    <Content Include="Resources\clock.png" />
+    <Content Include="Resources\close-btn.png" />
+    <None Include="Resources\compare-xxl.ico" />
+    <Content Include="Resources\details-icon.png" />
+    <Content Include="Resources\file-explorer-icon.png" />
+    <Content Include="Resources\GridView.png" />
+    <Content Include="Resources\hunt.png" />
+    <Content Include="Resources\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ie-logo.png" />
+    <Content Include="Resources\ie.png" />
+    <Content Include="Resources\img1.png" />
+    <Content Include="Resources\img2.png" />
+    <Content Include="Resources\img3.png" />
+    <Content Include="Resources\img4.png" />
+    <Content Include="Resources\img5.png" />
+    <Content Include="Resources\level1.png" />
+    <Content Include="Resources\level2.png" />
+    <Content Include="Resources\level3.png" />
+    <Content Include="Resources\list-icon.png" />
+    <Content Include="Resources\ListView.png" />
+    <Content Include="Resources\magnifier-bg.png" />
+    <Content Include="Resources\magnifier-icon.png" />
+    <Content Include="Resources\maximize-btn.png" />
+    <Content Include="Resources\minimize-btn.png" />
+    <Content Include="Resources\movieLab-bg.png" />
+    <Content Include="Resources\panorama.jpg" />
+    <Content Include="Resources\qsf-bg.png" />
+    <Content Include="Resources\qsf-icon.png" />
+    <Content Include="Resources\Rss-reader-icon.png" />
+    <Content Include="Resources\Scheduler.png" />
+    <Content Include="Resources\settings.png" />
+    <Content Include="Resources\store.png" />
+    <Content Include="Resources\ThViewer-bg.png" />
+    <Content Include="Resources\ThViewer-icon.png" />
+    <Content Include="Resources\tiles-icon.png" />
+    <Content Include="Resources\TreeView.png" />
+    <Content Include="Resources\TV_search.png" />
+    <Content Include="Resources\vsb-bg.png" />
+    <Content Include="Resources\vsb-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\OnSiteMonitor.Web\WFM.JW.HB.Models\WFM.JW.HB.Models.csproj">
+      <Project>{8f424437-648e-44ce-bff6-487c7b253a72}</Project>
+      <Name>WFM.JW.HB.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Erik.Utilities\Erik.Utilities.csproj">
+      <Project>{6e65c311-7003-41f7-8dae-f4bc6afcd6a4}</Project>
+      <Name>Erik.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileTranser.MTOM.ClassLibrary\FileTranser.MTOM.ClassLibrary.csproj">
+      <Project>{aff0fdf6-3b78-4d60-a25f-390e7a626abd}</Project>
+      <Name>FileTranser.MTOM.ClassLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.101.0\build\net40\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.101.0\build\net40\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此项目引用这台计算机上缺少的 NuGet 程序包。使用 NuGet 程序包还原可下载这些程序包。有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.101.0\build\net40\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.101.0\build\net40\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
