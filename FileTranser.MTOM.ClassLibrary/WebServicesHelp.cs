@@ -43,6 +43,8 @@ namespace FileTranser.MTOM.ClassLibrary
         public string Login(string Username, string Password)
         {
             LoginToken = theWebservice.Login(LoginToken, Username, Password);
+
+            //theWebservice.GetUpdateInfo(LoginToken, updateVerion);
             return LoginToken;
         }
         public bool Logout(string Username, string Password)

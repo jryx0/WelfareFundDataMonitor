@@ -23,13 +23,17 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="FileTransferWebServiceSoap", Namespace="http://FileTransfer.MTOM.WebServices/")]
     public partial class FileTransferWebService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback LoginOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetUpdateInfoOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SetUpdateSignOperationCompleted;
         
         private System.Threading.SendOrPostCallback PingOperationCompleted;
         
@@ -101,6 +105,12 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
         
         /// <remarks/>
         public event LoginCompletedEventHandler LoginCompleted;
+        
+        /// <remarks/>
+        public event GetUpdateInfoCompletedEventHandler GetUpdateInfoCompleted;
+        
+        /// <remarks/>
+        public event SetUpdateSignCompletedEventHandler SetUpdateSignCompleted;
         
         /// <remarks/>
         public event PingCompletedEventHandler PingCompleted;
@@ -177,6 +187,68 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
             if ((this.LoginCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.LoginCompleted(this, new LoginCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://FileTransfer.MTOM.WebServices/GetUpdateInfo", RequestNamespace="http://FileTransfer.MTOM.WebServices/", ResponseNamespace="http://FileTransfer.MTOM.WebServices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetUpdateInfo(string logintoken, string lasetupdateversion) {
+            object[] results = this.Invoke("GetUpdateInfo", new object[] {
+                        logintoken,
+                        lasetupdateversion});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetUpdateInfoAsync(string logintoken, string lasetupdateversion) {
+            this.GetUpdateInfoAsync(logintoken, lasetupdateversion, null);
+        }
+        
+        /// <remarks/>
+        public void GetUpdateInfoAsync(string logintoken, string lasetupdateversion, object userState) {
+            if ((this.GetUpdateInfoOperationCompleted == null)) {
+                this.GetUpdateInfoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetUpdateInfoOperationCompleted);
+            }
+            this.InvokeAsync("GetUpdateInfo", new object[] {
+                        logintoken,
+                        lasetupdateversion}, this.GetUpdateInfoOperationCompleted, userState);
+        }
+        
+        private void OnGetUpdateInfoOperationCompleted(object arg) {
+            if ((this.GetUpdateInfoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetUpdateInfoCompleted(this, new GetUpdateInfoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://FileTransfer.MTOM.WebServices/SetUpdateSign", RequestNamespace="http://FileTransfer.MTOM.WebServices/", ResponseNamespace="http://FileTransfer.MTOM.WebServices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool SetUpdateSign(string logintoken, string version) {
+            object[] results = this.Invoke("SetUpdateSign", new object[] {
+                        logintoken,
+                        version});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SetUpdateSignAsync(string logintoken, string version) {
+            this.SetUpdateSignAsync(logintoken, version, null);
+        }
+        
+        /// <remarks/>
+        public void SetUpdateSignAsync(string logintoken, string version, object userState) {
+            if ((this.SetUpdateSignOperationCompleted == null)) {
+                this.SetUpdateSignOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSetUpdateSignOperationCompleted);
+            }
+            this.InvokeAsync("SetUpdateSign", new object[] {
+                        logintoken,
+                        version}, this.SetUpdateSignOperationCompleted, userState);
+        }
+        
+        private void OnSetUpdateSignOperationCompleted(object arg) {
+            if ((this.SetUpdateSignCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SetUpdateSignCompleted(this, new SetUpdateSignCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -662,11 +734,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void LoginCompletedEventHandler(object sender, LoginCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class LoginCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -688,11 +760,63 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void GetUpdateInfoCompletedEventHandler(object sender, GetUpdateInfoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetUpdateInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetUpdateInfoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void SetUpdateSignCompletedEventHandler(object sender, SetUpdateSignCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SetUpdateSignCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SetUpdateSignCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void PingCompletedEventHandler(object sender, PingCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class PingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -714,11 +838,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void GetDataStatusCompletedEventHandler(object sender, GetDataStatusCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetDataStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -740,11 +864,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void GetUpLoadInfoCompletedEventHandler(object sender, GetUpLoadInfoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetUpLoadInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -766,11 +890,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void SetDefaultDataCompletedEventHandler(object sender, SetDefaultDataCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SetDefaultDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -792,11 +916,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void GetCluesCompletedEventHandler(object sender, GetCluesCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetCluesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -818,11 +942,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void UpdateReCheckDataCompletedEventHandler(object sender, UpdateReCheckDataCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class UpdateReCheckDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -844,11 +968,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void UpdateCheckDataCompletedEventHandler(object sender, UpdateCheckDataCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class UpdateCheckDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -870,11 +994,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void GetCurrentUserPathCompletedEventHandler(object sender, GetCurrentUserPathCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetCurrentUserPathCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -896,11 +1020,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void GetCurrentUserInfoCompletedEventHandler(object sender, GetCurrentUserInfoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetCurrentUserInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -922,11 +1046,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void GetUploadTokeCompletedEventHandler(object sender, GetUploadTokeCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetUploadTokeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -948,11 +1072,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void AppendChunkCompletedEventHandler(object sender, AppendChunkCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AppendChunkCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -974,11 +1098,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void EndAppendChunkCompletedEventHandler(object sender, EndAppendChunkCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EndAppendChunkCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1000,11 +1124,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void CheckFileHashCompletedEventHandler(object sender, CheckFileHashCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CheckFileHashCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1026,11 +1150,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void GetMaxRequestLengthCompletedEventHandler(object sender, GetMaxRequestLengthCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetMaxRequestLengthCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1052,11 +1176,11 @@ namespace FileTranser.MTOM.ClassLibrary.FileTranserServiceProxy {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void UpdateInfoCompletedEventHandler(object sender, UpdateInfoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class UpdateInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
