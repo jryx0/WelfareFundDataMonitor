@@ -25,7 +25,7 @@ namespace OnSiteFundComparer.UI
                                          ,"型号"
                                          ,"编号"
                                          ,"面积"
-
+                                         ,"日期1"
                                           
         };
 
@@ -43,6 +43,7 @@ namespace OnSiteFundComparer.UI
                                          ,"Type"
                                          ,"Number"
                                          ,"Area"
+                                        ,"DataDate1"
         };
 
 
@@ -57,7 +58,7 @@ namespace OnSiteFundComparer.UI
                 isHaveRelation = value;
                 if (isHaveRelation)
                     startIndex = 1;
-                else startIndex = 3;
+                else startIndex = 1;
             }
             get { return isHaveRelation; }
         }
@@ -127,6 +128,7 @@ namespace OnSiteFundComparer.UI
                     this.dataGridView1.Rows[index].Cells[1].Value = i + 2;
                     this.dataGridView1.Rows[index].Cells[2].Value = i;
                     this.dataGridView1.Rows[index].Cells[3].Value = colCode[i];
+                    this.dataGridView1.Rows[index].Cells[4].Value = colName[i];
 
 
                     this.dataGridView1.Rows[index].Cells[1].ValueType = typeof(int);

@@ -171,9 +171,10 @@ namespace OnSiteFundComparer
         {
             base.Start();
 
-            float eRat = (IDError * 1.0f / _totalSteps) * 100;
-            if (eRat > 10)
-                MessageBox.Show("身份证号异常超过" + eRat + "%, 是否文件格式错误？", "身份证号异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //ToDo：显示异常身份证
+            //float eRat = (IDError * 1.0f / _totalSteps) * 100;
+            //if (eRat > 10)
+            //    MessageBox.Show("身份证号异常超过" + eRat + "%, 是否文件格式错误？", "身份证号异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         protected override int CreateColums(int totalCols)
@@ -206,6 +207,7 @@ namespace OnSiteFundComparer
                     strRet = GlobalEnviroment.GetExcelValue(row.GetCell(index));
                     var id = GlobalEnviroment.GetFullIDEx(strRet);
 
+                    //ToDo:保存异常身份真行数
                     if (!String.IsNullOrEmpty(id) && (id.Length != 18 && id.Length != 15))
                         IDError++;
                 }

@@ -178,6 +178,7 @@ namespace OnSiteFundComparer.Models
                         Datapath  VARCHAR (250),
                         DataTime      VARCHAR (20),
                         dbTable      VARCHAR (20),
+                        dbTablePre      VARCHAR (20),
                         Status        BOOLEAN       DEFAULT true,
                         Seq           INTEGER       NOT NULL
                                                     DEFAULT (999999),

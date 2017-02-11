@@ -550,6 +550,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\规则.txt" />
     <Content Include="Resources\5.png" />
     <Content Include="Resources\AllTelerikProducts.png" />
     <Content Include="Resources\back.png" />

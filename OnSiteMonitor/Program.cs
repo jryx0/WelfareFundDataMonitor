@@ -252,7 +252,9 @@ namespace OnSiteFundComparer
                             dr[i - 1] = GlobalEnviroment.GetExcelValue(row.GetCell(index));
                             //GetExcelValue(row.GetCell(index));
 
+                            //2017.2.10
                             if (dataFormat[i].colName == "日期")
+                           
                             {
                                 dr[i - 1] = GlobalEnviroment.tryParingDateTime(dr[i - 1].ToString()).ToString("yyyy-MM-dd");//?
                             }
@@ -280,9 +282,11 @@ namespace OnSiteFundComparer
             }
 
             if (readlines == 0) return dt;
-            float eRat = (IDError * 1.0f / readlines) * 100;
-            if (eRat > 10)
-                MessageBox.Show("身份证号异常超过" + eRat + "%, 是否文件格式错误？", "身份证号异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            //ToDo:显示异常身份证
+            //float eRat = (IDError * 1.0f / readlines) * 100;
+            //if (eRat > 10)
+            //    MessageBox.Show("身份证号异常超过" + eRat + "%, 是否文件格式错误？", "身份证号异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             return dt;
         }
@@ -353,9 +357,11 @@ namespace OnSiteFundComparer
                 }
 
                 if (readlines == 0) return dt;
-                float eRat = (IDError * 1.0f / readlines) * 100;
-                if (eRat > 10)
-                    MessageBox.Show("身份证号异常超过" + eRat + "%, 是否文件格式错误？", "身份证号异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                //ToDo:显示异常身份证
+                //float eRat = (IDError * 1.0f / readlines) * 100;
+                //if (eRat > 10)
+                //    MessageBox.Show("身份证号异常超过" + eRat + "%, 是否文件格式错误？", "身份证号异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 mysr.Close();
             }
