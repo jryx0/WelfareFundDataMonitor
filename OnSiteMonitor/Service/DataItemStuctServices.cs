@@ -55,6 +55,9 @@ namespace OnSiteFundComparer.Service
                     fi.people = reader.GetValue(11).ToString();
                     fi.dbTablePre = reader.GetValue(12).ToString();
 
+                    fi.col1 = reader.GetValue(13).ToString();
+                    fi.col2 = reader.GetValue(14).ToString();
+
                     fiList.Add(fi);
                 }
             }

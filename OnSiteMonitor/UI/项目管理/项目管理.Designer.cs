@@ -54,11 +54,12 @@
             this.btnDisplay = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.tbTablePre = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbDataPreSql = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // tbShortName
             // 
+            this.tbShortName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbShortName.Location = new System.Drawing.Point(523, 150);
             this.tbShortName.Name = "tbShortName";
             this.tbShortName.Size = new System.Drawing.Size(233, 26);
@@ -66,6 +67,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(438, 15);
             this.label1.Name = "label1";
@@ -75,6 +77,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
@@ -87,6 +90,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(438, 51);
             this.label2.Name = "label2";
@@ -96,6 +100,7 @@
             // 
             // tbFullName
             // 
+            this.tbFullName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbFullName.Location = new System.Drawing.Point(523, 48);
             this.tbFullName.Name = "tbFullName";
             this.tbFullName.Size = new System.Drawing.Size(233, 26);
@@ -103,6 +108,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(438, 153);
             this.label3.Name = "label3";
@@ -112,6 +118,7 @@
             // 
             // tbTable
             // 
+            this.tbTable.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbTable.Location = new System.Drawing.Point(523, 82);
             this.tbTable.Name = "tbTable";
             this.tbTable.Size = new System.Drawing.Size(233, 26);
@@ -119,6 +126,7 @@
             // 
             // label4
             // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(438, 85);
             this.label4.Name = "label4";
@@ -128,6 +136,7 @@
             // 
             // label5
             // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(438, 187);
             this.label5.Name = "label5";
@@ -137,6 +146,7 @@
             // 
             // tbPath
             // 
+            this.tbPath.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbPath.Location = new System.Drawing.Point(523, 184);
             this.tbPath.Name = "tbPath";
             this.tbPath.Size = new System.Drawing.Size(233, 26);
@@ -144,6 +154,7 @@
             // 
             // tbDesc
             // 
+            this.tbDesc.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbDesc.Location = new System.Drawing.Point(523, 218);
             this.tbDesc.Name = "tbDesc";
             this.tbDesc.Size = new System.Drawing.Size(233, 26);
@@ -151,6 +162,7 @@
             // 
             // label6
             // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(438, 221);
             this.label6.Name = "label6";
@@ -217,6 +229,7 @@
             // 
             // label7
             // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(438, 255);
             this.label7.Name = "label7";
@@ -226,6 +239,7 @@
             // 
             // tbOrder
             // 
+            this.tbOrder.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbOrder.Location = new System.Drawing.Point(523, 252);
             this.tbOrder.Name = "tbOrder";
             this.tbOrder.Size = new System.Drawing.Size(233, 26);
@@ -263,6 +277,7 @@
             // 
             // label8
             // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(438, 119);
             this.label8.Name = "label8";
@@ -272,27 +287,31 @@
             // 
             // tbTablePre
             // 
+            this.tbTablePre.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbTablePre.Location = new System.Drawing.Point(523, 116);
             this.tbTablePre.Name = "tbTablePre";
             this.tbTablePre.Size = new System.Drawing.Size(233, 26);
             this.tbTablePre.TabIndex = 8;
             // 
-            // textBox1
+            // tbDataPreSql
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox1.Location = new System.Drawing.Point(442, 316);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(314, 196);
-            this.textBox1.TabIndex = 9;
+            this.tbDataPreSql.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbDataPreSql.Location = new System.Drawing.Point(442, 316);
+            this.tbDataPreSql.Multiline = true;
+            this.tbDataPreSql.Name = "tbDataPreSql";
+            this.tbDataPreSql.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbDataPreSql.Size = new System.Drawing.Size(314, 196);
+            this.tbDataPreSql.TabIndex = 9;
+            this.tbDataPreSql.WordWrap = false;
             // 
             // 项目管理
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(771, 570);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(777, 570);
+            this.Controls.Add(this.tbDataPreSql);
             this.Controls.Add(this.tbTablePre);
             this.Controls.Add(this.btnDisplay);
             this.Controls.Add(this.tbOrder);
@@ -351,6 +370,6 @@
         private System.Windows.Forms.Button btnDisplay;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tbTablePre;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbDataPreSql;
     }
 }

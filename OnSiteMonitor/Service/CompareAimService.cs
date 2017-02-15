@@ -144,15 +144,13 @@ namespace OnSiteFundComparer.Service
         private string ReplaceAll(string rule, string type, string tablename, string para, Models.DataItem di1, Models.DataItem di2, Models.DataItem di3)
         //private string ReplaceAll(string rule, string type, string tablename, int para, Models.DataItem di1, Models.DataItem di2, Models.DataItem di3)
         {
-
-
             rule = rule.Replace("@table1", di1.dbTable);
+            rule = rule.Replace("@tablepre1", di1.dbTablePre);
             rule = rule.Replace("@table2", di2.dbTable);
+            rule = rule.Replace("@tablepre2", di2.dbTablePre);
 
             rule = rule.Replace("@aimtype", type);
             rule = rule.Replace("@tablename", tablename);
-
-
 
 
             rule = rule.Replace("@t1p", di1.people);
@@ -166,6 +164,8 @@ namespace OnSiteFundComparer.Service
             if (di3 != null)
             {
                 rule = rule.Replace("@table3", di3.dbTable);
+                rule = rule.Replace("@tablepre3", di3.dbTablePre);
+
                 rule = rule.Replace("@t3p", di3.people);
                 rule = rule.Replace("@t3s", di3.DataShortName);
                 rule = rule.Replace("@t3f", di3.DataFullName);

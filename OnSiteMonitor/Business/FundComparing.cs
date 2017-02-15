@@ -114,9 +114,16 @@ namespace OnSiteFundComparer.Business
 
             log.Info("-输入数据库创建成功!");
             log.Info("----------------------------------------------------------\r\n\r\n");
+
+            log.Info("==============开始对数据进行预处理===============");
+            PreProcessData(complist);
+            PreProcessData(sourcelist);
+            log.Info("==============数据预处理完成===============\r\n");
+
+
+
+            log.Info("********************************************************************\r\n");
             log.Info("开始比对...");
-
-
             ResultExcelDir += "\\比对结果(" + System.DateTime.Now.ToString("yyyy年MM月dd日-HH点mm分ss秒") + ")\\";
             GlobalEnviroment.MakeSureDirectory(ResultExcelDir);
             GetResult(sourcelist);
@@ -167,6 +174,34 @@ namespace OnSiteFundComparer.Business
             log.Info("******************************************************");
 
             return true;
+        }
+
+        private void PreProcessData(List<DataItem> datalist)
+        {
+            ImportSqliteDB.BeginTran();
+            foreach (DataItem di in datalist)
+            {
+                if (di.col1.Length != 0)
+                    try
+                    {
+                        var colSql = di.col1.Split(';');
+                        foreach(string sql in colSql)
+                        {
+                            ImportSqliteDB.ExecuteDataset(sql);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Info("$$$$$$$$$$$预处理数据错误:" + di.DataFullName + "\r\n");
+                        log.Info("col1 = " + di.col1 + "\r\n");
+                        log.Info("$$$$$$$$$$$异常信息:\r\n" + ex.Message + "\r\n");
+
+                        ImportSqliteDB.RollBack();
+                        return;
+                    }
+
+            }
+            ImportSqliteDB.Commit();
         }
 
         private bool IsChecked()
@@ -762,6 +797,13 @@ namespace OnSiteFundComparer.Business
 
                     string CreateTable = Properties.Settings.Default.ReferTableSql.Replace("refertable", di.dbTable);
                     ImportSqliteDB.ExecuteNonQuery(CreateTable);
+
+                    if(di.col1.Length != 0)
+                    {
+                        CreateTable = Properties.Settings.Default.ReferTableSql.Replace("refertable", di.dbTablePre);
+                        ImportSqliteDB.ExecuteNonQuery(CreateTable);
+                    }
+
                 }
 
                 // _sqliteInput.ExecuteNonQuery();
@@ -1024,6 +1066,9 @@ namespace OnSiteFundComparer.Business
 
             
 
+
+
+
             readlines = readlines - dataFormat[0].colNumber;
             log.Info("文件:<" + Path.GetFileName(FileName) + ">, 写入数据库成功, 共 " + readlines.ToString() + " 条记录!");
            
@@ -1096,7 +1141,7 @@ namespace OnSiteFundComparer.Business
             readlines = readlines - dataFormat[0].colNumber;
             log.Info("文件" + Path.GetFileName(FileName) + "写入数据库成功, 共 " + readlines.ToString() + " 条记录!");
 
-             ImportSqliteDB.ExecuteNonQuery(@"delete from " + dataItem.dbTable + @" where length(id)=0 and name is null") ;
+            ImportSqliteDB.ExecuteNonQuery(@"delete from " + dataItem.dbTable + @" where length(id)=0 and name is null") ;
             return readlines;
         }
 

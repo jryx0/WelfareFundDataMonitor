@@ -47,6 +47,7 @@ namespace OnSiteFundComparer.UI.项目管理
             tbOrder.Text = di.Seq.ToString();
             cbStatuts.Checked = di.Status;
             tbDesc.Text = di.people;
+            tbDataPreSql.Text = di.col1;
         }
 
         private void initTreeView()
@@ -146,6 +147,7 @@ namespace OnSiteFundComparer.UI.项目管理
             tbOrder.Text = "";
             cbStatuts.Checked = true;
             tbDesc.Text = "";
+            tbDataPreSql.Text = "";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -238,6 +240,7 @@ namespace OnSiteFundComparer.UI.项目管理
             di.Seq = seq;
             di.Status = cbStatuts.Checked;
             di.people = tbDesc.Text.Trim();
+            di.col1 = tbDataPreSql.Text.Trim();
 
 
             Service.DataItemStuctServices diss = new Service.DataItemStuctServices(Properties.Settings.Default.MainDBFile);

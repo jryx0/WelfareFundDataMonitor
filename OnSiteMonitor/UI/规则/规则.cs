@@ -280,20 +280,21 @@ namespace OnSiteFundComparer.UI
             {
 
             }
-
-
         }
+
 
         private string ReplaceAll(string rule, DataItem di1, DataItem di2, DataItem di3)
         {
+
             rule = rule.Replace("@table1", di1.dbTable);
+            rule = rule.Replace("@tablepre1", di1.dbTablePre);
             rule = rule.Replace("@table2", di2.dbTable);
+            rule = rule.Replace("@tablepre2", di2.dbTablePre);
             rule = rule.Replace("@table3", di3.dbTable);
+            rule = rule.Replace("@tablepre3", di3.dbTablePre);
+
             rule = rule.Replace("@aimtype", tbAim.Text);
             rule = rule.Replace("@tablename", tbTableName.Text);
-
-
-
 
             rule = rule.Replace("@t1p", di1.people);
             rule = rule.Replace("@t1s", di1.DataShortName);
