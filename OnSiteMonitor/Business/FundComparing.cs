@@ -752,7 +752,6 @@ namespace OnSiteFundComparer.Business
 
             //DAL.MySqlite _sqliteInput = new DAL.MySqlite();
             //_sqliteInput.sqliteConnectionString = ImportDB;
-
             try
             {
                 ImportSqliteDB.BeginTran();
@@ -1140,12 +1139,15 @@ namespace OnSiteFundComparer.Business
                             break;
                         case "日期":
                             //tmp = value.Split(' ')[0];
-                            tmp = GlobalEnviroment.tryParingDateTime(value.Split(' ')[0]);
+                            tmp = GlobalEnviroment.tryParingDateTime(value/*.Split(' ')[0]*/);
                             sqlColName += "sDataDate,";
                             sqlValues += "@sDataDate,";
                             para.Add(new SQLiteParameter("@sDataDate", ((DateTime)tmp).ToString("yyyy-MM-dd")));
 
                             tmp = value;
+                            break;
+                        case "日期1":
+                            tmp = GlobalEnviroment.tryParingDateTime(value).ToString("yyyy-MM-dd");
                             break;
                         case "姓名":
                         case "相关人姓名":

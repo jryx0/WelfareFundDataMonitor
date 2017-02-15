@@ -183,6 +183,8 @@ namespace OnSiteFundComparer.Models
                         Seq           INTEGER       NOT NULL
                                                     DEFAULT (999999),
                         People        VARCHAR (10),
+                        Col1          VarCHAR(500),
+                        Col2          VarChar(500),
                         UNIQUE (
                         RowID
                         )
@@ -193,10 +195,10 @@ namespace OnSiteFundComparer.Models
             return @"
                     INSERT INTO DataItem (ParentID,DataType,DataShortName,DataFullName,
                                            DataLink,Datapath,DataTime,Status,Seq, People,dbTable
-,dbTablePre)
+,dbTablePre, Col1, Col2)
                                   VALUES (@ParentID,@DataType,@DataShortName,@DataFullName,
                                           @DataLink,@Datapath,@CreateDate,@Status,@Seq, @People,
-@dbTable,@dbTablePre);";
+@dbTable,@dbTablePre, @Col1, @Col2);";
         }
         public static System.Data.SQLite.SQLiteParameter[] getParam(DataItem dataItem)
         {
@@ -215,6 +217,8 @@ namespace OnSiteFundComparer.Models
                 new System.Data.SQLite.SQLiteParameter("@People", dataItem.people),
                 new System.Data.SQLite.SQLiteParameter("@dbTable", dataItem.dbTable),
                 new System.Data.SQLite.SQLiteParameter("@dbTablePre", dataItem.dbTablePre),
+                new System.Data.SQLite.SQLiteParameter("@Col1", dataItem.col1),
+                new System.Data.SQLite.SQLiteParameter("@Col2", dataItem.col2),
                 new System.Data.SQLite.SQLiteParameter("@RowID", dataItem.RowID)
             };
 
@@ -232,8 +236,9 @@ namespace OnSiteFundComparer.Models
                             Seq = @Seq,
                             People = @People,
                             dbTable = @dbTable,
-                            dbTablePre = @dbTablePre
-
+                            dbTablePre = @dbTablePre,
+                            Col1 = @Col1,
+                            Col2 = @Col2
                      WHERE rowid = @RowID";
         }
 
@@ -244,7 +249,7 @@ namespace OnSiteFundComparer.Models
                  SELECT   
                         RowID, ParentID, DataType,DataShortName, 
                         DataFullName,  DataLink, Datapath,  
-                        Status, Seq, DataTime, dbTable, people,dbTablePre
+                        Status, Seq, DataTime, dbTable, people,dbTablePre, Col1, Col2
                  FROM  DataItem where Status = 1 Order by Seq";
 
         }
@@ -255,7 +260,7 @@ namespace OnSiteFundComparer.Models
                  SELECT   
                         RowID, ParentID, DataType,DataShortName, 
                         DataFullName,  DataLink, Datapath,  
-                        Status, Seq, DataTime, dbTable, people,dbTablePre
+                        Status, Seq, DataTime, dbTable, people,dbTablePre, Col1, Col2
                  FROM  DataItem  Order by Seq";
 
         }

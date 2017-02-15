@@ -56,10 +56,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.tbPara = new System.Windows.Forms.TextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tbPreSql = new System.Windows.Forms.TextBox();
             this.tbRule2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbDesc
@@ -193,6 +196,7 @@
             this.tbRule2.Controls.Add(this.tabPage1);
             this.tbRule2.Controls.Add(this.tabPage2);
             this.tbRule2.Controls.Add(this.tabPage3);
+            this.tbRule2.Controls.Add(this.tabPage4);
             this.tbRule2.Location = new System.Drawing.Point(67, 211);
             this.tbRule2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tbRule2.Name = "tbRule2";
@@ -219,7 +223,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPage2.Size = new System.Drawing.Size(723, 257);
+            this.tabPage2.Size = new System.Drawing.Size(822, 257);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "按人分项";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -233,7 +237,7 @@
             this.tbR2.Name = "tbR2";
             this.tbR2.ReadOnly = true;
             this.tbR2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbR2.Size = new System.Drawing.Size(719, 251);
+            this.tbR2.Size = new System.Drawing.Size(818, 251);
             this.tbR2.TabIndex = 0;
             // 
             // tabPage3
@@ -243,7 +247,7 @@
             this.tabPage3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPage3.Size = new System.Drawing.Size(723, 257);
+            this.tabPage3.Size = new System.Drawing.Size(822, 257);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "汇总";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -257,7 +261,7 @@
             this.tbR3.Name = "tbR3";
             this.tbR3.ReadOnly = true;
             this.tbR3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbR3.Size = new System.Drawing.Size(719, 251);
+            this.tbR3.Size = new System.Drawing.Size(818, 251);
             this.tbR3.TabIndex = 1;
             // 
             // cbTB2
@@ -360,6 +364,26 @@
             this.tbPara.Size = new System.Drawing.Size(159, 26);
             this.tbPara.TabIndex = 7;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.tbPreSql);
+            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(822, 257);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "预处理";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tbPreSql
+            // 
+            this.tbPreSql.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbPreSql.Location = new System.Drawing.Point(3, 3);
+            this.tbPreSql.Multiline = true;
+            this.tbPreSql.Name = "tbPreSql";
+            this.tbPreSql.Size = new System.Drawing.Size(816, 251);
+            this.tbPreSql.TabIndex = 0;
+            // 
             // 规则
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -398,6 +422,8 @@
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -432,5 +458,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tbPara;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TextBox tbPreSql;
     }
 }

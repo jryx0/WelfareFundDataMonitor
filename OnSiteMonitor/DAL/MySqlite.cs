@@ -29,7 +29,7 @@ namespace OnSiteFundComparer.DAL
             sqliteConnectionString = "";
             isInit = false;
             isTrans = false;
-            sqlitePassword = "dfjwhb2014";
+           // sqlitePassword = "dfjwhb2014";
         }
 
         public MySqlite(String connStr)
@@ -37,7 +37,7 @@ namespace OnSiteFundComparer.DAL
             sqliteConnectionString = connStr;
             isInit = false;
             isTrans = false;
-            sqlitePassword = "dfjwhb2014";
+         //   sqlitePassword = "dfjwhb2014";
         }
 
         public MySqlite(String connStr, string password)

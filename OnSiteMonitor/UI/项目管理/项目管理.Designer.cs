@@ -54,6 +54,7 @@
             this.btnDisplay = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.tbTablePre = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // tbShortName
@@ -159,10 +160,12 @@
             // 
             // treeView1
             // 
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.treeView1.LabelEdit = true;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(405, 456);
+            this.treeView1.Size = new System.Drawing.Size(405, 512);
             this.treeView1.TabIndex = 4;
             this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
             this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeSelect);
@@ -171,7 +174,8 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 469);
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button2.Location = new System.Drawing.Point(11, 529);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(57, 29);
             this.button2.TabIndex = 0;
@@ -181,7 +185,8 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(699, 469);
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button3.Location = new System.Drawing.Point(698, 529);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(57, 29);
             this.button3.TabIndex = 0;
@@ -191,7 +196,8 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(92, 469);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Location = new System.Drawing.Point(91, 529);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(57, 29);
             this.button1.TabIndex = 0;
@@ -202,7 +208,7 @@
             // cbStatuts
             // 
             this.cbStatuts.AutoSize = true;
-            this.cbStatuts.Location = new System.Drawing.Point(523, 305);
+            this.cbStatuts.Location = new System.Drawing.Point(523, 286);
             this.cbStatuts.Name = "cbStatuts";
             this.cbStatuts.Size = new System.Drawing.Size(56, 24);
             this.cbStatuts.TabIndex = 5;
@@ -235,7 +241,8 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(523, 469);
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button5.Location = new System.Drawing.Point(522, 529);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(57, 29);
             this.button5.TabIndex = 0;
@@ -245,7 +252,8 @@
             // 
             // btnDisplay
             // 
-            this.btnDisplay.Location = new System.Drawing.Point(221, 469);
+            this.btnDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDisplay.Location = new System.Drawing.Point(220, 529);
             this.btnDisplay.Name = "btnDisplay";
             this.btnDisplay.Size = new System.Drawing.Size(129, 29);
             this.btnDisplay.TabIndex = 7;
@@ -269,11 +277,22 @@
             this.tbTablePre.Size = new System.Drawing.Size(233, 26);
             this.tbTablePre.TabIndex = 8;
             // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox1.Location = new System.Drawing.Point(442, 316);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(314, 196);
+            this.textBox1.TabIndex = 9;
+            // 
             // 项目管理
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(771, 508);
+            this.ClientSize = new System.Drawing.Size(771, 570);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.tbTablePre);
             this.Controls.Add(this.btnDisplay);
             this.Controls.Add(this.tbOrder);
@@ -332,5 +351,6 @@
         private System.Windows.Forms.Button btnDisplay;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tbTablePre;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

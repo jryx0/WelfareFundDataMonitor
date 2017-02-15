@@ -210,81 +210,81 @@ namespace OnSiteFundComparer.Business
 
 
 
-        public CollisionAim GetAimbyID(string id)
-        {
-            CollisionAim ca = null;
-            Service.CollisionAimService cas = new Service.CollisionAimService(MainDB);
+        //public CollisionAim GetAimbyID(string id)
+        //{
+        //    CollisionAim ca = null;
+        //    Service.CollisionAimService cas = new Service.CollisionAimService(MainDB);
 
 
-            var ds = cas.GetAimbyID(id);
-            if (ds == null)
-                return ca;
+        //    var ds = cas.GetAimbyID(id);
+        //    if (ds == null)
+        //        return ca;
 
-            if(ds.Tables[0].Rows != null && ds.Tables[0].Rows.Count == 1)
-            {
-                var dr = ds.Tables[0].Rows[0];
+        //    if (ds.Tables[0].Rows != null && ds.Tables[0].Rows.Count == 1)
+        //    {
+        //        var dr = ds.Tables[0].Rows[0];
 
-                ca = new CollisionAim();
+        //        ca = new CollisionAim();
 
-                ca.RowID = int.Parse(dr[0].ToString());
-                ca.SourceID = int.Parse(dr[1].ToString());
+        //        ca.RowID = int.Parse(dr[0].ToString());
+        //        ca.SourceID = int.Parse(dr[1].ToString());
 
-                ca.AimName = dr[2].ToString();
-                ca.AimDesc = dr[3].ToString();
-                ca.seq = int.Parse(dr[5].ToString());
-                ca.TableName = dr[6].ToString();
-                ca.Rules = dr[7].ToString();
-                ca.Rules2 = dr[8].ToString();
+        //        ca.AimName = dr[2].ToString();
+        //        ca.AimDesc = dr[3].ToString();
+        //        ca.seq = int.Parse(dr[5].ToString());
+        //        ca.TableName = dr[6].ToString();
+        //        ca.Rules = dr[7].ToString();
+        //        ca.Rules2 = dr[8].ToString();
 
-            }
+        //    }
 
-            return ca;
-        }
-        public DataSet GetAllAimDataSet()
-        {
-            Service.CollisionAimService cas = new Service.CollisionAimService(MainDB);
+        //    return ca;
+        //}
+        //public DataSet GetAllAimDataSet()
+        //{
+        //    Service.CollisionAimService cas = new Service.CollisionAimService(MainDB);
 
-            return cas.GetAims();
-        }
-        public List<CollisionAim> GetAllAim()
-        {
-            DataSet ds  = new Service.CollisionAimService(MainDB).GetAims();
+        //    return cas.GetAims();
+        //}
+        //public List<CollisionAim> GetAllAim()
+        //{
+        //    DataSet ds = new Service.CollisionAimService(MainDB).GetAims();
 
-            List<CollisionAim> aims = new List<CollisionAim>();
-            foreach (DataRow dr in ds.Tables[0].Rows)
-            {
-                CollisionAim ca = new CollisionAim();
+        //    List<CollisionAim> aims = new List<CollisionAim>();
+        //    foreach (DataRow dr in ds.Tables[0].Rows)
+        //    {
+        //        CollisionAim ca = new CollisionAim();
 
-                ca.RowID = int.Parse(dr[0].ToString());
-                ca.SourceID = int.Parse(dr[1].ToString());
+        //        ca.RowID = int.Parse(dr[0].ToString());
+        //        ca.SourceID = int.Parse(dr[1].ToString());
 
-                ca.AimName = dr[2].ToString();
-                ca.AimDesc = dr[3].ToString();
+        //        ca.AimName = dr[2].ToString();
+        //        ca.AimDesc = dr[3].ToString();
 
-                ca.seq = int.Parse(dr[5].ToString());
-                ca.TableName = dr[6].ToString();
-                ca.Rules = dr[7].ToString();
-                ca.Rules2 = dr[8].ToString();
+        //        ca.seq = int.Parse(dr[5].ToString());
+        //        ca.TableName = dr[6].ToString();
+        //        ca.Rules = dr[7].ToString();
+        //        ca.Rules2 = dr[8].ToString();
 
-                aims.Add(ca);
-            }
-            return aims;
-        }
+        //        aims.Add(ca);
+        //    }
+        //    return aims;
+        //}
 
-        public void UpdateCollisionAim(CollisionAim ca)
-        {
-            var cas = new Service.CollisionAimService(MainDB);
-            cas.UpdateAim(ca);
-        }
+        //public void UpdateCollisionAim(CollisionAim ca)
+        //{
+        //    var cas = new Service.CollisionAimService(MainDB);
+        //    cas.UpdateAim(ca);
+        //}
 
-        public void DeleteCollisionAim(CollisionAim ca)
-        {
-            if (ca == null)
-                return;
+        //public void DeleteCollisionAim(CollisionAim ca)
+        //{
+        //    if (ca == null)
+        //        return;
 
-            var cas = new Service.CollisionAimService(MainDB);
-            cas.DeleteAimbyID(ca.RowID.ToString());
-        }
+        //    var cas = new Service.CollisionAimService(MainDB);
+        //    cas.DeleteAimbyID(ca.RowID.ToString());
+        //}
     }
     
 }

@@ -17,6 +17,12 @@ namespace Test
         String password = "dfjwhb2014";
         #endregion
 
+        enum DBType
+        {
+            Cryt,
+            UnCryt,
+        }
+
         public CrytLocalDB()
         {
             InitializeComponent();
@@ -25,16 +31,49 @@ namespace Test
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            if(ofd.ShowDialog() == DialogResult.OK)
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
                 tbDBDir.Text = ofd.FileName;
 
-                tbNewDB.Text =  ofd.FileName + ".cryt";
+                if (TestDBType(ofd.FileName) == DBType.Cryt)
+                {
+                    button2.Enabled = false;
+                    button4.Enabled = true;
+                }
+                else
+                {
+                    button2.Enabled = true;
+                    button4.Enabled = false;
+                }
+             //   tbNewDB.Text = ofd.FileName;// + ".cryt";
             }
+        }
+
+        private DBType TestDBType(string fileName)
+        {
+            DBType bRet = DBType.UnCryt;
+
+            DAL.MySqlite sourceDB = new DAL.MySqlite();
+            sourceDB.sqliteConnectionString = fileName;           
+
+            try
+            {
+                var ds = sourceDB.ExecuteDataset(@"select tbl_name, sql from sqlite_master
+                                    where type = 'table' and tbl_name not like '%sqlite%'");
+            }
+            catch (Exception ex)
+            {
+                bRet = DBType.Cryt;
+            }
+
+            return bRet;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            
+            this.Cursor = Cursors.WaitCursor;
+
             List<String> tables = new List<string>();
 
 
@@ -42,7 +81,11 @@ namespace Test
             sourceDB.sqliteConnectionString = tbDBDir.Text;
 
             DAL.MySqlite tragetDB = new DAL.MySqlite();
-            tragetDB.sqliteConnectionString = tbNewDB.Text;
+
+            var newDB = tbDBDir.Text.Replace(".cryt", "");
+            newDB = newDB.Replace(".Uncryt", "");
+
+            tragetDB.sqliteConnectionString = newDB + ".cryt";
             tragetDB.sqlitePassword = "dfjwhb2014";
 
             try
@@ -75,11 +118,17 @@ namespace Test
 
                 }
 
+                MessageBox.Show(
+                    "成功生成加密数据库：" + System.IO.Path.GetFileName(tragetDB.sqliteConnectionString)
+                    );
+                tbNewDB.Text = tragetDB.sqliteConnectionString;
             }
             catch(Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
+
+            this.Cursor = Cursors.Arrow;
         }
 
         private string GetCols(string sql)
@@ -117,6 +166,8 @@ namespace Test
         private void button4_Click(object sender, EventArgs e)
         {
 
+            this.Cursor = Cursors.WaitCursor;
+
             List<String> tables = new List<string>();
 
             DAL.MySqlite sourceDB = new DAL.MySqlite();
@@ -124,7 +175,11 @@ namespace Test
             sourceDB.sqlitePassword = "dfjwhb2014";
 
             DAL.MySqlite tragetDB = new DAL.MySqlite();
-            tragetDB.sqliteConnectionString = tbNewDB.Text;
+
+            var newDB = tbDBDir.Text.Replace(".cryt", "");
+            newDB = newDB.Replace(".Uncryt", "");
+
+            tragetDB.sqliteConnectionString = newDB + ".Uncryt"; ;
 
 
             try
@@ -156,13 +211,22 @@ namespace Test
                     tragetDB.ExecuteNonQuery(l.Sql);
                     tragetDB.ExecuteNonQuery(CreateSql);
                 }
+
+                MessageBox.Show(
+                    "成功生成脱密数据库：" + System.IO.Path.GetFileName(tragetDB.sqliteConnectionString)
+                    );
+
+                tbNewDB.Text = tragetDB.sqliteConnectionString;
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
             }
 
             sourceDB.CloseConnection();
             tragetDB.CloseConnection();
+
+            this.Cursor = Cursors.Arrow;
         }
 
         private void button3_Click(object sender, EventArgs e)

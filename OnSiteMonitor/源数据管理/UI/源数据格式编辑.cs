@@ -26,7 +26,9 @@ namespace OnSiteFundComparer.UI
                                          ,"编号"
                                          ,"面积"
                                          ,"日期1"
-                                          
+                                         ,"编号1"
+                                        ,"编号2"
+
         };
 
         string[] colCode = new string[] { "RowStart"
@@ -44,8 +46,37 @@ namespace OnSiteFundComparer.UI
                                          ,"Number"
                                          ,"Area"
                                         ,"DataDate1"
+                                        ,"Serial1"
+                                        ,"Serial2"
         };
 
+
+        /// <summary>
+        /*CREATE TABLE IF NOT EXISTS refertable
+        (
+            RowID INTEGER      PRIMARY KEY AUTOINCREMENT,
+            ID VARCHAR(20),
+            sRelateID VARCHAR(20),
+            sDataDate DATETIME(0),
+            InputID VARCHAR(20),
+            Name VARCHAR(20),
+            Region VARCHAR(20),
+            Addr VARCHAR(20),
+            DataDate VARCHAR(20),
+            Amount DOUBLE(0),
+            AmountType VARCHAR(20),
+            RelateID VARCHAR(20),
+            RelateName VARCHAR(20),
+            Relation VARCHAR(20),
+            Type VARCHAR(20),
+            ItemType VARCHAR(20),
+            Number VARCHAR(20),
+            Area DOUBLE(0),
+            DataDate1 varchar(20),
+            Serial1 varchar(30),
+            Serial2 varchar(30)
+          );*/ 
+        /// </summary>
 
         public int startIndex = 3;
         

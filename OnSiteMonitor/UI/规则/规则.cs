@@ -250,7 +250,8 @@ namespace OnSiteFundComparer.UI
             ////get tmp
             string tmpSql = @"SELECT rowid, rules,
                                        rule2,
-                                       rule3
+                                       rule3,
+                                       PreRules
                                   FROM RulesTmp
                                  WHERE status = 1 AND 
                                        rowid = @id ";
@@ -270,6 +271,9 @@ namespace OnSiteFundComparer.UI
 
                     string r3 = ds.Tables[0].Rows[0][3].ToString();
                     tbR3.Text = ReplaceAll(r3, di1, di2, di3);
+
+                    string r4 = ds.Tables[0].Rows[0][4].ToString();
+                    tbPreSql.Text = ReplaceAll(r4, di1, di2, di3);
                 }
             }
             catch (Exception ex)

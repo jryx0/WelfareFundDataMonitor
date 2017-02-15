@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="OnSiteFundComparer.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="MainDBFile" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Data\config.ys</Value>
-    </Setting>
     <Setting Name="InputDBFile" Type="System.String" Scope="Application">
       <Value Profile="(Default)">InputData</Value>
     </Setting>
@@ -40,10 +37,11 @@ Relation   VARCHAR (20),
 Type       VARCHAR (20),
 ItemType       VARCHAR (20),
 Number     VARCHAR (20),
-Area       DOUBLE (0) 
+Area       DOUBLE (0),
+DataDate1 varchar(20),
+Serial1    varchar(30),
+Serial2    varchar(30) 
 ); 
-
-; 
 
 DROP INDEX IF EXISTS index_refertable; 
 
@@ -62,14 +60,17 @@ ID ASC
     <Setting Name="CurentRegionName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="WebServicesUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://192.168.10.1/</Value>
-    </Setting>
     <Setting Name="Version" Type="System.String" Scope="User">
       <Value Profile="(Default)">1.5</Value>
     </Setting>
     <Setting Name="IsFirst" Type="System.String" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="MainDBFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data\config.Uncryt</Value>
+    </Setting>
+    <Setting Name="WebServicesUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://156.18.1.93/</Value>
     </Setting>
   </Settings>
 </SettingsFile>

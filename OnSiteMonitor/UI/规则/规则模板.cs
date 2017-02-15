@@ -28,7 +28,7 @@ namespace OnSiteFundComparer.UI
             try
             {
                 var ds = configDB.ExecuteDataset(@"SELECT rowid,
-                                               tmpName
+                                               tmpName as 模板名称,type as 类型
                                           FROM RulesTmp
                                          WHERE status = 1
                                          ORDER BY seq");
@@ -37,7 +37,8 @@ namespace OnSiteFundComparer.UI
                 if(dgvTmp.Columns.Count > 0)
                 { 
                     dgvTmp.Columns[0].Visible = false;
-                    dgvTmp.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dgvTmp.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+                    dgvTmp.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
                 }
 
                 showTmp("1");
@@ -104,7 +105,7 @@ namespace OnSiteFundComparer.UI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string sql = "update  RulesTmp set rules =@r1, rule2 = @r2, rule3 = @r3 where rowid = @id";
+            string sql = "update  RulesTmp set rules =@r1, rule2 = @r2, rule3 = @r3, PreRules = @r4 where rowid = @id";
 
             DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
             try
@@ -114,6 +115,7 @@ namespace OnSiteFundComparer.UI
                     new System.Data.SQLite.SQLiteParameter("@r1", textBox1.Text),
                     new System.Data.SQLite.SQLiteParameter("@r2", textBox2.Text),
                     new System.Data.SQLite.SQLiteParameter("@r3", textBox3.Text),
+                    new System.Data.SQLite.SQLiteParameter("@r4", textBox4.Text),
                     new System.Data.SQLite.SQLiteParameter("@id", int.Parse(currentid))
                     });
 

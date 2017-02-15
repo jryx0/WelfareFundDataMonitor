@@ -42,7 +42,7 @@ namespace OnSiteFundComparer.UI
                                                 SELECT CompareAim.RowID,   
                                                     DataItem.DataShortName as 项目类型,   
                                                     CompareAim.AimName as 规则名称,  CompareAim.AimDesc as 规则说明,
-                                                    CompareAim.TableName,
+                                                    CompareAim.TableName as 表名,
                                                     CompareAim.t1,
                                                     CompareAim.t2,
                                                     CompareAim.t3,
@@ -77,7 +77,7 @@ namespace OnSiteFundComparer.UI
                     this.dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     this.dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-                    this.dataGridView1.Columns[4].Visible = false;
+                    this.dataGridView1.Columns[4].Visible = true;
                     this.dataGridView1.Columns[5].Visible = false;
                     this.dataGridView1.Columns[6].Visible = false;
                     this.dataGridView1.Columns[7].Visible = false;
@@ -121,45 +121,62 @@ namespace OnSiteFundComparer.UI
             if (this.dataGridView1.SelectedRows.Count == 0)
                 return;
 
-            string rname = this.dataGridView1.SelectedRows[0].Cells[2].ToString();
-
-            if (MessageBox.Show("确认删除规则" + rname + "吗？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            var _selectedRows = this.dataGridView1.SelectedRows.Count;
+            if (MessageBox.Show("确认删除 " + _selectedRows  + " 条规则吗？",
+                "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-
-            string rowid = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-            try
+ 
+            string rowids = "";
+            foreach (DataGridViewRow _selectedRow in this.dataGridView1.SelectedRows)
             {
-                DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
-                configDB.ExecuteNonQuery("delete from CompareAim where rowid = " + rowid);
-
-
-                ReSetGridView();
-                //int index = dataGridView1.FirstDisplayedScrollingRowIndex;
-                //int cIndex = -1;
-                //if (this.dataGridView1.CurrentCell != null)
-                //    cIndex = this.dataGridView1.CurrentCell.RowIndex;
-
-                //Init();
-
-                //if (cIndex > 0 && cIndex < this.dataGridView1.Rows.Count)
-                //    this.dataGridView1.CurrentCell = this.dataGridView1.Rows[cIndex].Cells[1];
-                //if (index > -1)
-                //    dataGridView1.FirstDisplayedScrollingRowIndex = index;
-
-
-
-
-
-
-                
+                rowids = rowids + _selectedRow.Cells[0].Value.ToString() + ",";
             }
-            catch(Exception ex)
-            {
 
+            if (rowids.Length != 0)
+            {
+                rowids = rowids.Substring(0, rowids.Length - 1);
+                try
+                {
+                    DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+                    configDB.ExecuteNonQuery("delete from CompareAim where rowid in (" + rowids + ")");
+
+                    ReSetGridView();
+
+                    MessageBox.Show("成功删除 " + _selectedRows + " 条规则");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("删除错误：" + ex.Message);
+                }
             }
 
 
+            //string rowid = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            //try
+            //{
+            //    DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+            //    configDB.ExecuteNonQuery("delete from CompareAim where rowid = " + rowid);
+
+
+            //    ReSetGridView();
+            //    //int index = dataGridView1.FirstDisplayedScrollingRowIndex;
+            //    //int cIndex = -1;
+            //    //if (this.dataGridView1.CurrentCell != null)
+            //    //    cIndex = this.dataGridView1.CurrentCell.RowIndex;
+
+            //    //Init();
+
+            //    //if (cIndex > 0 && cIndex < this.dataGridView1.Rows.Count)
+            //    //    this.dataGridView1.CurrentCell = this.dataGridView1.Rows[cIndex].Cells[1];
+            //    //if (index > -1)
+            //    //    dataGridView1.FirstDisplayedScrollingRowIndex = index;
+            //}
+            //catch (Exception ex)
+            //{
+
+            //}
         }
+
         private void ShowDetail(string rowid)
         {
             if (GlobalEnviroment.LoginedUser.Name != "admin")

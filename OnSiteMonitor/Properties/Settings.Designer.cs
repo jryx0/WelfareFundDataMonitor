@@ -25,15 +25,6 @@ namespace OnSiteFundComparer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data\\config.ys")]
-        public string MainDBFile {
-            get {
-                return ((string)(this["MainDBFile"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("InputData")]
         public string InputDBFile {
             get {
@@ -104,10 +95,11 @@ Relation   VARCHAR (20),
 Type       VARCHAR (20),
 ItemType       VARCHAR (20),
 Number     VARCHAR (20),
-Area       DOUBLE (0) 
+Area       DOUBLE (0),
+DataDate1 varchar(20),
+Serial1    varchar(30),
+Serial2    varchar(30) 
 ); 
-
-; 
 
 DROP INDEX IF EXISTS index_refertable; 
 
@@ -163,18 +155,6 @@ ID ASC
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.10.1/")]
-        public string WebServicesUrl {
-            get {
-                return ((string)(this["WebServicesUrl"]));
-            }
-            set {
-                this["WebServicesUrl"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1.5")]
         public string Version {
             get {
@@ -194,6 +174,27 @@ ID ASC
             }
             set {
                 this["IsFirst"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data\\config.Uncryt")]
+        public string MainDBFile {
+            get {
+                return ((string)(this["MainDBFile"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://156.18.1.93/")]
+        public string WebServicesUrl {
+            get {
+                return ((string)(this["WebServicesUrl"]));
+            }
+            set {
+                this["WebServicesUrl"] = value;
             }
         }
     }
