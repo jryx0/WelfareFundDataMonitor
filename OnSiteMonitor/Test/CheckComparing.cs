@@ -123,9 +123,10 @@ namespace OnSiteFundComparer.Test
                     return "";
 
                 Log("输入数据库创建成功!");
-                Log("开始导入比对数据Excel数据文件");
+                Log(5,"开始导入比对数据Excel数据文件");
                 if (!ImportCompExcel(complist))
                     return "";
+
                 Log(10, "开始调整清理比对数据数据");
                 if (!CleanUpData())
                 {
@@ -134,7 +135,7 @@ namespace OnSiteFundComparer.Test
                 }
 
 
-                Log("开始导入源数据Excel数据文件");
+                Log(15, "开始导入源数据Excel数据文件");
                 if (!ImportSourceExcelEx(sourcelist, formatslist, compareAims))
                     return "";
                 

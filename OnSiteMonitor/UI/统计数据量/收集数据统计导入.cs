@@ -49,7 +49,7 @@ namespace OnSiteFundComparer.UI
             if (e.UserState.ToString().Length != 0)
                 tbLogWin.AppendText(e.UserState.ToString() + "\r\n");
 
-            if (e.ProgressPercentage >= 0)
+            if (e.ProgressPercentage != 0)
                 this.progressBar1.Value = e.ProgressPercentage > 100 ? 100 : e.ProgressPercentage;
 
         }

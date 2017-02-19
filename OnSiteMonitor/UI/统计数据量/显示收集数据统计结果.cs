@@ -32,13 +32,12 @@ namespace OnSiteFundComparer.UI
                 Select '@DataName' as 项目名称, Count(*) 数据量 from @tablename
                 ";
 
-
             Service.DataItemStuctServices diss = new Service.DataItemStuctServices(
                 GlobalEnviroment.MainDBFile);
             var diList = diss.GetDisplayDataItems();           
 
             String _countSql = "";
-            foreach (var di in diList.Where(x => (x.ParentID == 2 || x.ParentID == 3) && x.Status && x.dbTable.Length != 0))
+            foreach (var di in diList.Where(x => (x.ParentID == 2 || x.ParentID == 3) && x.Status && x.dbTable.Length != 0).OrderBy(x => x.ParentID).ThenBy(x =>x.Seq))
             { 
                 var sql = CountSql.Replace("@DataName", di.DataFullName);
                 sql = sql.Replace("@tablename", di.dbTable);
@@ -46,7 +45,7 @@ namespace OnSiteFundComparer.UI
             }
             diss.Close();
 
-            _countSql = _countSql.Substring(7);
+            _countSql =  _countSql.Substring(7);
             DAL.MySqlite db = new DAL.MySqlite(dbString);
 
             try
