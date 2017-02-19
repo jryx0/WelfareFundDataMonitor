@@ -42,9 +42,16 @@ namespace OnSiteFundComparer
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // Application.Run(new MainForm());
+
+            //Application.Run(new Test.测试());
+            
+            //Application.Run(new MainForm());
+
+
             Application.Run(new LoginContext()); 
-            //Application.Run(new UI.login.StartUp(para[0], para[1], para[2]));
+           
+            
+            
         }
     }
     public class GlobalEnviroment

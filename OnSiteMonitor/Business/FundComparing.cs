@@ -464,10 +464,11 @@ namespace OnSiteFundComparer.Business
                 var dt = GetDataTable(ImportSqliteDB, ItemSql.Replace("@table1", di.RowID.ToString()));
                 if (dt != null && dt.Rows.Count != 0)
                 {
-                    //var newdt = SreeenDataTable(dt, "线索类型 LIKE '%不一致%' AND 线索类型 NOT LIKE '%+%'", "乡镇街道, 地址, 身份证号");
-                    //SaveToExcelFile(ResultExcelDir + di.DataShortName + "\\", regionName + "数据录入问题", newdt);
+                    var newdt = SreeenDataTable(dt, "线索类型 LIKE '%不一致%' AND 线索类型 NOT LIKE '%+%'", "乡镇街道, 地址, 身份证号");
+                    if (newdt.Rows != null || newdt.Rows.Count != 0)
+                        SaveToExcelFile(ResultExcelDir + di.DataShortName + "\\", regionName + "数据录入问题", newdt);
 
-                    var newdt = SreeenDataTable(dt, "线索类型 not LIKE '%不一致%' or 线索类型 LIKE '%+%'", "乡镇街道, 地址, 身份证号");
+                    newdt = SreeenDataTable(dt, "线索类型 not LIKE '%不一致%' or 线索类型 LIKE '%+%'", "乡镇街道, 地址, 身份证号");
                     SaveToExcelFile(ResultExcelDir + di.DataShortName + "\\", regionName + di.DataShortName + "问题线索-按人分项统计", newdt);
 
                     log.Info("生成文件 --- " + di.DataFullName + "- 按人分项统计.xls,成功！");

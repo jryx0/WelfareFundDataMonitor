@@ -470,6 +470,59 @@ namespace OnSiteFundComparer.UI
             initTreeView();
 
         }
+        
+        //统计数据量
+        //必须是经过数据比对后才能看到
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //获取最新比对中间数据库
+            var dbFileInfo = GetlastDB();
+
+            收集数据统计向导 dataWz = new 收集数据统计向导();
+            dataWz.ShowDialog();
+            if (dataWz.CountType == "Old")
+                if (dbFileInfo.Length == 0)
+                    if (MessageBox.Show("无法找到比对结果， 需要进行数据导入吗？", "导入数据", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                        dataWz.CountType = "New";
+                    else return;
+
+            if (dataWz.CountType == "New")
+            {
+                收集数据统计导入 dataImportor = new 收集数据统计导入();
+                if (dataImportor.ShowDialog() == DialogResult.Cancel)
+                    return;
+
+                dbFileInfo = dataImportor.DBFileInfo;
+            }
+
+            显示收集数据统计结果 dataReport = new 显示收集数据统计结果(dbFileInfo);
+
+
+            dataReport.ShowDialog();
+
+
+            //show result
+
+
+        }
+
+        public string GetlastDB()
+        {
+            String dbFileInfo = "";
+            DirectoryInfo TheFolder = new DirectoryInfo(GlobalEnviroment.InputDBDir);
+            if (TheFolder.GetFiles().Count() != 0)
+            {
+                var filename = TheFolder.GetFiles()
+                    .Where(x => ((x.FullName.IndexOf("result") == -1) && (x.FullName.IndexOf("Check") == -1)))
+                    .OrderByDescending(n => n.LastWriteTime).First();
+
+                if (filename != null)
+                {
+                    dbFileInfo = filename.FullName;
+                }
+            }
+            return dbFileInfo;
+        }
     }
 }
 

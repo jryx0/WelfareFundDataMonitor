@@ -45,6 +45,7 @@
             this.lbInfo = new System.Windows.Forms.Label();
             this.btnEditFormat = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -78,6 +79,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btnAddItem, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.lbInfo, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.btnEditFormat, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.button1, 4, 6);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -255,6 +257,16 @@
             this.imageList1.Images.SetKeyName(1, "wenjian.png");
             this.imageList1.Images.SetKeyName(2, "Floder.png");
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(389, 459);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 31);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "数据统计";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // DataStandardize
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -297,5 +309,6 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.Button button1;
     }
 }

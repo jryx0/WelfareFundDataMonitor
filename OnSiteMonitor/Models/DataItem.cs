@@ -339,6 +339,10 @@ namespace OnSiteFundComparer.Models
         public int status = 1;
 
         public int Type;
+
+
+
+
     }
 
 

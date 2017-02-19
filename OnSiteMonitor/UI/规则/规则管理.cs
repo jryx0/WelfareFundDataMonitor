@@ -222,15 +222,21 @@ namespace OnSiteFundComparer.UI
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //Test.生成测试库 tf = new Test.生成测试库();
 
-            Test.TestForm1 tf = new Test.TestForm1();
+            //tf.ShowDialog();
 
-            if(tf.ShowDialog() == DialogResult.OK)
-            {
-                this.resultDB = tf.resultDB;
-                this.configDB = tf.configDB;
-                this.ImportDB = tf.ImportDB;
-            }
+            new Test.测试().ShowDialog();
+
+
+            //Test.TestForm1 tf = new Test.TestForm1();
+
+            //if(tf.ShowDialog() == DialogResult.OK)
+            //{
+            //    this.resultDB = tf.resultDB;
+            //    this.configDB = tf.configDB;
+            //    this.ImportDB = tf.ImportDB;
+            //}
         }
 
         private void ReSetGridView()
@@ -248,7 +254,40 @@ namespace OnSiteFundComparer.UI
                 dataGridView1.FirstDisplayedScrollingRowIndex = index;
         }
 
-       
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count == 0)
+                return;
+
+            var _selectedRows = this.dataGridView1.SelectedRows.Count;
+            if (MessageBox.Show("确认停用 " + _selectedRows + " 条规则吗？",
+                "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                return;
+
+            string rowids = "";
+            foreach (DataGridViewRow _selectedRow in this.dataGridView1.SelectedRows)
+            {
+                rowids = rowids + _selectedRow.Cells[0].Value.ToString() + ",";
+            }
+
+            if (rowids.Length != 0)
+            {
+                rowids = rowids.Substring(0, rowids.Length - 1);
+                try
+                {
+                    DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+                    configDB.ExecuteNonQuery("update CompareAim set status = 0  where rowid in (" + rowids + ")");
+
+                    ReSetGridView();
+
+                    MessageBox.Show("成功停用 " + _selectedRows + " 条规则");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("停用出错：" + ex.Message);
+                }
+            }
+        }
     }
 }
 

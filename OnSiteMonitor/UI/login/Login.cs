@@ -51,44 +51,52 @@ namespace OnSiteFundComparer
                 if (GlobalEnviroment.LocalVersion)
                 {
                     DAL.MySqlite _sqlite = new DAL.MySqlite(GlobalEnviroment.MainDBFile);
-
-                    var ds = _sqlite.ExecuteScalar(CommandType.Text,
-                        @"select ParentName || '\'|| RegionName  as name from user join   vw_region on user.regionid = vw_region.Rowid
-where Status = 1 and username=@usernam and password=@password", 
-                        new SQLiteParameter[] {
+                    try
+                    {
+                        var ds = _sqlite.ExecuteScalar(CommandType.Text,
+                            @"select ParentName || '\'|| RegionName  as name from user join   vw_region on user.regionid = vw_region.Rowid
+where Status = 1 and username=@usernam and password=@password",
+                            new SQLiteParameter[] {
                             new System.Data.SQLite.SQLiteParameter("@usernam", tbUserName.Text.ToLower()),
                             new System.Data.SQLite.SQLiteParameter("@password", tbPassword.Text)
-                        } );
+                            });
 
-                    if(ds == null)
-                    {
-                        lbInfo.Text = "用户名密码错误！";
-                        lbInfo.ForeColor = Color.Red;
-                        
-                        //MessageBox.Show("用户名密码错误!");
-                        this.Cursor = Cursors.Arrow;
+                        if (ds == null)
+                        {
+                            lbInfo.Text = "用户名密码错误！";
+                            lbInfo.ForeColor = Color.Red;
+
+                            //MessageBox.Show("用户名密码错误!");
+                            this.Cursor = Cursors.Arrow;
+                        }
+                        else
+                        {
+                            var RegionName = ds.ToString().Split('\\');
+                            if (RegionName.Length == 3)
+                                Properties.Settings.Default.CurentRegionName = RegionName[1] + RegionName[2];
+                            else if (RegionName.Length == 2)
+                                Properties.Settings.Default.CurentRegionName = RegionName[0] + RegionName[1];
+                            else Properties.Settings.Default.CurentRegionName = RegionName[0];
+
+                            if (RegionName.Length != 0)
+                                Properties.Settings.Default.CurrentRegion = RegionName[RegionName.Length - 1];
+
+                            Properties.Settings.Default.Save();
+                            GlobalEnviroment.LoginToken = "";
+
+                            Login.LoginedUser = new Models.User { Name = tbUserName.Text.ToLower(), Password = tbPassword.Text };
+                            Login.Logged = true;
+
+                            this.Hide();
+                            this.Close();
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        var RegionName = ds.ToString().Split('\\');
-                        if (RegionName.Length == 3)
-                            Properties.Settings.Default.CurentRegionName = RegionName[1] + RegionName[2];
-                        else if (RegionName.Length == 2)
-                            Properties.Settings.Default.CurentRegionName = RegionName[0] + RegionName[1];
-                        else Properties.Settings.Default.CurentRegionName = RegionName[0];
 
-                        if (RegionName.Length != 0)
-                            Properties.Settings.Default.CurrentRegion = RegionName[RegionName.Length - 1];
-
-                        Properties.Settings.Default.Save();
-                        GlobalEnviroment.LoginToken = "";
-
-                        Login.LoginedUser = new Models.User { Name = tbUserName.Text.ToLower(), Password = tbPassword.Text };
-                        Login.Logged = true;
-
-                        this.Hide();
-                        this.Close();
                     }
+
+
 
                 }
                 else

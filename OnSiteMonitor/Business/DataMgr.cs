@@ -8,7 +8,7 @@ using OnSiteFundComparer.Models;
 
 namespace OnSiteFundComparer.Business
 {
-    class DataMgr
+    class DataMgr 
     {
         string MainDB = Application.StartupPath + "\\" +
             OnSiteFundComparer.Properties.Settings.Default.MainDBFile;

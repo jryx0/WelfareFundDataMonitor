@@ -247,7 +247,9 @@ namespace OnSiteFundComparer
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            theWebService.Logout(currentUser.Name, currentUser.Password);
+            if(GlobalEnviroment.LocalVersion == false)
+                theWebService.Logout(currentUser.Name, currentUser.Password);
+
             base.OnFormClosed(e);
         }
 
@@ -432,11 +434,15 @@ namespace OnSiteFundComparer
         }
         private void radTitlesystemSetting_Click(object sender, EventArgs e)
         {//系统设置
-            if(new 系统设置().ShowDialog() == DialogResult.OK)
+            if (currentUser.Name.ToLower() == "admin")
+            {
+                new Test.测试().Show();
+            }
+            else if (new 系统设置().ShowDialog() == DialogResult.OK)
             {
                 this.regionLabel.Text = "地区:  " + Properties.Settings.Default.CurentRegionName; //"Demo Apps Hub";
                 //headerLabel.Text = headerString + Properties.Settings.Default.CurentRegionName;
-                this.regionLabel.ResumeReferenceUpdate(); 
+                this.regionLabel.ResumeReferenceUpdate();
             }
         }
 

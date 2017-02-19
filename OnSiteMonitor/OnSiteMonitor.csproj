@@ -130,6 +130,7 @@
     <Compile Include="Service\CompareAimService.cs" />
     <Compile Include="Service\DataCheckService.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Test\CheckComparing.cs" />
     <Compile Include="Test\Sql工具窗口.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +142,24 @@
     </Compile>
     <Compile Include="Test\TestForm1.Designer.cs">
       <DependentUpon>TestForm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test\测试.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\测试.Designer.cs">
+      <DependentUpon>测试.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test\测试比对.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\测试比对.Designer.cs">
+      <DependentUpon>测试比对.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test\生成测试库.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\生成测试库.Designer.cs">
+      <DependentUpon>生成测试库.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\DataStandardize.cs">
       <SubType>Form</SubType>
@@ -210,6 +229,18 @@
     <Compile Include="UI\地区设置.Designer.cs">
       <DependentUpon>地区设置.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\统计数据量\收集数据统计向导.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\统计数据量\收集数据统计向导.Designer.cs">
+      <DependentUpon>收集数据统计向导.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\统计数据量\收集数据统计导入.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\统计数据量\收集数据统计导入.Designer.cs">
+      <DependentUpon>收集数据统计导入.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\数据查询.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,6 +304,12 @@
     </Compile>
     <Compile Include="UI\结果数据库管理.Designer.cs">
       <DependentUpon>结果数据库管理.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\统计数据量\显示收集数据统计结果.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\统计数据量\显示收集数据统计结果.Designer.cs">
+      <DependentUpon>显示收集数据统计结果.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\规则\规则.cs">
       <SubType>Form</SubType>
@@ -394,6 +431,15 @@
     <EmbeddedResource Include="Test\TestForm1.resx">
       <DependentUpon>TestForm1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Test\测试.resx">
+      <DependentUpon>测试.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\测试比对.resx">
+      <DependentUpon>测试比对.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\生成测试库.resx">
+      <DependentUpon>生成测试库.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\DataStandardize.resx">
       <DependentUpon>DataStandardize.cs</DependentUpon>
     </EmbeddedResource>
@@ -424,6 +470,12 @@
     <EmbeddedResource Include="UI\地区设置.resx">
       <DependentUpon>地区设置.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\统计数据量\收集数据统计向导.resx">
+      <DependentUpon>收集数据统计向导.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\统计数据量\收集数据统计导入.resx">
+      <DependentUpon>收集数据统计导入.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\数据查询.resx">
       <DependentUpon>数据查询.cs</DependentUpon>
     </EmbeddedResource>
@@ -450,6 +502,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\结果数据库管理.resx">
       <DependentUpon>结果数据库管理.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\统计数据量\显示收集数据统计结果.resx">
+      <DependentUpon>显示收集数据统计结果.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\规则\规则.resx">
       <DependentUpon>规则.cs</DependentUpon>
@@ -513,6 +568,7 @@
     </None>
     <EmbeddedResource Include="PanoramaDemo.tssp" />
     <None Include="bin\Debug\Data\config.tmpa" />
+    <None Include="bin\Debug\Data\config.Uncryt" />
     <None Include="bin\Debug\Data\config.ys" />
     <None Include="Data\config.tmpa">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
