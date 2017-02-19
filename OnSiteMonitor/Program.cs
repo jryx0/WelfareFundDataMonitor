@@ -1,8 +1,4 @@
-﻿
-
-
-
-using NPOI.HPSF;
+﻿using NPOI.HPSF;
 using NPOI.HSSF.UserModel;
 using NPOI.HSSF.Util;
 using NPOI.SS.UserModel;
@@ -62,7 +58,7 @@ namespace OnSiteFundComparer
         public static string InputExceltDir; //输入excel目录
         public static string ResultOutputDir; //结果目录 Excle
 
-        public static bool LocalVersion = false;
+        public static bool LocalVersion = true;
    
 
         public static FileTranser.MTOM.ClassLibrary.WebServicesHelp theWebService;
@@ -916,9 +912,6 @@ namespace OnSiteFundComparer
         private static extern bool MakeSureDirectoryPathExists(string name);
         #endregion
     }
-
-  
-
 
 }
 

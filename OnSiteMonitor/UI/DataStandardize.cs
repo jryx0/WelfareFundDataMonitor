@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OnSiteFundComparer.Models;
+using System.Diagnostics;
 
 namespace OnSiteFundComparer.UI
 {
@@ -479,7 +480,9 @@ namespace OnSiteFundComparer.UI
             var dbFileInfo = GetlastDB();
 
             收集数据统计向导 dataWz = new 收集数据统计向导();
-            dataWz.ShowDialog();
+            if (dataWz.ShowDialog() != DialogResult.OK)
+                return;
+
             if (dataWz.CountType == "Old")
                 if (dbFileInfo.Length == 0)
                     if (MessageBox.Show("无法找到比对结果， 需要进行数据导入吗？", "导入数据", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -522,6 +525,15 @@ namespace OnSiteFundComparer.UI
                 }
             }
             return dbFileInfo;
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if(Directory.Exists(lbInfo.Text))
+            {
+                ProcessStartInfo proc = new ProcessStartInfo("explorer.exe", lbInfo.Text);
+                Process.Start(proc);
+            }
         }
     }
 }
