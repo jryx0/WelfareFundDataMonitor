@@ -292,11 +292,14 @@ namespace OnSiteFundComparer.Test
                 string dir = Properties.Settings.Default.WorkDir + di.Datapath + "\\";
                 Log("导入:" + di.DataFullName + ", 路径:" + dir);
 
+                if (!Directory.Exists(dir))
+                    continue;
+
                 int totalItemData = 0;
                 DirectoryInfo folder = new DirectoryInfo(dir);
+                
                 try
                 {
-
                     var filelist = folder.GetFiles("*.xls");
                     foreach (FileInfo file in filelist)
                     {
@@ -346,6 +349,8 @@ namespace OnSiteFundComparer.Test
             foreach (Models.DataItem di in sourcelist)
             {
                 string dir = Properties.Settings.Default.WorkDir + di.Datapath + "\\";
+                if (!Directory.Exists(dir))
+                    continue;
 
                 Log("读入" + di.DataFullName + "的数据文件");
                 Log("路径:" + dir);

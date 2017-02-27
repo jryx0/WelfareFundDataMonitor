@@ -129,7 +129,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "湖北纪委精准扶贫政策落实情况监督检查(单机版) - v1.5";
+            this.Text = "湖北纪委精准扶贫政策落实情况监督检查(单机版) - v";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

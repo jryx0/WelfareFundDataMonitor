@@ -39,7 +39,7 @@ namespace OnSiteFundComparer.UI
                                                                WHEN 0 THEN taskname || '-' || createdate 
                                                                WHEN 1 THEN '上报库-' || taskname || '-' || createdate END AS name
                                                           FROM task
-                                                         ORDER BY TStatus DESC");
+                                                         ORDER BY createdate  desc limit 1");
 
                 if (ds == null || ds.Tables[0].Rows.Count == 0)
                 { 

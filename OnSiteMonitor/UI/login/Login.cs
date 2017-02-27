@@ -27,6 +27,12 @@ namespace OnSiteFundComparer
             get; set;
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            this.Text += Properties.Settings.Default.Version;
+            base.OnLoad(e);
+        }
+
         public Login()
         {
             InitializeComponent();
@@ -95,9 +101,6 @@ where Status = 1 and username=@usernam and password=@password",
                     {
 
                     }
-
-
-
                 }
                 else
                 {

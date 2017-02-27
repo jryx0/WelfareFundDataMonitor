@@ -29,7 +29,7 @@ namespace OnSiteFundComparer.UI
             }
 
             String CountSql = @"
-                Select '@DataName' as 项目名称, Count(*) 数据量 from @tablename
+                Select '@DataName' as 项目名称, Count(*) as 数量, @Seq as seq  from @tablename
                 ";
 
             Service.DataItemStuctServices diss = new Service.DataItemStuctServices(
@@ -41,11 +41,12 @@ namespace OnSiteFundComparer.UI
             { 
                 var sql = CountSql.Replace("@DataName", di.DataFullName);
                 sql = sql.Replace("@tablename", di.dbTable);
+                sql = sql.Replace("@Seq", (di.ParentID * 10000 + di.Seq).ToString());
                 _countSql += " union " + sql;
             }
             diss.Close();
 
-            _countSql =  _countSql.Substring(7);
+            _countSql = "Select 项目名称, 数量 from (" + _countSql.Substring(7) + ") a ORDER BY a.seq  ";
             DAL.MySqlite db = new DAL.MySqlite(dbString);
 
             try

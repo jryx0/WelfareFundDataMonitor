@@ -58,7 +58,7 @@ namespace OnSiteFundComparer
         public static string InputExceltDir; //输入excel目录
         public static string ResultOutputDir; //结果目录 Excle
 
-        public static bool LocalVersion = true;
+        public static bool LocalVersion = false;
    
 
         public static FileTranser.MTOM.ClassLibrary.WebServicesHelp theWebService;

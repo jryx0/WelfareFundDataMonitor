@@ -567,9 +567,6 @@
       <SubType>Designer</SubType>
     </None>
     <EmbeddedResource Include="PanoramaDemo.tssp" />
-    <None Include="bin\Debug\Data\config.tmpa" />
-    <None Include="bin\Debug\Data\config.Uncryt" />
-    <None Include="bin\Debug\Data\config.ys" />
     <None Include="Data\config.tmpa">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

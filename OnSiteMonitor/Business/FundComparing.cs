@@ -469,9 +469,9 @@ namespace OnSiteFundComparer.Business
                         SaveToExcelFile(ResultExcelDir + di.DataShortName + "\\", regionName + "数据录入问题", newdt);
 
                     newdt = SreeenDataTable(dt, "线索类型 not LIKE '%不一致%' or 线索类型 LIKE '%+%'", "乡镇街道, 地址, 身份证号");
-                    SaveToExcelFile(ResultExcelDir + di.DataShortName + "\\", regionName + di.DataShortName + "问题线索-按人分项统计", newdt);
+                    SaveToExcelFile(ResultExcelDir + di.DataShortName + "\\", regionName + di.DataShortName + "问题线索-分项统计", newdt);
 
-                    log.Info("生成文件 --- " + di.DataFullName + "- 按人分项统计.xls,成功！");
+                    log.Info("生成文件 --- " + di.DataFullName + "- 分项统计.xls,成功！");
 
 
                     dt.Clear();
@@ -832,6 +832,8 @@ namespace OnSiteFundComparer.Business
             {
                 string dir = Properties.Settings.Default.WorkDir + di.Datapath + "\\";
                 //log.Info("导入:" + di.DataFullName + ", 路径:" + dir);
+                if (!Directory.Exists(dir))
+                    continue;
 
                 int totalItemData = 0;
                 DirectoryInfo folder = new DirectoryInfo(dir);
@@ -883,6 +885,8 @@ namespace OnSiteFundComparer.Business
             foreach (Models.DataItem di in sourcelist)
             {
                 string dir = Properties.Settings.Default.WorkDir + di.Datapath + "\\";
+                if (!Directory.Exists(dir))
+                    continue;
 
                 log.Info("读入" + di.DataFullName + "的数据文件");
                 // log.Info("路径:" + dir);
