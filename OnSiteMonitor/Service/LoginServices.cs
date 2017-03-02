@@ -15,13 +15,13 @@ namespace OnSiteFundComparer.Service
 
         public LoginServices(string connStr)
         {
-            _sqliteDB = new DAL.MySqlite(connStr);
+            _sqliteDB = new DAL.MySqlite(connStr, GlobalEnviroment.isCryt);
         }
 
         public LoginServices()
         {
             _sqliteDB = new DAL.MySqlite(Application.StartupPath + "\\" +
-            OnSiteFundComparer.Properties.Settings.Default.MainDBFile);
+                OnSiteFundComparer.Properties.Settings.Default.MainDBFile, GlobalEnviroment.isCryt);
         }
 
 

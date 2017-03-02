@@ -18,7 +18,7 @@ namespace OnSiteFundComparer.UI
         public 规则管理()
         {
             InitializeComponent();
-            Init();
+            
 
             if (GlobalEnviroment.LoginedUser.Name!= "admin")
             {
@@ -33,12 +33,9 @@ namespace OnSiteFundComparer.UI
 
         private void Init(int index = -1)
         {
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
 
-            try
-            {
-
-                var ds = configDB.ExecuteDataset(@"
+            String _Sql = @"
                                                 SELECT CompareAim.RowID,   
                                                     DataItem.DataShortName as 项目类型,   
                                                     CompareAim.AimName as 规则名称,  CompareAim.AimDesc as 规则说明,
@@ -53,10 +50,22 @@ namespace OnSiteFundComparer.UI
                                                     RulesTmp
                                                 WHERE CompareAim.status = 1 AND 
                                                     CompareAim.SourceID = DataItem.RowID AND 
-                                                    RulesTmp.RowID = CompareAim.tmp
+                                                    RulesTmp.RowID = CompareAim.tmp @para
                                                 ORDER BY DataItem.parentid,
                                                     DataItem.seq,
-                                                    CompareAim.Seq");
+                                                    CompareAim.Seq";
+
+            if (index == 1) //compare
+                _Sql = _Sql.Replace("@para", " and CompareAim.Type = 0");
+            else if(index == 2) //checkrule
+                _Sql = _Sql.Replace("@para", " and CompareAim.Type = 1");
+            else
+                _Sql = _Sql.Replace("@para", " ");
+
+            try
+            {
+
+                var ds = configDB.ExecuteDataset(_Sql);
 
                 this.dataGridView1.DataSource = ds.Tables[0];
 
@@ -90,6 +99,16 @@ namespace OnSiteFundComparer.UI
 
             }
 
+        }
+
+
+        protected override void OnLoad(EventArgs e)
+        {
+            Init();
+
+            comboBox1.SelectedIndex = 1;
+
+            base.OnLoad(e);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -137,7 +156,7 @@ namespace OnSiteFundComparer.UI
                 rowids = rowids.Substring(0, rowids.Length - 1);
                 try
                 {
-                    DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+                    DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
                     configDB.ExecuteNonQuery("delete from CompareAim where rowid in (" + rowids + ")");
 
                     ReSetGridView();
@@ -275,7 +294,7 @@ namespace OnSiteFundComparer.UI
                 rowids = rowids.Substring(0, rowids.Length - 1);
                 try
                 {
-                    DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+                    DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
                     configDB.ExecuteNonQuery("update CompareAim set status = 0  where rowid in (" + rowids + ")");
 
                     ReSetGridView();
@@ -287,6 +306,11 @@ namespace OnSiteFundComparer.UI
                     MessageBox.Show("停用出错：" + ex.Message);
                 }
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Init(comboBox1.SelectedIndex);
         }
     }
 }

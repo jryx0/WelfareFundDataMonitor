@@ -35,7 +35,7 @@ namespace OnSiteFundComparer.UI
             int times = 0;
             try
             {
-                DAL.MySqlite configDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile);
+                DAL.MySqlite configDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
 
                 var o = configDB.ExecuteScalar("Select count() from Task");
                 times = int.Parse(o.ToString());
@@ -79,16 +79,30 @@ namespace OnSiteFundComparer.UI
         {
             try
             {
-                DAL.MySqlite configDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile);
+                DAL.MySqlite configDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
 
                 configDB.ExecuteScalar("delete from Task");
 
-                MessageBox.Show("清空任务列表成功！", "失败", MessageBoxButtons.OK, MessageBoxIcon.Information);             
+                MessageBox.Show("清空任务列表成功！", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);             
             }
             catch
             {
                 MessageBox.Show("清空任务列表失败！", "失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Business.QuickComparer qc = new Business.QuickComparer();
+
+            DateTime start = DateTime.Now;
+            
+
+            qc.Comparer(0);
+
+            TimeSpan ts = DateTime.Now - start;
+
+            MessageBox.Show("总耗时：" + ts.TotalSeconds.ToString());
         }
     }
 }

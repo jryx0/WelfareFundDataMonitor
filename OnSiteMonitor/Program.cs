@@ -58,8 +58,10 @@ namespace OnSiteFundComparer
         public static string InputExceltDir; //输入excel目录
         public static string ResultOutputDir; //结果目录 Excle
 
-        public static bool LocalVersion = false;
-   
+        public static bool LocalVersion = true;
+        public static bool isCryt = false;
+        public static int MaxThreadNum = Environment.ProcessorCount;
+
 
         public static FileTranser.MTOM.ClassLibrary.WebServicesHelp theWebService;
         public static Models.User LoginedUser;

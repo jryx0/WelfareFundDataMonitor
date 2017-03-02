@@ -11,7 +11,7 @@ namespace OnSiteFundComparer.UI
 {
     public partial class 结果上报 : Form
     {
-        DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+        DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
       
 
         public 结果上报(DAL.MySqlite result)

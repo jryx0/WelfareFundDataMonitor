@@ -22,7 +22,7 @@ namespace OnSiteFundComparer.UI
         private void button1_Click(object sender, EventArgs e)
         {
             tmpName = textBox1.Text;
-            textBox2.Text = type;
+            type = textBox2.Text  ;
             this.DialogResult = DialogResult.OK;
         }
     }

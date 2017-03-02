@@ -23,7 +23,7 @@ namespace OnSiteFundComparer.UI
 
         private void init()
         {
-            MySqlite configDB = new MySqlite(GlobalEnviroment.MainDBFile);
+            MySqlite configDB = new MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             try
             {
                 
@@ -91,7 +91,7 @@ namespace OnSiteFundComparer.UI
 
         private void comboCity_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            MySqlite configDB = new MySqlite(GlobalEnviroment.MainDBFile);
+            MySqlite configDB = new MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             var dsContry = configDB.ExecuteDataset(
                    @"SELECT rowid, regioncode, regionname 
                       FROM hb_region

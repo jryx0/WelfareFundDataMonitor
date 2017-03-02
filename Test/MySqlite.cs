@@ -22,6 +22,7 @@ namespace Test.DAL
 
         private bool isInit = false;
         private bool isTrans = false;
+        public bool isCryt = false;
 
         #region Sqlite Init
         public MySqlite()

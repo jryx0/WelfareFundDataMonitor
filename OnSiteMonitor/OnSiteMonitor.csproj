@@ -121,7 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\DataCheck.cs" />
-    <Compile Include="Business\MultiCalculate.cs" />
+    <Compile Include="Business\QuickComparor.cs" />
     <Compile Include="ImportExcelPO.cs" />
     <Compile Include="Models\Clues.cs" />
     <Compile Include="Models\DataHelper.cs" />
@@ -206,7 +206,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Service\CollisionAimService.cs" />
     <Compile Include="Service\DataFormatService.cs" />
     <Compile Include="Service\DataItemStuctServices.cs" />
     <Compile Include="Service\LoginServices.cs" />

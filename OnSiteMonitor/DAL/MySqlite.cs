@@ -22,6 +22,7 @@ namespace OnSiteFundComparer.DAL
 
         private bool isInit = false;
         private bool isTrans = false;
+        public bool isCryt = GlobalEnviroment.isCryt;
 
         #region Sqlite Init
         public MySqlite()
@@ -29,15 +30,19 @@ namespace OnSiteFundComparer.DAL
             sqliteConnectionString = "";
             isInit = false;
             isTrans = false;
-           // sqlitePassword = "dfjwhb2014";
+
+            if(isCryt)
+              sqlitePassword = "dfjwhb2014";
         }
 
-        public MySqlite(String connStr)
+        public MySqlite(String connStr, bool Cryt)
         {
             sqliteConnectionString = connStr;
             isInit = false;
             isTrans = false;
-         //   sqlitePassword = "dfjwhb2014";
+
+            if (isCryt)
+                sqlitePassword = "dfjwhb2014";
         }
 
         public MySqlite(String connStr, string password)
@@ -48,6 +53,13 @@ namespace OnSiteFundComparer.DAL
             sqlitePassword = password;
         }
 
+        public bool IsDBClose()
+        {
+            if (sqliteConn == null || sqliteConn.State == System.Data.ConnectionState.Closed)
+                return true;
+
+            return false;
+        }
 
         private void InitSqliteDB()
         {

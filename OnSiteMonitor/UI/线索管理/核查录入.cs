@@ -45,7 +45,7 @@ namespace OnSiteFundComparer.UI.线索管理
                                     ReCheckByName1
                               FROM Clue_Report Where RowID = @rowid ";
 
-            DAL.MySqlite result = new DAL.MySqlite(dbFile);
+            DAL.MySqlite result = new DAL.MySqlite(dbFile, GlobalEnviroment.isCryt);
             try
             {
                 var clue = new WFM.JW.HB.Models.Clues();
@@ -191,7 +191,7 @@ namespace OnSiteFundComparer.UI.线索管理
 
 
 
-            DAL.MySqlite result = new DAL.MySqlite(dbFile);
+            DAL.MySqlite result = new DAL.MySqlite(dbFile, GlobalEnviroment.isCryt);
             try
             {
 

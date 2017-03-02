@@ -232,7 +232,7 @@ namespace OnSiteFundComparer.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DAL.MySqlite config = new MySqlite(GlobalEnviroment.MainDBFile);
+            DAL.MySqlite config = new MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
 
             config.ExecuteNonQuery("Delete from Task");
             config.ExecuteNonQuery("Update setting set Settingvalue = 1");

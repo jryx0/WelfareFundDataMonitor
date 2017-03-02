@@ -10,9 +10,22 @@ namespace OnSiteFundComparer.Service
     {
         private DAL.MySqlite _sqliteDB; 
 
+        public DataFormatService()
+        {
+            _sqliteDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
+        }
+
         public DataFormatService(string connStr)
         {
-            _sqliteDB  = new DAL.MySqlite(connStr);
+            _sqliteDB  = new DAL.MySqlite(connStr, GlobalEnviroment.isCryt);
+        }
+
+        public DataFormatService(DAL.MySqlite _sqlite)
+        {
+            if (_sqliteDB == null || _sqliteDB.IsDBClose())
+                _sqliteDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
+            else
+                _sqliteDB = _sqlite;
         }
         
         public void SaveDataFormat(List<Models.DataFormat> ff, int ParentID)
@@ -71,7 +84,7 @@ namespace OnSiteFundComparer.Service
 
         internal DataSet GetAllDataFormat()
         {
-            string sql1 = @"SELECT   RowID, ParentID, ColName as 名称, Col as 值, Seq 
+            string sql1 = @"SELECT   RowID, ParentID, ColName as 名称, Col as 值, Seq , colCode,DisplayName
                              FROM      DataFormat Order by Seq";
             return _sqliteDB.ExecuteDataset(sql1);
         }

@@ -4,26 +4,41 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using OnSiteFundComparer.Models;
+ 
 
 namespace OnSiteFundComparer.Business
 {
-    class DataMgr 
+    class DataMgr
     {
-        string MainDB = Application.StartupPath + "\\" +
-            OnSiteFundComparer.Properties.Settings.Default.MainDBFile;
+        //string MainDB = Application.StartupPath + "\\" +
+        //    OnSiteFundComparer.Properties.Settings.Default.MainDBFile;
 
-        //string MainDB = GlobalEnviroment.MainDBDir;
+        // string MainDB = GlobalEnviroment.MainDBFile;
+
+        DAL.MySqlite MainSqliteDB;
 
         int treeDeep = 0;
         public DataMgr()
         {
+            MainSqliteDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
+        }
 
+        public DataMgr(string connstr)
+        {
+            MainSqliteDB = new DAL.MySqlite(connstr, GlobalEnviroment.isCryt); ;
+        }
+
+        public DataMgr(DAL.MySqlite _sqlite)
+        {
+            if (MainSqliteDB == null || MainSqliteDB.IsDBClose())
+                MainSqliteDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
+            else
+                MainSqliteDB = _sqlite;
         }
 
         public List<Models.DataItem> GetChildDataItemList(int ParentID)
         {
-            Service.DataItemStuctServices diss = new Service.DataItemStuctServices(MainDB);
+            Service.DataItemStuctServices diss = new Service.DataItemStuctServices(MainSqliteDB);
             var fundList = diss.GetDisplayDataItems();
             diss.Close();
 
@@ -31,16 +46,17 @@ namespace OnSiteFundComparer.Business
         }
         public List<Models.DataItem> GetChildAllList(int ParentID)
         {
-            Service.DataItemStuctServices diss = new Service.DataItemStuctServices(MainDB);
+            Service.DataItemStuctServices diss = new Service.DataItemStuctServices(MainSqliteDB);
             var fundList = diss.GetDisplayDataItems();
 
-            List<Models.DataItem> newList = new List<DataItem>();
+            List<Models.DataItem> newList = new List<Models.DataItem>();
 
             CreateDataItem(newList, fundList, ParentID);
 
             return newList;
         }
-        private void CreateDataItem(List<DataItem> allchildlist, List<DataItem> list, int ParentID)
+
+        private void CreateDataItem(List<Models.DataItem> allchildlist, List<Models.DataItem> list, int ParentID)
         {
             var fi = list.Find(x => x.RowID == ParentID);
             if (fi == null)
@@ -50,7 +66,7 @@ namespace OnSiteFundComparer.Business
             var childlist = list.FindAll(x => x.ParentID == ParentID);
             foreach (var l in childlist)
             {
-                l.parentItem = fi;                                
+                l.parentItem = fi;
                 CreateDataItem(allchildlist, list, l.RowID);
                 //allchildlist.Add(l);
             }
@@ -60,20 +76,20 @@ namespace OnSiteFundComparer.Business
 
         public TreeNode BuildDisplayItemStruct(int startID)
         {
-            Service.DataItemStuctServices diss = new Service.DataItemStuctServices(MainDB);
+            Service.DataItemStuctServices diss = new Service.DataItemStuctServices(MainSqliteDB);
             var fundList = diss.GetDisplayDataItems();
             diss.Close();
 
-            TreeNode tn = new TreeNode();            
+            TreeNode tn = new TreeNode();
             CreateTree(tn, fundList, startID);
             tn.Expand();
-            
+
             return tn;
         }
 
         public TreeNode BuildAllItemStruct(int startID)
         {
-            Service.DataItemStuctServices diss = new Service.DataItemStuctServices(MainDB);
+            Service.DataItemStuctServices diss = new Service.DataItemStuctServices(MainSqliteDB);
             var fundList = diss.GetDataItems(); //show hidden items
             diss.Close();
 
@@ -84,8 +100,8 @@ namespace OnSiteFundComparer.Business
             return tn;
         }
 
-        private void CreateTree(TreeNode tn, List<DataItem> list, int rowid)
-        {   
+        private void CreateTree(TreeNode tn, List<Models.DataItem> list, int rowid)
+        {
             var fi = list.Find(x => x.RowID == rowid);
             if (fi == null)
                 return;
@@ -109,48 +125,85 @@ namespace OnSiteFundComparer.Business
             treeDeep--;
             return;
         }
-     
+
         public void SaveNewFormat(List<Models.DataFormat> df, Models.DataItem di)
         {
-            Service.DataFormatService ffs = new Service.DataFormatService(MainDB);
+            Service.DataFormatService ffs = new Service.DataFormatService(MainSqliteDB);
             ffs.SaveDataFormat(df, di.RowID);
         }
 
-        internal DataSet GetDataFormat(DataItem di)
+        internal DataSet GetDataFormat(Models.DataItem di)
         {
-            Service.DataFormatService ffs = new Service.DataFormatService(MainDB);
+            Service.DataFormatService ffs = new Service.DataFormatService(MainSqliteDB);
             return ffs.GetDataFormat(di.RowID);
         }
 
-        
-        internal List<Models.DataFormat> GetDataFormatList(DataItem di)
+        internal DataSet GetDataFormat()
         {
-            List<Models.DataFormat> dataformat = new List<DataFormat>();
+            Service.DataFormatService ffs = new Service.DataFormatService(MainSqliteDB);
+            return ffs.GetAllDataFormat();
+        }
 
-            DataSet ds = GetDataFormat(di);
+        internal List<Models.DataFormat> GetDataFormatList()
+        {
+            return GetDataFormatList(null);
+        }
+
+        internal List<Models.DataFormat> GetDataFormatList(Models.DataItem di)
+        {
+            List<Models.DataFormat> dataformat = new List<Models.DataFormat>();
+
+            DataSet ds;
+            if (di == null)
+                ds = GetDataFormat();
+            else
+                ds = GetDataFormat(di);
+
             foreach(DataRow dr in ds.Tables[0].Rows)
             {
-                Models.DataFormat df = new DataFormat();
+                //Models.DataFormat df = new Models.DataFormat();
 
-                df.ParentID = di.RowID;
-                df.RowID = int.Parse(dr[0].ToString());
+                //df.ParentID = di.RowID;
+                //df.RowID = int.Parse(dr[0].ToString());
 
-                df.colName = dr[2].ToString();
-                df.colNumber = int.Parse(dr[3].ToString());
-                df.Seq = int.Parse(dr[4].ToString());
+                //df.colName = dr[2].ToString();
+                //df.colNumber = int.Parse(dr[3].ToString());
+                //df.Seq = int.Parse(dr[4].ToString());
 
-                df.colCode = dr[5].ToString();
-                df.DisplayName = dr[6].ToString();
+                //df.colCode = dr[5].ToString();
+                //df.DisplayName = dr[6].ToString();
+
+                Models.DataFormat df = Mapor(dr);
+               // df.ParentID = di.RowID;
 
                 dataformat.Add(df);
             }
             return dataformat;
         }
 
+        internal Models.DataFormat Mapor(DataRow dr)
+        {
+            Models.DataFormat df = new Models.DataFormat();
+
+            
+            df.RowID = int.Parse(dr[0].ToString());
+            df.ParentID = int.Parse(dr[1].ToString());
+
+            df.colName = dr[2].ToString();
+            df.colNumber = int.Parse(dr[3].ToString());
+            df.Seq = int.Parse(dr[4].ToString());
+
+            df.colCode = dr[5].ToString();
+            df.DisplayName = dr[6].ToString();
+
+            return df;
+        }
+
+
         internal List<string> GetDataLabelList()
         {
             List<string> labels = new List<string>();
-            Service.DataItemStuctServices diss = new Service.DataItemStuctServices(MainDB);
+            Service.DataItemStuctServices diss = new Service.DataItemStuctServices(MainSqliteDB);
 
             DataSet ds = diss.GetDataLabel();
             foreach (DataRow dr in ds.Tables[0].Rows)
@@ -163,16 +216,16 @@ namespace OnSiteFundComparer.Business
         }
         internal void UpdateLabel(List<string> labels)
         {
-            Service.DataItemStuctServices diss = new Service.DataItemStuctServices(MainDB);
+            Service.DataItemStuctServices diss = new Service.DataItemStuctServices(MainSqliteDB);
 
             diss.UpdateLabels(labels);
         }
 
-        internal DataFormat GetDataRelation(DataItem di)
+        internal Models.DataFormat GetDataRelation(Models.DataItem di)
         {
-            DataFormat df = new DataFormat();
+            Models.DataFormat df = new Models.DataFormat();
             //Service.DataItemStuctServices diss = new Service.DataItemStuctServices(MainDB);
-            Service.DataFormatService fs = new Service.DataFormatService(MainDB);
+            Service.DataFormatService fs = new Service.DataFormatService(MainSqliteDB);
 
             DataSet ds = fs.GetDataFormat(di.RowID, -1);
 
@@ -186,15 +239,15 @@ namespace OnSiteFundComparer.Business
 
             return df;
         }
-        public List<DataFormat> GetAllDataFormatList()
+        public List<Models.DataFormat> GetAllDataFormatList()
         {
-            Service.DataFormatService ffs = new Service.DataFormatService(MainDB);
+            Service.DataFormatService ffs = new Service.DataFormatService(MainSqliteDB);
             DataSet ds = ffs.GetAllDataFormat();
 
-            List<Models.DataFormat> dataformat = new List<DataFormat>();
+            List<Models.DataFormat> dataformat = new List<Models.DataFormat>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                Models.DataFormat df = new DataFormat();
+                Models.DataFormat df = new Models.DataFormat();
 
                 df.RowID = int.Parse(dr[0].ToString());
                 df.ParentID = int.Parse(dr[1].ToString());               
@@ -208,7 +261,35 @@ namespace OnSiteFundComparer.Business
             return dataformat;
         }
 
+        public List<Models.DataItem> GetDataItemByAim(List<Models.CompareAim> aims)
+        {
+            var AimDi = new List<Models.DataItem>();
+            if (aims == null || aims.Count == 0)
+                return AimDi;
 
+            using (var dss = new Service.DataItemStuctServices(MainSqliteDB))
+            {
+                var diList = dss.GetDataItems();
+
+                AimDi = (from di in diList
+                         from a in aims
+                         where (di.RowID == a.t1 || di.RowID == a.t2 || di.RowID == a.t3)
+                         select di).Distinct().ToList();
+            }
+
+            return AimDi;
+        }
+        /// <summary>
+        /// tmpType = 0 for compare aims
+        /// tmpType = 1 for check aims
+        /// </summary>
+        /// <param name="tmpType"></param>
+        /// <returns></returns>
+        public List<Models.CompareAim> GetCompareAllAim(int tmpType)
+        {
+            Service.CompareAimService cas = new Service.CompareAimService(MainSqliteDB);
+            return cas.GetCompareAllAim().Where(x => x.TmpType == tmpType).ToList();
+        }
 
         //public CollisionAim GetAimbyID(string id)
         //{
@@ -287,4 +368,26 @@ namespace OnSiteFundComparer.Business
         //}
     }
     
+
+    class CompareMgr 
+    {
+        public List<Models.DataItem> GetDataItemByAim(List<Models.CompareAim> aims)
+        {
+            var AimDi = new List<Models.DataItem>();
+            if (aims == null || aims.Count == 0)
+                return AimDi;
+
+            using (var dss = new Service.DataItemStuctServices(GlobalEnviroment.MainDBFile))
+            {
+                var diList = dss.GetDataItems();
+
+                AimDi = (from di in diList
+                         from a in aims
+                         where (di.RowID == a.t1 || di.RowID == a.t2 || di.RowID == a.t3)
+                         select di).ToList();
+            }
+
+            return AimDi;
+        }
+    }
 }

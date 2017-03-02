@@ -24,7 +24,7 @@ namespace Test
             tn.Text = DBName + "("+ Path.GetFileName(DBFile)+")";
             tn.Tag = DBFile;            
 
-            OnSiteFundComparer.DAL.MySqlite db = new OnSiteFundComparer.DAL.MySqlite(DBFile);
+            OnSiteFundComparer.DAL.MySqlite db = new OnSiteFundComparer.DAL.MySqlite(DBFile, OnSiteFundComparer.GlobalEnviroment.isCryt);
             try
             {
                 var ds = db.ExecuteDataset(@"select * from sqlite_master where type='table'");
@@ -78,7 +78,7 @@ namespace Test
 
 
 
-            OnSiteFundComparer.DAL.MySqlite _sqlite = new OnSiteFundComparer.DAL.MySqlite((string)treeView1.SelectedNode.Tag);
+            OnSiteFundComparer.DAL.MySqlite _sqlite = new OnSiteFundComparer.DAL.MySqlite((string)treeView1.SelectedNode.Tag, OnSiteFundComparer.GlobalEnviroment.isCryt);
 
             try
             {

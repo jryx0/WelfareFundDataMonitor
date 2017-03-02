@@ -42,9 +42,13 @@ namespace OnSiteFundComparer
 
             
             ws = new FileTranser.MTOM.ClassLibrary.WebServicesHelp();
-            //ws.Url = Properties.Settings.Default.WebServicesUrl + "WFMUploader/FileTransfer.asmx";
-            ws.Url = Properties.Settings.Default.WebServicesUrl + "TMPAServices/FileTransfer.asmx";
 
+            //ws.Url = Properties.Settings.Default.WebServicesUrl + "WFMUploader/FileTransfer.asmx";
+            if(Properties.Settings.Default.WebServicesUrl.ToLower().IndexOf("localhost")  != -1)
+                ws.Url = Properties.Settings.Default.WebServicesUrl + "/FileTransfer.asmx";
+            else
+                ws.Url = Properties.Settings.Default.WebServicesUrl + "TMPAServices/FileTransfer.asmx";
+ 
             lbInfo.Text = "";
         }
 
@@ -56,7 +60,7 @@ namespace OnSiteFundComparer
 
                 if (GlobalEnviroment.LocalVersion)
                 {
-                    DAL.MySqlite _sqlite = new DAL.MySqlite(GlobalEnviroment.MainDBFile);
+                    DAL.MySqlite _sqlite = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
                     try
                     {
                         var ds = _sqlite.ExecuteScalar(CommandType.Text,

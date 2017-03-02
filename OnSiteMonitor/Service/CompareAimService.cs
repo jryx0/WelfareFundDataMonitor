@@ -12,9 +12,14 @@ namespace OnSiteFundComparer.Service
 
         public CompareAimService(string connStr)
         {
-            _sqliteDB = new DAL.MySqlite(connStr);
+            _sqliteDB = new DAL.MySqlite(connStr, GlobalEnviroment.isCryt);
         }
-        
+
+        public CompareAimService(DAL.MySqlite sqlitedb)
+        {
+            _sqliteDB = sqlitedb;
+        }
+
         public List<Models.DataItem> GetChildDataItemList()
         {
             Service.DataItemStuctServices diss = new Service.DataItemStuctServices(
@@ -41,7 +46,8 @@ namespace OnSiteFundComparer.Service
                                    CompareAim.t3,
                                    CompareAim.conditions,
                                    CompareAim.seq,
-                                   RulesTmp.Type
+                                   RulesTmp.RuleType,
+                                   RulesTmp.TmpType
                               FROM CompareAim,
                                    RulesTmp,
                                    DataItem
@@ -67,8 +73,7 @@ namespace OnSiteFundComparer.Service
 
         public List<Models.CompareAim> GetCompareAllAim()
         {
-            Service.DataItemStuctServices diss = new Service.DataItemStuctServices(
-          OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+            DataItemStuctServices diss = new DataItemStuctServices(GlobalEnviroment.MainDBFile);
             var fundList = diss.GetDisplayDataItems();
 
             DataSet ds = GetCompareAimsDS();
@@ -107,30 +112,32 @@ namespace OnSiteFundComparer.Service
                 cl.Rules3 = ReplaceAll(cl.Rules3, cl.AimName, cl.TableName, para, di1, di2, di3);
 
                 cl.seq = int.Parse(dr[12].ToString());
-                cl.Type = int.Parse(dr[13].ToString());
+                cl.RuleType = int.Parse(dr[13].ToString());
+                cl.TmpType = int.Parse(dr[14].ToString());
                 cList.Add(cl);
             }
 
             return cList;
         }
-        /// <summary>
-        /// 校验aim
-        /// </summary>
-        /// <returns></returns>
-        public List<Models.CompareAim> GetDataCheckAim()
-        {
-            var aList = GetCompareAllAim();
-            return aList.Where(x => x.Type > 1000).ToList();
-        }
-        /// <summary>
-        /// 重复数据删除aim
-        /// </summary>
-        /// <returns></returns>
-        public List<Models.CompareAim> GetDataAim()
-        {
-            var aList = GetCompareAllAim();
-            return aList.Where(x => x.Type > 2000).ToList();
-        }
+        
+        ///// <summary>
+        ///// 校验aim
+        ///// </summary>
+        ///// <returns></returns>
+        //public List<Models.CompareAim> GetDataCheckAim()
+        //{
+        //    var aList = GetCompareAllAim();
+        //    return aList.Where(x => x.RuleType > 1000).ToList();
+        //}
+        ///// <summary>
+        ///// 重复数据删除aim
+        ///// </summary>
+        ///// <returns></returns>
+        //public List<Models.CompareAim> GetDataAim()
+        //{
+        //    var aList = GetCompareAllAim();
+        //    return aList.Where(x => x.RuleType > 2000).ToList();
+        //}
         /// <summary>
         /// 比对aim
         /// </summary>
@@ -138,7 +145,7 @@ namespace OnSiteFundComparer.Service
         public List<Models.CompareAim> GetCompareAim()
         {
             var aList = GetCompareAllAim();
-            return aList.Where(x => x.Type < 1000).ToList();
+            return aList.Where(x => x.RuleType < 1000).ToList();
         }
 
         private string ReplaceAll(string rule, string type, string tablename, string para, Models.DataItem di1, Models.DataItem di2, Models.DataItem di3)

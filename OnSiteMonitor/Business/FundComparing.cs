@@ -13,7 +13,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using OnSiteFundComparer.Models;
 
-
 namespace OnSiteFundComparer.Business
 {
     class FundComparing
@@ -57,9 +56,9 @@ namespace OnSiteFundComparer.Business
             task.UserName = GlobalEnviroment.LoginedUser.Name;
 
 
-            MainSqliteDB = new DAL.MySqlite(Application.StartupPath + "\\" + Properties.Settings.Default.MainDBFile);
-            ImportSqliteDB = new DAL.MySqlite(InputDBDir + ComparingInfo + ".db"); //中间文件file db
-            ResultSqliteDB = new DAL.MySqlite(InputDBDir + "result." + ComparingInfo + ".db"); //结果文件file db
+            MainSqliteDB = new DAL.MySqlite(Application.StartupPath + "\\" + Properties.Settings.Default.MainDBFile, GlobalEnviroment.isCryt);
+            ImportSqliteDB = new DAL.MySqlite(InputDBDir + ComparingInfo + ".db", GlobalEnviroment.isCryt); //中间文件file db
+            ResultSqliteDB = new DAL.MySqlite(InputDBDir + "result." + ComparingInfo + ".db", GlobalEnviroment.isCryt); //结果文件file db
 
             ImportSqliteDB.ExecuteNonQuery("attach database '" + InputDBDir + "result." + ComparingInfo + ".db' as result");
 
@@ -230,11 +229,11 @@ namespace OnSiteFundComparer.Business
             TimeSpan ts = DateTime.Now - new DateTime(2015, 1, 1);
             ComparingInfo = ts.TotalMilliseconds.ToString();
 
-            MainSqliteDB = new DAL.MySqlite(Application.StartupPath + "\\" + Properties.Settings.Default.MainDBFile);
-            ImportSqliteDB = new DAL.MySqlite(InputDBDir + "Check." + ComparingInfo + ".db"); //file db
+            //MainSqliteDB = new DAL.MySqlite(Application.StartupPath + "\\" + Properties.Settings.Default.MainDBFile, GlobalEnviroment.isCryt);
+            //ImportSqliteDB = new DAL.MySqlite(InputDBDir + "Check." + ComparingInfo + ".db", GlobalEnviroment.isCryt); //file db
 
-            MainSqliteDB = new DAL.MySqlite(Application.StartupPath + "\\" + Properties.Settings.Default.MainDBFile);
-            ImportSqliteDB = new DAL.MySqlite(InputDBDir + "Check." + ComparingInfo + ".db"); //file db
+            MainSqliteDB = new DAL.MySqlite(Application.StartupPath + "\\" + Properties.Settings.Default.MainDBFile, GlobalEnviroment.isCryt);
+            ImportSqliteDB = new DAL.MySqlite(InputDBDir + "Check." + ComparingInfo + ".db", GlobalEnviroment.isCryt); //file db
 
 
 
@@ -799,7 +798,7 @@ namespace OnSiteFundComparer.Business
                     string CreateTable = Properties.Settings.Default.ReferTableSql.Replace("refertable", di.dbTable);
                     ImportSqliteDB.ExecuteNonQuery(CreateTable);
 
-                    if(di.col1.Length != 0)
+                    if(di.col1 != null && di.col1.Length != 0)
                     {
                         CreateTable = Properties.Settings.Default.ReferTableSql.Replace("refertable", di.dbTablePre);
                         ImportSqliteDB.ExecuteNonQuery(CreateTable);

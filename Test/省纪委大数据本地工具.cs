@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace Test
 {
+
     public partial class 省纪委大数据本地工具 : Form
     {
         public 省纪委大数据本地工具()
@@ -36,40 +37,12 @@ namespace Test
 
         private void button4_Click(object sender, EventArgs e)
         {
-            DAL.MySqlite testDB = new DAL.MySqlite("d:\\tools\\test.db");
-
-            long tick = DateTime.Now.Ticks;
-            Random r = new Random((int)(tick & tick & 0xffffffffL) | (int)(tick >> 32));
-
-            String Sql = "insert into tb values('@p', @n, '@p@n') ";
-            try
-            {
-                testDB.ExecuteNonQuery("CREATE TABLE IF NOT EXISTS tb (name varchar(10),val int,memo varchar(20))");
-
-                testDB.BeginTran();
-
-                for(int i = 0; i < 100; i ++)
-                {
-                    var sql1 = Sql.Replace("@p", GetRandomString(3, false, true, true, false, "") );
-
-                    for (int j = 0; j < 1000; j++)
-                    {
-                        var sql2 = sql1.Replace("@n", r.Next().ToString());
-                        testDB.ExecuteNonQuery(sql2);
-                    }
-                    
-                }
-
-                testDB.Commit();
-
-
-            }catch(Exception ex)
-            {
-
-            }
-
+ 
 
         }
+
+ 
+
 
         public static string GetRandomString(int length, bool useNum, bool useLow, bool useUpp, bool useSpe, string custom)
         {

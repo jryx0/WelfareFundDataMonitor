@@ -30,8 +30,8 @@ namespace OnSiteFundComparer.UI.线索管理
             _currentStep = 0;
             OnOperationStart(EventArgs.Empty);
             int start = 1;
-            DAL.MySqlite result = new DAL.MySqlite(DBFile);
-            DAL.MySqlite config = new DAL.MySqlite(GlobalEnviroment.MainDBFile);
+            DAL.MySqlite result = new DAL.MySqlite(DBFile, GlobalEnviroment.isCryt);
+            DAL.MySqlite config = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             result.AttchDatabase(config, "Config");
             try
             {

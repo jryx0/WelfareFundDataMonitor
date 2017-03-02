@@ -12,8 +12,8 @@ namespace OnSiteFundComparer.UI
 {
     public partial class 规则 : Form
     {
-        internal CollisionAim collisionAim;
-        internal string testDBFile;
+        
+        internal string testDBFile="";
 
         public int CurrentRuleID = -1;
 
@@ -29,7 +29,7 @@ namespace OnSiteFundComparer.UI
             initTableComb();
             initTmpComb();
 
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
 
             try
             {
@@ -116,10 +116,10 @@ namespace OnSiteFundComparer.UI
 
         private void initTmpComb()
         {
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             try
             {
-                var ds = configDB.ExecuteDataset("SELECT rowid, tmpname,type FROM RulesTmp where status = 1 order by seq");
+                var ds = configDB.ExecuteDataset("SELECT rowid, tmpname,ruletype FROM RulesTmp where status = 1 order by seq");
 
                 dtTmp = ds.Tables[0];
                 this.cbTemplate.DataSource = ds.Tables[0];
@@ -138,7 +138,7 @@ namespace OnSiteFundComparer.UI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             try
             {
                 var o = configDB.ExecuteScalar("Select rowid from CompareAim where rowid = " + CurrentRuleID.ToString());
@@ -185,7 +185,7 @@ namespace OnSiteFundComparer.UI
                     break;
             }
 
-            DAL.MySqlite sqliteDB = new DAL.MySqlite(testDBFile);
+            DAL.MySqlite sqliteDB = new DAL.MySqlite(testDBFile, GlobalEnviroment.isCryt);
             try
             {
                 this.Cursor = Cursors.WaitCursor;
@@ -255,7 +255,7 @@ namespace OnSiteFundComparer.UI
                                   FROM RulesTmp
                                  WHERE status = 1 AND 
                                        rowid = @id ";
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             try
             {
                 var ds = configDB.ExecuteDataset(tmpSql.Replace("@id", tmp));
@@ -329,7 +329,7 @@ namespace OnSiteFundComparer.UI
             DataItem di2 = (DataItem)this.cbTB2.SelectedItem;
             DataItem di3 = (DataItem)this.cbTB3.SelectedItem;
 
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             string insertSql = @"INSERT INTO CompareAim (SourceID,
                                    AimName, AimDesc,  TableName, t1,  t2,  t3,  tmp, seq, conditions) 
                                 VALUES (@SourceID, @AimName,  @AimDesc,  @TableName,  @t1, @t2,  @t3, @tmp, @seq, @conditions)";
@@ -375,7 +375,7 @@ namespace OnSiteFundComparer.UI
             DataItem di2 = (DataItem)this.cbTB2.SelectedItem;
             DataItem di3 = (DataItem)this.cbTB3.SelectedItem;
 
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);             
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);             
             string updateSql = @"UPDATE CompareAim    SET
                                     SourceID = @SourceID,    AimName = @AimName,
                                     AimDesc = @AimDesc,     TableName = @TableName,

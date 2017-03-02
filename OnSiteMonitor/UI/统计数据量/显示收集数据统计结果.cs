@@ -47,7 +47,7 @@ namespace OnSiteFundComparer.UI
             diss.Close();
 
             _countSql = "Select 项目名称, 数量 from (" + _countSql.Substring(7) + ") a ORDER BY a.seq  ";
-            DAL.MySqlite db = new DAL.MySqlite(dbString);
+            DAL.MySqlite db = new DAL.MySqlite(dbString, GlobalEnviroment.isCryt);
 
             try
             {

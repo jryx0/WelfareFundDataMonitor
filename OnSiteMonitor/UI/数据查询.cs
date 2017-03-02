@@ -28,7 +28,7 @@ namespace OnSiteFundComparer.UI
 
         private void init()
         {
-            MySqlite configDB = new MySqlite(GlobalEnviroment.MainDBFile);
+            MySqlite configDB = new MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
 
             try
             {
@@ -71,7 +71,7 @@ namespace OnSiteFundComparer.UI
             }
 
             this.Cursor = Cursors.WaitCursor;
-            MySqlite configDB = new MySqlite(GlobalEnviroment.MainDBFile);
+            MySqlite configDB = new MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             object ret = null;
             try
             {

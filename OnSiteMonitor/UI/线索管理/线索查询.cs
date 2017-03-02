@@ -53,7 +53,7 @@ namespace OnSiteFundComparer.UI
         }      
         public bool GetDefaultData()
         {
-            DAL.MySqlite configDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
 
             try
             {
@@ -249,10 +249,10 @@ namespace OnSiteFundComparer.UI
                 ImportExcelCluesPO xlsCluePO = new ImportExcelCluesPO(dbFile, of.FileName);
                 xlsCluePO.StartNumber = 3;
 
-                xlsCluePO.resultDB = new DAL.MySqlite(dbFile);
+                xlsCluePO.resultDB = new DAL.MySqlite(dbFile, GlobalEnviroment.isCryt);
                 xlsCluePO.resultDB.AttchDatabase(Properties.Settings.Default.MainDBFile, "Config");
 
-                xlsCluePO.MainDB = new DAL.MySqlite(Properties.Settings.Default.MainDBFile);
+                xlsCluePO.MainDB = new DAL.MySqlite(Properties.Settings.Default.MainDBFile, GlobalEnviroment.isCryt);
                 xlsCluePO.MainDB.AttchDatabase(xlsCluePO.resultDB, "result");
 
                 
@@ -308,7 +308,7 @@ namespace OnSiteFundComparer.UI
             Properties.Settings.Default.IsFirst = "1";
             Properties.Settings.Default.Save();
 
-            DAL.MySqlite configDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
 
             String updateSql1 = @"Update dataFormat set col = 3 where colcode='RelateID'";
             String updateSql2 = @"Update dataFormat set col = 4 where colcode='RelateName'";
@@ -326,7 +326,7 @@ namespace OnSiteFundComparer.UI
             }
 
 
-            DAL.MySqlite result = new DAL.MySqlite(dbFile);
+            DAL.MySqlite result = new DAL.MySqlite(dbFile, GlobalEnviroment.isCryt);
             String SqlSelect = @"SELECT RowID, ID,   Addr, Region,  
                                IsClueTrue,   IsCP, Fact, IllegalMoney,CheckDate,
                                CheckByName1, CheckByName2, ReCheckFact, ReCheckType, ReCheckByName1,isconfirmed,isuploaded,table1
@@ -438,7 +438,7 @@ namespace OnSiteFundComparer.UI
             线索管理.UploadCluePO uploader = new 线索管理.UploadCluePO(_clues.ToList());
             Erik.Utilities.Lib.StartProgressiveOperation(uploader, owner);
 
-            DAL.MySqlite result = new DAL.MySqlite(_dbFile);
+            DAL.MySqlite result = new DAL.MySqlite(_dbFile, GlobalEnviroment.isCryt);
             int success = 0;
             try { 
             foreach (var c in uploader.returnList)
@@ -476,7 +476,7 @@ namespace OnSiteFundComparer.UI
                               Where RowID = @RowID ";
             #endregion
 
-            DAL.MySqlite result = new DAL.MySqlite(_dbFile);
+            DAL.MySqlite result = new DAL.MySqlite(_dbFile, GlobalEnviroment.isCryt);
             int success = 0;
             try
             {
@@ -550,8 +550,8 @@ namespace OnSiteFundComparer.UI
 
             String CountSql = @"Select count() from Clue_Report where 1 = 1";
 
-            DAL.MySqlite result = new DAL.MySqlite(dbFile);
-            DAL.MySqlite config = new DAL.MySqlite(GlobalEnviroment.MainDBFile);
+            DAL.MySqlite result = new DAL.MySqlite(dbFile, GlobalEnviroment.isCryt);
+            DAL.MySqlite config = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
 
             try
             {

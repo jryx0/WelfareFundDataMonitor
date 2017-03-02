@@ -61,9 +61,9 @@ namespace Test
 
             int nError = 0;
 
-            MySqlite configDB = new MySqlite(tbConfigDB.Text);
-            MySqlite importDB = new MySqlite(tbImportDB.Text);
-            MySqlite resultDB = new MySqlite(tbResultDB.Text);
+            MySqlite configDB = new MySqlite(tbConfigDB.Text, OnSiteFundComparer.GlobalEnviroment.isCryt);
+            MySqlite importDB = new MySqlite(tbImportDB.Text, OnSiteFundComparer.GlobalEnviroment.isCryt);
+            MySqlite resultDB = new MySqlite(tbResultDB.Text, OnSiteFundComparer.GlobalEnviroment.isCryt);
 
             System.Collections.Generic.Dictionary<string, string> testSql = new Dictionary<string, string>();
 

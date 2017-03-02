@@ -29,7 +29,7 @@ namespace OnSiteFundComparer.UI
 
         void init()
         {
-            DAL.MySqlite config = new DAL.MySqlite(GlobalEnviroment.MainDBFile);
+            DAL.MySqlite config = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
 
             try
             {
@@ -88,7 +88,7 @@ namespace OnSiteFundComparer.UI
             if (this.dataGridView1.SelectedRows == null && this.dataGridView1.SelectedRows.Count == 0)
                 return;
             this.Cursor = Cursors.AppStarting;
-            DAL.MySqlite config = new DAL.MySqlite(GlobalEnviroment.MainDBFile);
+            DAL.MySqlite config = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             try
             {
                 var t = config.ExecuteScalar("Select TStatus  from task where Rowid = " +

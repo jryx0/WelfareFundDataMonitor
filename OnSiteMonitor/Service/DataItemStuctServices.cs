@@ -11,14 +11,28 @@ namespace OnSiteFundComparer.Service
 {
     class DataItemStuctServices: IDisposable
     {
-        private List<Models.DataItem> _dataItems;
+       // private List<Models.DataItem> _dataItems;
         private DAL.MySqlite _sqliteDB;
         public DataItemStuctServices(string connStr)
         {
-            _dataItems = new List<Models.DataItem>();
-            _sqliteDB = new DAL.MySqlite();
+           // _dataItems = new List<Models.DataItem>();
+            _sqliteDB = new DAL.MySqlite(connStr, GlobalEnviroment.isCryt);
 
-            _sqliteDB.sqliteConnectionString = connStr;
+           // _sqliteDB.sqliteConnectionString = connStr;
+        }
+
+        public DataItemStuctServices()
+        {
+            _sqliteDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
+        }
+
+        public DataItemStuctServices(DAL.MySqlite sqlitedb)
+        {
+            //_dataItems = new List<Models.DataItem>();
+            if (sqlitedb == null || sqlitedb.IsDBClose())
+                _sqliteDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
+            else
+                _sqliteDB = sqlitedb;
         }
 
         public List<Models.DataItem>  GetDisplayDataItems( )
@@ -33,32 +47,35 @@ namespace OnSiteFundComparer.Service
             {
                 while (reader.Read())
                 {
+                    #region mapor
                     //reader.FieldCount
-                    Models.DataItem fi = new Models.DataItem();
+                    //Models.DataItem fi = new Models.DataItem();
 
-                    fi.RowID = Convert.ToInt32(reader.GetValue(0));
-                    fi.ParentID = Convert.ToInt32(reader.GetValue(1));
+                    //fi.RowID = Convert.ToInt32(reader.GetValue(0));
+                    //fi.ParentID = Convert.ToInt32(reader.GetValue(1));
 
 
-                    Models.FundItemTypes ft = new Models.FundItemTypes();
-                    Enum.TryParse<Models.FundItemTypes>(reader.GetValue(2).ToString(), out ft);
-                    fi.DataType = ft;
+                    //Models.FundItemTypes ft = new Models.FundItemTypes();
+                    //Enum.TryParse<Models.FundItemTypes>(reader.GetValue(2).ToString(), out ft);
+                    //fi.DataType = ft;
 
-                    fi.DataShortName = reader.GetValue(3).ToString();
-                    fi.DataFullName = reader.GetValue(4).ToString();
-                    fi.DataLink = Convert.ToInt32(reader.GetValue(5));
-                    fi.Datapath = reader.GetValue(6).ToString();
-                    fi.Status = (bool)reader.GetValue(7);
-                    fi.Seq = Convert.ToInt32(reader.GetValue(8));
-                    //fi.CreateDate = reader.GetValue(9).ToString();
-                    fi.dbTable = reader.GetValue(10).ToString();
-                    fi.people = reader.GetValue(11).ToString();
-                    fi.dbTablePre = reader.GetValue(12).ToString();
+                    //fi.DataShortName = reader.GetValue(3).ToString();
+                    //fi.DataFullName = reader.GetValue(4).ToString();
+                    //fi.DataLink = Convert.ToInt32(reader.GetValue(5));
+                    //fi.Datapath = reader.GetValue(6).ToString();
+                    //fi.Status = (bool)reader.GetValue(7);
+                    //fi.Seq = Convert.ToInt32(reader.GetValue(8));
+                    ////fi.CreateDate = reader.GetValue(9).ToString();
+                    //fi.dbTable = reader.GetValue(10).ToString();
+                    //fi.people = reader.GetValue(11).ToString();
+                    //fi.dbTablePre = reader.GetValue(12).ToString();
 
-                    fi.col1 = reader.GetValue(13).ToString();
-                    fi.col2 = reader.GetValue(14).ToString();
+                    //fi.col1 = reader.GetValue(13).ToString();
+                    //fi.col2 = reader.GetValue(14).ToString();
+                    #endregion
 
-                    fiList.Add(fi);
+                    //fiList.Add(fi);
+                    fiList.Add(Mapor(reader));
                 }
             }
 
@@ -67,7 +84,6 @@ namespace OnSiteFundComparer.Service
 
             return fiList;
         }
-
 
         public List<Models.DataItem> GetDataItems()
         {
@@ -81,28 +97,31 @@ namespace OnSiteFundComparer.Service
             {
                 while (reader.Read())
                 {
+                    #region mapor
                     //reader.FieldCount
-                    Models.DataItem fi = new Models.DataItem();
+                    //Models.DataItem fi = new Models.DataItem();
 
-                    fi.RowID = Convert.ToInt32(reader.GetValue(0));
-                    fi.ParentID = Convert.ToInt32(reader.GetValue(1));
+                    //fi.RowID = Convert.ToInt32(reader.GetValue(0));
+                    //fi.ParentID = Convert.ToInt32(reader.GetValue(1));
 
 
-                    Models.FundItemTypes ft = new Models.FundItemTypes();
-                    Enum.TryParse<Models.FundItemTypes>(reader.GetValue(2).ToString(), out ft);
-                    fi.DataType = ft;
+                    //Models.FundItemTypes ft = new Models.FundItemTypes();
+                    //Enum.TryParse<Models.FundItemTypes>(reader.GetValue(2).ToString(), out ft);
+                    //fi.DataType = ft;
 
-                    fi.DataShortName = reader.GetValue(3).ToString();
-                    fi.DataFullName = reader.GetValue(4).ToString();
-                    fi.DataLink = Convert.ToInt32(reader.GetValue(5));
-                    fi.Datapath = reader.GetValue(6).ToString();
-                    fi.Status = (bool)reader.GetValue(7);
-                    fi.Seq = Convert.ToInt32(reader.GetValue(8));
-                    //fi.CreateDate = reader.GetValue(9).ToString();
-                    fi.dbTable = reader.GetValue(10).ToString();
-                    fi.people = reader.GetValue(11).ToString();
+                    //fi.DataShortName = reader.GetValue(3).ToString();
+                    //fi.DataFullName = reader.GetValue(4).ToString();
+                    //fi.DataLink = Convert.ToInt32(reader.GetValue(5));
+                    //fi.Datapath = reader.GetValue(6).ToString();
+                    //fi.Status = (bool)reader.GetValue(7);
+                    //fi.Seq = Convert.ToInt32(reader.GetValue(8));
+                    ////fi.CreateDate = reader.GetValue(9).ToString();
+                    //fi.dbTable = reader.GetValue(10).ToString();
+                    //fi.people = reader.GetValue(11).ToString();
+                    #endregion
 
-                    fiList.Add(fi);
+                    //fiList.Add(fi);
+                    fiList.Add(Mapor(reader));
                 }
             }
 
@@ -110,6 +129,39 @@ namespace OnSiteFundComparer.Service
 
 
             return fiList;
+        }
+
+       
+
+
+        private Models.DataItem Mapor(SQLiteDataReader reader)
+        {
+            Models.DataItem fi = new Models.DataItem();
+
+            fi.RowID = Convert.ToInt32(reader.GetValue(0));
+            fi.ParentID = Convert.ToInt32(reader.GetValue(1));
+
+
+            Models.FundItemTypes ft = new Models.FundItemTypes();
+            Enum.TryParse<Models.FundItemTypes>(reader.GetValue(2).ToString(), out ft);
+            fi.DataType = ft;
+
+            fi.DataShortName = reader.GetValue(3).ToString();
+            fi.DataFullName = reader.GetValue(4).ToString();
+            fi.DataLink = Convert.ToInt32(reader.GetValue(5));
+            fi.Datapath = reader.GetValue(6).ToString();
+            fi.Status = (bool)reader.GetValue(7);
+            fi.Seq = Convert.ToInt32(reader.GetValue(8));
+            //fi.CreateDate = reader.GetValue(9).ToString();
+            fi.dbTable = reader.GetValue(10).ToString();
+            fi.people = reader.GetValue(11).ToString();
+
+            fi.dbTablePre = reader.GetValue(12).ToString();
+            fi.col1 = reader.GetValue(13).ToString();
+            fi.col2 = reader.GetValue(14).ToString();
+
+
+            return fi;
         }
 
         private void BuildDataItemStruct(List<Models.DataItem> list)

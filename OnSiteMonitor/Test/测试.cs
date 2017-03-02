@@ -62,7 +62,7 @@ namespace OnSiteFundComparer.Test
 
         private void InitGridView()
         {
-            DAL.MySqlite configDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
 
             try
             {
@@ -79,7 +79,7 @@ namespace OnSiteFundComparer.Test
                                                        RulesTmp
                                                  WHERE CompareAim.status = 1 AND 
                                                        CompareAim.SourceID = DataItem.RowID AND 
-                                                       RulesTmp.RowID = CompareAim.tmp
+                                                       RulesTmp.RowID = CompareAim.tmp and CompareAim.Type = 0
                                                  ORDER BY DataItem.parentid,
                                                           DataItem.seq,
                                                           CompareAim.Seq");
@@ -267,7 +267,7 @@ namespace OnSiteFundComparer.Test
         private bool IsDBCorrect()
         {
             bool bRet = false;
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             try
             {
                 var ds = configDB.ExecuteDataset(@"select tbl_name, sql from sqlite_master
@@ -345,7 +345,7 @@ namespace OnSiteFundComparer.Test
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            DAL.MySqlite configDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             String Sql = @"Insert or replace into CompareAimTest(aimid, TheoryResult, TestResult, TestTime)
                     values(@aimid, '@TheoryResult', '@TestResult', '@TestTime')";
 
@@ -418,7 +418,7 @@ namespace OnSiteFundComparer.Test
             }
 
 
-            DAL.MySqlite configDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             configDB.ExecuteNonQuery("delete from CompareAimTest");
         }
 

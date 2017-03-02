@@ -254,6 +254,18 @@ namespace OnSiteFundComparer.Models
 
         }
 
+        public static string Selectby(string sets)
+        {
+            String _sql = @"
+                 SELECT   
+                        RowID, ParentID, DataType,DataShortName, 
+                        DataFullName,  DataLink, Datapath,  
+                        Status, Seq, DataTime, dbTable, people,dbTablePre, Col1, Col2
+                 FROM  DataItem where Status = 1 and rowid in (" + sets + ")  Order by Seq";
+            return _sql;
+
+        }
+
         public static string SelectSqlAll()
         {
             return @"
@@ -338,11 +350,8 @@ namespace OnSiteFundComparer.Models
         public int seq;
         public int status = 1;
 
-        public int Type;
-
-
-
-
+        public int RuleType;
+        public int TmpType; //0 for compare, 1 for check
     }
 
 
@@ -361,6 +370,10 @@ namespace OnSiteFundComparer.Models
         public string CheckName;
         public string CheckSql;
         public int Type;
+
+        public int t1;
+        public int t2;
+        public int t3;
     }
 }
 

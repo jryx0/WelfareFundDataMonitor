@@ -105,8 +105,8 @@ namespace OnSiteFundComparer.Test
 
         internal string Start ()
         {
-            MainSqliteDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile);
-            ImportSqliteDB = new DAL.MySqlite(InputDB );
+            MainSqliteDB = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
+            ImportSqliteDB = new DAL.MySqlite(InputDB, GlobalEnviroment.isCryt);
 
             Business.DataMgr dmgr = new Business.DataMgr();
             var complist = dmgr.GetChildDataItemList(3);

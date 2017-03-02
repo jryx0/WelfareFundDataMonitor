@@ -23,12 +23,12 @@ namespace OnSiteFundComparer.UI
 
         private void init()
         {
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
 
             try
             {
                 var ds = configDB.ExecuteDataset(@"SELECT rowid,
-                                               tmpName as 模板名称,type as 类型
+                                               tmpName as 模板名称,ruletype as 类型
                                           FROM RulesTmp
                                          WHERE status = 1
                                          ORDER BY seq");
@@ -37,8 +37,10 @@ namespace OnSiteFundComparer.UI
                 if(dgvTmp.Columns.Count > 0)
                 { 
                     dgvTmp.Columns[0].Visible = false;
-                    dgvTmp.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-                    dgvTmp.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
+                    dgvTmp.Columns[1].Width = 200;
+                    //dgvTmp.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+                    //dgvTmp.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
                 }
 
                 showTmp("1");
@@ -86,10 +88,10 @@ namespace OnSiteFundComparer.UI
             if (dlg.ShowDialog() != DialogResult.OK)
                 return;
 
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             try
             {
-                var ds = configDB.ExecuteNonQuery(@"insert into rulestmp(tmpname, type) values ('" + dlg.tmpName + "', " + dlg.type + ")");
+                var ds = configDB.ExecuteNonQuery(@"insert into rulestmp(tmpname, Ruletype) values ('" + dlg.tmpName + "', " + dlg.type + ")");
                 init();
             }
             catch (Exception ex)
@@ -107,7 +109,7 @@ namespace OnSiteFundComparer.UI
         {
             string sql = "update  RulesTmp set rules =@r1, rule2 = @r2, rule3 = @r3, PreRules = @r4 where rowid = @id";
 
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             try
             {
                 configDB.ExecuteNonQuery(CommandType.Text, sql,
@@ -152,7 +154,7 @@ namespace OnSiteFundComparer.UI
         private void showTmp(string rowID)
         {
 
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             try
             {
                 var ds = configDB.ExecuteDataset(@"select rules, rule2, rule3
