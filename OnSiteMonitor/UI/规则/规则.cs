@@ -42,9 +42,13 @@ namespace OnSiteFundComparer.UI
                                                            CompareAim.t2,
                                                            CompareAim.t3,
                                                            CompareAim.tmp,
-                                                           CompareAim.conditions
+                                                           CompareAim.conditions,
+                                                           RulesTmp.TmpType,
+                                                           CompareAim.Seq
                                                       FROM CompareAim
-                                                     WHERE CompareAim.status = 1  and RowID = "
+                                                           JOIN
+                                                           RulesTmp ON compareAim.tmp = RulesTmp.RowID
+                                                     WHERE CompareAim.status = 1  and CompareAim.RowID = "
                                                + CurrentRuleID.ToString());
 
                 if (ds != null && ds.Tables[0] != null)
@@ -59,7 +63,15 @@ namespace OnSiteFundComparer.UI
                     this.cbTB3.SelectedValue = int.Parse(ds.Tables[0].Rows[0][7].ToString());
                     this.cbTemplate.SelectedValue = int.Parse(ds.Tables[0].Rows[0][8].ToString());
 
-                    
+                    if (ds.Tables[0].Rows[0][10].ToString() == "0")
+                        this.lbTmpType.Text = "规则类型:比对规则";
+                    else if (ds.Tables[0].Rows[0][10].ToString() == "1")
+                        this.lbTmpType.Text = "规则类型:校验规则";
+                    else if (ds.Tables[0].Rows[0][10].ToString() == "2")
+                        this.lbTmpType.Text = "规则类型:预处理规则";
+                    else this.lbTmpType.Text = "";
+
+                    this.tbSeq.Text = ds.Tables[0].Rows[0][11].ToString();
 
                     //this.tbR1.Text = ds.Tables[0].Rows[0][2].ToString();
                     //this.tbR2.Text = ds.Tables[0].Rows[0][3].ToString();
@@ -251,7 +263,7 @@ namespace OnSiteFundComparer.UI
             string tmpSql = @"SELECT rowid, rules,
                                        rule2,
                                        rule3,
-                                       PreRules
+                                       Comments
                                   FROM RulesTmp
                                  WHERE status = 1 AND 
                                        rowid = @id ";
@@ -427,6 +439,8 @@ namespace OnSiteFundComparer.UI
             this.tbR1.Text = "";
             this.tbR2.Text = "";
             this.tbR3.Text = "";
+
+            this.lbTmpType.Text = "";
 
 
         }

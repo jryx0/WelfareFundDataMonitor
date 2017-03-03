@@ -27,6 +27,7 @@ namespace OnSiteFundComparer.UI
                 button2.Visible = false;
                 button3.Visible = false;
                 button5.Visible = false;
+                btnTmp.Visible = false;
             }
 
         }
@@ -44,7 +45,8 @@ namespace OnSiteFundComparer.UI
                                                     CompareAim.t2,
                                                     CompareAim.t3,
                                                     CompareAim.tmp,
-                                                    RulesTmp.TmpName AS 模板
+                                                    RulesTmp.TmpName AS 模板,
+                                                    CompareAim.Seq as 顺序
                                                 FROM CompareAim,
                                                     DataItem,
                                                     RulesTmp
@@ -55,10 +57,9 @@ namespace OnSiteFundComparer.UI
                                                     DataItem.seq,
                                                     CompareAim.Seq";
 
-            if (index == 1) //compare
-                _Sql = _Sql.Replace("@para", " and CompareAim.Type = 0");
-            else if(index == 2) //checkrule
-                _Sql = _Sql.Replace("@para", " and CompareAim.Type = 1");
+            if (comboBox1.SelectedIndex < 3 && comboBox1.SelectedIndex > -1) //compare
+                _Sql = _Sql.Replace("@para", " and CompareAim.Type = " + comboBox1.SelectedIndex);
+            
             else
                 _Sql = _Sql.Replace("@para", " ");
 
@@ -82,16 +83,16 @@ namespace OnSiteFundComparer.UI
                     this.dataGridView1.Columns[0].Visible = false;
 
 
-                    this.dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                    this.dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                    this.dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dataGridView1.Columns[1].Width = 150;
+                    this.dataGridView1.Columns[2].Width = 300;
+                    this.dataGridView1.Columns[3].Width = 450;
 
-                    this.dataGridView1.Columns[4].Visible = true;
+                    this.dataGridView1.Columns[4].Width = 200;
                     this.dataGridView1.Columns[5].Visible = false;
                     this.dataGridView1.Columns[6].Visible = false;
                     this.dataGridView1.Columns[7].Visible = false;
                     this.dataGridView1.Columns[8].Visible = false;
-                    this.dataGridView1.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dataGridView1.Columns[9].Width = 300;
                 }
             }
             catch(Exception ex)
@@ -105,8 +106,7 @@ namespace OnSiteFundComparer.UI
         protected override void OnLoad(EventArgs e)
         {
             Init();
-
-            comboBox1.SelectedIndex = 1;
+            comboBox1.SelectedIndex = 0;
 
             base.OnLoad(e);
         }
@@ -311,6 +311,11 @@ namespace OnSiteFundComparer.UI
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Init(comboBox1.SelectedIndex);
+        }
+
+        private void btnTmp_Click(object sender, EventArgs e)
+        {
+            new 规则模板().ShowDialog();
         }
     }
 }

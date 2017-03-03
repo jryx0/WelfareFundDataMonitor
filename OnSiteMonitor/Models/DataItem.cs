@@ -138,6 +138,12 @@ namespace OnSiteFundComparer.Models
         /// </summary>
         HouseInfo = 1160
     }
+    public enum RulesTypes
+    {
+        Compare = 0,
+        Check = 1,
+        Preprocess = 2
+    }
 
     public class DataItem
     {
@@ -310,23 +316,23 @@ namespace OnSiteFundComparer.Models
        
     }
 
-    public class CollisionAim
-    {
-        public int RowID;
-        public int SourceID;        
+    //public class CollisionAim
+    //{
+    //    public int RowID;
+    //    public int SourceID;        
 
-        public String AimName;
-        public string AimDesc;
+    //    public String AimName;
+    //    public string AimDesc;
 
-        public string TableName;
-        public string Rules;
-        public string Rules2;
+    //    public string TableName;
+    //    public string Rules;
+    //    public string Rules2;
 
 
-        public int seq;
-        public int status = 1;
+    //    public int seq;
+    //    public int status = 1;
 
-    }
+    //}
 
 
     public class CompareAim
@@ -351,7 +357,13 @@ namespace OnSiteFundComparer.Models
         public int status = 1;
 
         public int RuleType;
-        public int TmpType; //0 for compare, 1 for check
+
+        /// <summary>
+        /// 0 for compare
+        /// 1 for check
+        /// 2 for preprocess
+        /// </summary>
+        public RulesTypes TmpType;  
     }
 
 

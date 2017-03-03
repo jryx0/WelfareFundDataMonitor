@@ -68,10 +68,10 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(391, 12);
+            this.tabControl1.Location = new System.Drawing.Point(438, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(546, 491);
+            this.tabControl1.Size = new System.Drawing.Size(590, 491);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -80,7 +80,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(538, 461);
+            this.tabPage1.Size = new System.Drawing.Size(582, 461);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -92,7 +92,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(532, 455);
+            this.textBox1.Size = new System.Drawing.Size(576, 455);
             this.textBox1.TabIndex = 0;
             // 
             // tabPage2
@@ -101,7 +101,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(595, 348);
+            this.tabPage2.Size = new System.Drawing.Size(538, 461);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -113,7 +113,7 @@
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox2.Size = new System.Drawing.Size(589, 342);
+            this.textBox2.Size = new System.Drawing.Size(532, 455);
             this.textBox2.TabIndex = 1;
             // 
             // tabPage3
@@ -122,7 +122,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 26);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(595, 348);
+            this.tabPage3.Size = new System.Drawing.Size(538, 461);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -134,7 +134,7 @@
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox3.Size = new System.Drawing.Size(589, 342);
+            this.textBox3.Size = new System.Drawing.Size(532, 455);
             this.textBox3.TabIndex = 0;
             // 
             // tabPage4
@@ -142,7 +142,7 @@
             this.tabPage4.Controls.Add(this.textBox4);
             this.tabPage4.Location = new System.Drawing.Point(4, 26);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(595, 348);
+            this.tabPage4.Size = new System.Drawing.Size(538, 461);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -153,7 +153,7 @@
             this.textBox4.Location = new System.Drawing.Point(0, 0);
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(595, 348);
+            this.textBox4.Size = new System.Drawing.Size(538, 461);
             this.textBox4.TabIndex = 0;
             // 
             // dgvTmp
@@ -165,9 +165,9 @@
             this.dgvTmp.Name = "dgvTmp";
             this.dgvTmp.ReadOnly = true;
             this.dgvTmp.RowTemplate.Height = 23;
-            this.dgvTmp.Size = new System.Drawing.Size(370, 451);
+            this.dgvTmp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTmp.Size = new System.Drawing.Size(427, 451);
             this.dgvTmp.TabIndex = 3;
-            this.dgvTmp.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTmp_CellContentDoubleClick);
             this.dgvTmp.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvTmp_CellMouseDoubleClick);
             this.dgvTmp.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvTmp_CellMouseUp);
             // 
@@ -209,19 +209,21 @@
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "全部",
             "比对模板",
-            "校验模板"});
+            "校验模板",
+            "预处理模板",
+            "全部"});
             this.comboBox1.Location = new System.Drawing.Point(5, 478);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(370, 25);
+            this.comboBox1.Size = new System.Drawing.Size(427, 25);
             this.comboBox1.TabIndex = 6;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // 规则模板
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 584);
+            this.ClientSize = new System.Drawing.Size(1040, 584);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dgvTmp);
             this.Controls.Add(this.tabControl1);

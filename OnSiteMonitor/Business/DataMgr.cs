@@ -279,13 +279,10 @@ namespace OnSiteFundComparer.Business
 
             return AimDi;
         }
-        /// <summary>
-        /// tmpType = 0 for compare aims
-        /// tmpType = 1 for check aims
-        /// </summary>
-        /// <param name="tmpType"></param>
-        /// <returns></returns>
-        public List<Models.CompareAim> GetCompareAllAim(int tmpType)
+        
+
+
+        public List<Models.CompareAim> GetCompareAllAim(Models.RulesTypes tmpType)
         {
             Service.CompareAimService cas = new Service.CompareAimService(MainSqliteDB);
             return cas.GetCompareAllAim().Where(x => x.TmpType == tmpType).ToList();

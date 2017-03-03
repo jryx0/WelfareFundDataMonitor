@@ -113,7 +113,8 @@ namespace OnSiteFundComparer.Service
 
                 cl.seq = int.Parse(dr[12].ToString());
                 cl.RuleType = int.Parse(dr[13].ToString());
-                cl.TmpType = int.Parse(dr[14].ToString());
+
+                cl.TmpType = (Models.RulesTypes)dr[14] ;  //int.Parse(dr[14].ToString());
                 cList.Add(cl);
             }
 
@@ -145,7 +146,8 @@ namespace OnSiteFundComparer.Service
         public List<Models.CompareAim> GetCompareAim()
         {
             var aList = GetCompareAllAim();
-            return aList.Where(x => x.RuleType < 1000).ToList();
+          //  return aList.Where(x => x.RuleType < 1000).ToList();
+            return aList.Where(x => x.TmpType == Models.RulesTypes.Compare).ToList();
         }
 
         private string ReplaceAll(string rule, string type, string tablename, string para, Models.DataItem di1, Models.DataItem di2, Models.DataItem di3)

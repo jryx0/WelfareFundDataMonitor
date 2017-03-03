@@ -484,7 +484,6 @@ namespace OnSiteFundComparer.Business
 
             return sqlColName + "-" + sqlValues;
         }
-
     }
 
     public class DataAnalyer
@@ -532,7 +531,7 @@ namespace OnSiteFundComparer.Business
     {        
         public delegate void Log(object target, int progress, string Message);  
 
-        public void Comparer(int tmpType)
+        public void Comparer(Models.RulesTypes tmpType)
         {
             CompareEnvirment Env = new CompareEnvirment();
 

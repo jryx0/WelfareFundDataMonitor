@@ -16,9 +16,6 @@ namespace OnSiteFundComparer.UI
         public 规则模板()
         {
             InitializeComponent();
-
-
-            init();
         }
 
         private void init()
@@ -27,76 +24,59 @@ namespace OnSiteFundComparer.UI
 
             try
             {
-                var ds = configDB.ExecuteDataset(@"SELECT rowid,
-                                               tmpName as 模板名称,ruletype as 类型
-                                          FROM RulesTmp
-                                         WHERE status = 1
-                                         ORDER BY seq");
+                String sql = @"SELECT rowid,
+                            tmpName AS 模板名称,
+                            ruletype AS 形式,
+                            CASE tmptype WHEN 0 THEN '比对规则' WHEN 1 THEN '校验规则' WHEN 2 THEN '预处理规则' END AS 模板类型,
+                            seq as 顺序
+                        FROM RulesTmp
+                        WHERE status = 1 @para
+                        ORDER BY seq";
+
+
+                if (comboBox1.SelectedIndex < 3 && comboBox1.SelectedIndex > -1)
+                    sql = sql.Replace("@para", " and tmptype = " + comboBox1.SelectedIndex);
+                else sql = sql.Replace("@para", " ");
+
+
+                var ds = configDB.ExecuteDataset(sql);
                 dgvTmp.DataSource = ds.Tables[0];
 
                 if(dgvTmp.Columns.Count > 0)
                 { 
                     dgvTmp.Columns[0].Visible = false;
 
-                    dgvTmp.Columns[1].Width = 200;
-                    //dgvTmp.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-                    //dgvTmp.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                    dgvTmp.Columns[1].Width = 180;
+                    dgvTmp.Columns[1].ReadOnly = true;
+                    dgvTmp.Columns[2].Width = 55;
+                    dgvTmp.Columns[3].ReadOnly = true;
+                    dgvTmp.Columns[3].Width = 80;
+                    dgvTmp.Columns[4].Width = 55;
                 }
 
-                showTmp("1");
-
+                if (ds != null && ds.Tables[0].Rows.Count != 0)
+                    showTmp(ds.Tables[0].Rows[0][0].ToString());
+                else showTmp(null);
             }
             catch(Exception ex)
             {
                 
             }
-        }
-
-        private void initGridView()
-        {
-            Service.DataItemStuctServices dis = new Service.DataItemStuctServices(OnSiteFundComparer.GlobalEnviroment.MainDBFile);
-
-            var list = dis.GetDisplayDataItems();
-            dgvTmp.DataSource = list.FindAll(x => x.DataType == Models.FundItemTypes.SourceData);
-
-            dgvTmp.Columns[0].Visible = false;
-            dgvTmp.Columns[1].Visible = false;
-
-
-            dgvTmp.Columns[2].Visible = false;
-            dgvTmp.Columns[3].Visible = false;
-            //dgvTmp.Columns[4].Visible = false;
-            dgvTmp.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvTmp.Columns[5].Visible = false;
-            dgvTmp.Columns[6].Visible = false;
-            dgvTmp.Columns[7].Visible = false;
-            dgvTmp.Columns[8].Visible = false;
-            dgvTmp.Columns[9].Visible = false;
-            dgvTmp.Columns[10].Visible = false;
-
-
-        }
+        }  
 
         private void 规则模板_Load(object sender, EventArgs e)
         {
-            
+            comboBox1.SelectedIndex = 0;            
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {           
             规则模板添加 dlg = new 规则模板添加();
-            if (dlg.ShowDialog() != DialogResult.OK)
-                return;
-
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
-            try
+            dlg.tmpType = comboBox1.SelectedIndex;
+            if (dlg.ShowDialog() == DialogResult.OK)
             {
-                var ds = configDB.ExecuteNonQuery(@"insert into rulestmp(tmpname, Ruletype) values ('" + dlg.tmpName + "', " + dlg.type + ")");
+                NewTmp(dlg);
                 init();
-            }
-            catch (Exception ex)
-            {
-
             }
         }
 
@@ -107,7 +87,7 @@ namespace OnSiteFundComparer.UI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string sql = "update  RulesTmp set rules =@r1, rule2 = @r2, rule3 = @r3, PreRules = @r4 where rowid = @id";
+            string sql = "update  RulesTmp set rules =@r1, rule2 = @r2, rule3 = @r3, Comments = @r4 where rowid = @id";
 
             DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             try
@@ -147,12 +127,21 @@ namespace OnSiteFundComparer.UI
         {
             if (dgvTmp.CurrentRow != null)
             {
-                showTmp(dgvTmp.CurrentRow.Cells[0].Value.ToString());
+                currentid = dgvTmp.CurrentRow.Cells[0].Value.ToString();
+                showTmp(currentid);
+                 
             }
         }
 
         private void showTmp(string rowID)
         {
+            if(String.IsNullOrEmpty(rowID))
+            {
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                currentid = "-1";
+            }
 
             DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
             try
@@ -180,20 +169,61 @@ namespace OnSiteFundComparer.UI
 
         private void dgvTmp_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (e.RowIndex < 0)
+                return;
 
-            //if (dgvTmp.CurrentRow != null)
-            //{
-            //    showTmp(dgvTmp.CurrentRow.Cells[0].Value.ToString());
-            //}
+            var dlg = new 规则模板添加();            
+            dlg.rowid = dgvTmp.Rows[e.RowIndex].Cells[0].Value.ToString();
 
-
-             
-        }
-
-        private void dgvTmp_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                NewTmp(dlg);
+                init();
+            }
+        }   
+        
+        private void NewTmp(规则模板添加 dlg)
         {
-             
-            
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
+            try
+            {
+                if (dlg.rowid.Length == 0)
+                {
+                    string sql = @"insert into rulestmp(Tmpname, Ruletype, TmpType,Seq) values (@Tmpname, @Ruletype, @TmpType, @Seq)";
+                    configDB.ExecuteNonQuery(CommandType.Text, sql,
+                                            new System.Data.SQLite.SQLiteParameter[] {
+                                            new System.Data.SQLite.SQLiteParameter("@Tmpname", dlg.tmpName),
+                                            new System.Data.SQLite.SQLiteParameter("@Ruletype", int.Parse(dlg.type)),
+                                            new System.Data.SQLite.SQLiteParameter("@TmpType", dlg.tmpType),
+                                            new System.Data.SQLite.SQLiteParameter("@Seq", int.Parse(dlg.seq))});
+                }
+                else
+                {
+                     string sql = @"update rulestmp set  Tmpname = @Tmpname,  
+                                                         Ruletype = @Ruletype, 
+                                                         TmpType = @TmpType,
+                                                         Seq = @Seq
+                                                                  where rowid = @rowid";
+                    configDB.ExecuteNonQuery(CommandType.Text, sql,
+                                            new System.Data.SQLite.SQLiteParameter[] {
+                                            new System.Data.SQLite.SQLiteParameter("@Tmpname", dlg.tmpName),
+                                            new System.Data.SQLite.SQLiteParameter("@Ruletype", int.Parse(dlg.type)),
+                                            new System.Data.SQLite.SQLiteParameter("@TmpType", dlg.tmpType),
+                                            new System.Data.SQLite.SQLiteParameter("@Seq", int.Parse(dlg.seq)),
+                                            new System.Data.SQLite.SQLiteParameter("@rowid", int.Parse(dlg.rowid)
+                                            )});
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }  
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            init();
         }
     }
 }
