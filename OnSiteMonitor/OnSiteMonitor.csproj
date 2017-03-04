@@ -597,6 +597,7 @@
     <None Include="Resources\compare-xxl.ico" />
     <Content Include="Resources\details-icon.png" />
     <Content Include="Resources\file-explorer-icon.png" />
+    <None Include="Resources\config.js.Uncryt" />
     <None Include="Resources\Fillter.bmp" />
     <None Include="Resources\filter.png" />
     <None Include="Resources\filter %281%29.png" />
