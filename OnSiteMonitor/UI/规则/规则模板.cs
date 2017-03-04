@@ -82,7 +82,24 @@ namespace OnSiteFundComparer.UI
 
         private void btnDel_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("确认删除吗?", "警告", MessageBoxButtons.YesNo) == DialogResult.No)
+                return;
 
+            if (dgvTmp.SelectedRows == null || dgvTmp.SelectedRows.Count == 0)
+                return;
+
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
+            try
+            {
+                
+                var ds = configDB.ExecuteDataset(@"delete from RulesTmp WHERE   rowid = '" + dgvTmp.SelectedRows[0].Cells[0].Value + "'");
+
+                init();                  
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)

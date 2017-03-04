@@ -14,8 +14,8 @@ namespace OnSiteFundComparer.UI
     {
         
         internal string testDBFile="";
-
         public int CurrentRuleID = -1;
+        public int CurrentTmpType = 0;
 
         DataTable dtTmp;
 
@@ -27,7 +27,9 @@ namespace OnSiteFundComparer.UI
         protected override void OnLoad(EventArgs e)
         {
             initTableComb();
-            initTmpComb();
+            //initTmpComb();
+
+            InitTmp(-1);
 
             DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
 
@@ -63,13 +65,13 @@ namespace OnSiteFundComparer.UI
                     this.cbTB3.SelectedValue = int.Parse(ds.Tables[0].Rows[0][7].ToString());
                     this.cbTemplate.SelectedValue = int.Parse(ds.Tables[0].Rows[0][8].ToString());
 
-                    if (ds.Tables[0].Rows[0][10].ToString() == "0")
-                        this.lbTmpType.Text = "规则类型:比对规则";
-                    else if (ds.Tables[0].Rows[0][10].ToString() == "1")
-                        this.lbTmpType.Text = "规则类型:校验规则";
-                    else if (ds.Tables[0].Rows[0][10].ToString() == "2")
-                        this.lbTmpType.Text = "规则类型:预处理规则";
-                    else this.lbTmpType.Text = "";
+                    //if (ds.Tables[0].Rows[0][10].ToString() == "0")
+                    //    this.lbTmpType.Text = "规则类型:比对规则";
+                    //else if (ds.Tables[0].Rows[0][10].ToString() == "1")
+                    //    this.lbTmpType.Text = "规则类型:校验规则";
+                    //else if (ds.Tables[0].Rows[0][10].ToString() == "2")
+                    //    this.lbTmpType.Text = "规则类型:预处理规则";
+                    //else this.lbTmpType.Text = "";
 
                     this.tbSeq.Text = ds.Tables[0].Rows[0][11].ToString();
 
@@ -92,60 +94,59 @@ namespace OnSiteFundComparer.UI
         public void InitCombox(ComboBox cb, List<DataItem> sList)
         {
             if (sList == null)
-                return;
-
-            
+                return;            
 
             cb.DataSource = sList;
             cb.DisplayMember = "DataFullName";
             cb.ValueMember = "RowID";//"dbTable";// 
             cb.SelectedIndex = 0;
         }
+
         private void initTableComb()
         {
-            Business.DataMgr dm = new Business.DataMgr();
-            var sList = dm.GetChildDataItemList(2);
-            var cmpList = dm.GetChildDataItemList(3);
-            var tmp = dm.GetChildDataItemList(2);
-
-            InitCombox(this.cbTB1, sList);
-
-            tmp.AddRange(cmpList);
-
             var di = new DataItem();
             di.DataFullName = "请选择";
             di.RowID = 0;
-            tmp.Add(di);
-            InitCombox(this.cbTB3, tmp);
-            this.cbTB3.SelectedValue = 0;
 
-            cmpList.AddRange(sList);
-            var l = dm.GetChildDataItemList(-1);
-            cmpList.AddRange(l);
-            InitCombox(this.cbTB2, cmpList);
+            Business.DataMgr dm = new Business.DataMgr();
+
+            List<DataItem> l1 = dm.GetChildDataItemList(2);
+            l1.Insert(0, di);
+            l1.AddRange(dm.GetChildDataItemList(3));
+            InitCombox(this.cbTB1, l1);
+
+            List<DataItem> l2 = new List<DataItem>();
+            l2.AddRange(l1);
+            l2.AddRange(dm.GetChildDataItemList(-1));
+            InitCombox(this.cbTB2, l2);
+
+            List<DataItem> l3 = new List<DataItem>();
+            l3.AddRange(l2);             
+            InitCombox(this.cbTB3, l3);
         }
 
 
-        private void initTmpComb()
-        {
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
-            try
-            {
-                var ds = configDB.ExecuteDataset("SELECT rowid, tmpname,ruletype FROM RulesTmp where status = 1 order by seq");
+        //private void initTmpComb()
+        //{
+        //    DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
+        //    try
+        //    {
+        //        var ds = configDB.ExecuteDataset("SELECT rowid, tmpname,ruletype,tmptype FROM RulesTmp where status = 1  order by seq");
+                               
 
-                dtTmp = ds.Tables[0];
-                this.cbTemplate.DataSource = ds.Tables[0];
+        //        dtTmp = ds.Tables[0]; 
 
-                this.cbTemplate.DisplayMember = "tmpname";
-                this.cbTemplate.ValueMember = "rowid";
+        //        this.cbTemplate.DataSource = ds.Tables[0];
+        //        this.cbTemplate.DisplayMember = "tmpname";
+        //        this.cbTemplate.ValueMember = "rowid";
 
-                this.cbTemplate.SelectedIndex = -1;
-            }
-            catch(Exception ex)
-            {
+        //        this.cbTemplate.SelectedIndex = -1;
+        //    }
+        //    catch(Exception ex)
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -440,7 +441,7 @@ namespace OnSiteFundComparer.UI
             this.tbR2.Text = "";
             this.tbR3.Text = "";
 
-            this.lbTmpType.Text = "";
+           // this.lbTmpType.Text = "";
 
 
         }
@@ -454,6 +455,55 @@ namespace OnSiteFundComparer.UI
             //cbTB1_SelectedIndexChanged(null, null);
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var p = this.PointToScreen(new Point(button2.Location.X, button2.Location.Y + button2.Height));
+
+            contextMenuStrip1.Show(p);
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsm = (ToolStripMenuItem)sender;
+            button2.Text = tsm.Text;
+
+          
+            InitTmp(tsm.MergeIndex);
+        }
+
+        private void InitTmp(int index)
+        {
+            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
+            try
+            {
+                String sql = @"SELECT rowid, tmpname,ruletype,tmptype FROM RulesTmp where status = 1  @para order by seq";
+                if (index > -1 && index < 3)
+                    sql = sql.Replace("@para", "and tmptype = " + index);
+                else sql = sql.Replace("@para", "");
+
+                var ds = configDB.ExecuteDataset(sql);
+
+
+                dtTmp = ds.Tables[0];
+
+
+                
+                object rowid = this.cbTemplate.SelectedValue;
+
+                this.cbTemplate.DataSource = ds.Tables[0];
+                this.cbTemplate.DisplayMember = "tmpname";
+                this.cbTemplate.ValueMember = "rowid";
+
+                if (rowid == null)
+                    this.cbTemplate.SelectedIndex = -1;
+                else
+                this.cbTemplate.SelectedValue = rowid;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
         
     }
 }

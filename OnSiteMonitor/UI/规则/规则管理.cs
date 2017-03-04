@@ -58,7 +58,7 @@ namespace OnSiteFundComparer.UI
                                                     CompareAim.Seq";
 
             if (comboBox1.SelectedIndex < 3 && comboBox1.SelectedIndex > -1) //compare
-                _Sql = _Sql.Replace("@para", " and CompareAim.Type = " + comboBox1.SelectedIndex);
+                _Sql = _Sql.Replace("@para", " and RulesTmp.TmpType = " + comboBox1.SelectedIndex);
             
             else
                 _Sql = _Sql.Replace("@para", " ");

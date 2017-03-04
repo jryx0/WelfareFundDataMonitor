@@ -114,7 +114,7 @@ namespace OnSiteFundComparer.Service
                 cl.seq = int.Parse(dr[12].ToString());
                 cl.RuleType = int.Parse(dr[13].ToString());
 
-                cl.TmpType = (Models.RulesTypes)dr[14] ;  //int.Parse(dr[14].ToString());
+                cl.TmpType = (Models.RulesTypes)int.Parse(dr[14].ToString());
                 cList.Add(cl);
             }
 
