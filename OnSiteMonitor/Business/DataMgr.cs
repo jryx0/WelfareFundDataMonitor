@@ -273,8 +273,8 @@ namespace OnSiteFundComparer.Business
 
                 AimDi = (from di in diList
                          from a in aims
-                         where (di.RowID == a.t1 || di.RowID == a.t2 || di.RowID == a.t3)
-                         select di).Distinct().ToList();
+                         where (di.RowID == a.t1 || di.RowID == a.t2 || di.RowID == a.t3) && di.ParentID > 0
+                         select di).Distinct().OrderBy(x => x.ParentID).ThenBy(x =>x.Seq).ToList();
             }
 
             return AimDi;

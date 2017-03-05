@@ -73,7 +73,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(363, 296);
+            this.button1.Location = new System.Drawing.Point(419, 296);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 35);
             this.button1.TabIndex = 3;
@@ -93,7 +93,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(191, 296);
+            this.button3.Location = new System.Drawing.Point(32, 296);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(132, 35);
             this.button3.TabIndex = 5;
@@ -104,11 +104,11 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(19, 296);
+            this.button4.Location = new System.Drawing.Point(246, 296);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(149, 35);
+            this.button4.Size = new System.Drawing.Size(92, 35);
             this.button4.TabIndex = 6;
-            this.button4.Text = "测试多线程比对";
+            this.button4.Text = "快速比对";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 

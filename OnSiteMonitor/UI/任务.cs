@@ -93,16 +93,21 @@ namespace OnSiteFundComparer.UI
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Business.QuickComparer qc = new Business.QuickComparer();
 
-            DateTime start = DateTime.Now;
+            this.DialogResult = DialogResult.Yes;
+
+            this.Close();
+
+            //Business.QuickComparer qc = new Business.QuickComparer();
+
+            //DateTime start = DateTime.Now;
             
 
-            qc.Comparer(0);
+            //qc.Comparer(0);
 
-            TimeSpan ts = DateTime.Now - start;
+            //TimeSpan ts = DateTime.Now - start;
 
-            MessageBox.Show("总耗时：" + ts.TotalSeconds.ToString());
+            //MessageBox.Show("总耗时：" + ts.TotalSeconds.ToString());
         }
     }
 }

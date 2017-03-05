@@ -153,22 +153,22 @@ namespace OnSiteFundComparer.Service
         private string ReplaceAll(string rule, string type, string tablename, string para, Models.DataItem di1, Models.DataItem di2, Models.DataItem di3)
         //private string ReplaceAll(string rule, string type, string tablename, int para, Models.DataItem di1, Models.DataItem di2, Models.DataItem di3)
         {
-            rule = rule.Replace("@table1", di1.dbTable);
-            rule = rule.Replace("@tablepre1", di1.dbTablePre);
-            rule = rule.Replace("@table2", di2.dbTable);
-            rule = rule.Replace("@tablepre2", di2.dbTablePre);
+            rule = rule.Replace("@table1", di1?.dbTable);
+            rule = rule.Replace("@tablepre1", di1?.dbTablePre);
+            rule = rule.Replace("@table2", di2?.dbTable);
+            rule = rule.Replace("@tablepre2", di2?.dbTablePre);
 
             rule = rule.Replace("@aimtype", type);
             rule = rule.Replace("@tablename", tablename);
 
 
-            rule = rule.Replace("@t1p", di1.people);
-            rule = rule.Replace("@t1s", di1.DataShortName);
-            rule = rule.Replace("@t1f", di1.DataFullName);
+            rule = rule.Replace("@t1p", di1?.people);
+            rule = rule.Replace("@t1s", di1?.DataShortName);
+            rule = rule.Replace("@t1f", di1?.DataFullName);
 
-            rule = rule.Replace("@t2p", di2.people);
-            rule = rule.Replace("@t2s", di2.DataShortName);
-            rule = rule.Replace("@t2f", di2.DataFullName);
+            rule = rule.Replace("@t2p", di2?.people);
+            rule = rule.Replace("@t2s", di2?.DataShortName);
+            rule = rule.Replace("@t2f", di2?.DataFullName);
 
             if (di3 != null)
             {

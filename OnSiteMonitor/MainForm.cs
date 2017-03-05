@@ -415,10 +415,16 @@ namespace OnSiteFundComparer
             this.Cursor = Cursors.WaitCursor;
             
             var dlg = new UI.任务();
-            if (dlg.ShowDialog() == DialogResult.OK)
+
+            var ret = dlg.ShowDialog();
+            if (ret == DialogResult.OK)
             {
                 new 数据比对(dlg.task).ShowDialog();                 
-            }            
+            }       
+            else if(ret == DialogResult.Yes)
+            {
+                new CompareMonitorUI().ShowDialog();
+            }     
             this.Cursor = Cursors.Arrow;
         }
 

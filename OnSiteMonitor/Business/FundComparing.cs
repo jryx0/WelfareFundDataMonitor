@@ -893,8 +893,6 @@ namespace OnSiteFundComparer.Business
                 DirectoryInfo folder = new DirectoryInfo(dir);
                 try
                 {
-
-
                     var filelist = folder.GetFiles("*.xls");
                     foreach (FileInfo file in filelist)
                     {

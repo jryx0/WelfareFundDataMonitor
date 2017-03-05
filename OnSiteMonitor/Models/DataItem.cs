@@ -165,6 +165,7 @@ namespace OnSiteFundComparer.Models
         public string col2 { set; get; }
 
         public int deep = 0;
+        public int TotalNumbers = 0;
         
         public DataItem parentItem;
 

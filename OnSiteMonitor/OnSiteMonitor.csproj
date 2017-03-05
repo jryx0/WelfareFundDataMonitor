@@ -161,6 +161,12 @@
     <Compile Include="Test\生成测试库.Designer.cs">
       <DependentUpon>生成测试库.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\CompareMonitorUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CompareMonitorUI.Designer.cs">
+      <DependentUpon>CompareMonitorUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\DataStandardize.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -438,6 +444,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Test\生成测试库.resx">
       <DependentUpon>生成测试库.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\CompareMonitorUI.resx">
+      <DependentUpon>CompareMonitorUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DataStandardize.resx">
       <DependentUpon>DataStandardize.cs</DependentUpon>

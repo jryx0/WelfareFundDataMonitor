@@ -16,6 +16,29 @@ using System.Text.RegularExpressions;
 
 namespace OnSiteFundComparer.Business
 {
+    public enum CompareEventEnum
+    {
+        Step = 0,
+        Progress = 1,
+        Info = 3
+    }    
+    public class CompareEventArgs : EventArgs
+    {
+        public CompareEventEnum ArgType { get; set; }
+
+        public int Progress { set; get; }
+        public int MaxProgress { set; get; }
+        public String ProgressMessage { set; get; }
+
+        
+
+        /// <summary>
+        /// 0 debug, 1 Info, 2 Warnning, 3 Error
+        /// </summary>
+        public int Level { set; get; }
+    }
+    public delegate void CompareEnventHandler(int progress, object args);
+
     public class CompareEnvirment
     {
         //导入文件目录
@@ -27,23 +50,32 @@ namespace OnSiteFundComparer.Business
         //导入数据库目录
         //public String ImportDataDir = GlobalEnviroment.InputDBDir;
 
-        private string _TimeStampe()
-        {             
-                TimeSpan ts = DateTime.Now - new DateTime(2015, 1, 1);
-                return ts.TotalMilliseconds.ToString();
-        }
-
-        public string CompareStampe;
-
-        public log4net.ILog Log
+        #region 日志处理
+        public event CompareEnventHandler CompareInfo;
+        private void NotifyCompareInfo(int InfoType, object args)
         {
-            get
-            {
-                return GlobalEnviroment.log;
-            }
+            CompareInfo?.Invoke(InfoType, args);
         }
 
-        //配置数据库
+        internal void NotifyLogInfo(CompareEventArgs cea)
+        {
+            NotifyCompareInfo(cea.Progress, CaculateProgress(cea));
+        }
+
+        private CompareEventArgs CaculateProgress(CompareEventArgs Args)
+        {
+            if (Args.Progress > Args.MaxProgress)
+                Args.Progress = 100;
+            else if (Args.Progress < 0)
+                Args.Progress = 0;
+            else
+                Args.Progress = (int)(Args.Progress * 100.0 / Args.MaxProgress);
+
+            return Args;
+        }
+        #endregion
+
+        #region 数据库定义
         public DAL.MySqlite MainSqliteDB = new DAL.MySqlite(Application.StartupPath + "\\" + Properties.Settings.Default.MainDBFile, GlobalEnviroment.isCryt);
 
         //中间数据库
@@ -51,7 +83,14 @@ namespace OnSiteFundComparer.Business
         public String ImportSqliteDBPath;
         //结果数据库
         public DAL.MySqlite ResultSqliteDB = null;
+        #endregion
 
+        private string _TimeStampe()
+        {
+            TimeSpan ts = DateTime.Now - new DateTime(2015, 1, 1);
+            return ts.TotalMilliseconds.ToString();
+        }
+        public string CompareStampe;
         public FileTranser.MTOM.ClassLibrary.WebServicesHelp theWebService
         {
             get
@@ -59,8 +98,6 @@ namespace OnSiteFundComparer.Business
                return GlobalEnviroment.theWebService;
             }
         }
-         
-
         public CompareEnvirment()
         {
             CompareStampe = _TimeStampe();
@@ -77,80 +114,137 @@ namespace OnSiteFundComparer.Business
 
     public class DataImporter
     {
-        CompareEnvirment _Env;
-         
+        int DataItemIndex = 0;
+        int MaxImportNumber = 0;
+        CompareEnvirment _Env;  
+               
         public DataImporter(CompareEnvirment env)
         {
             _Env = env;
         }
 
         public bool ImportData(List<DataItem> diList, List<DataFormat> format)
-        {   
+        {
+            MaxImportNumber = diList.Count;
+
+            DateTime dt = DateTime.Now;
             Parallel.ForEach(diList,
-              new ParallelOptions() { MaxDegreeOfParallelism =  GlobalEnviroment.MaxThreadNum },
-              di => {
+              new ParallelOptions() { MaxDegreeOfParallelism = GlobalEnviroment.MaxThreadNum + 1 },
+              di =>
+              {
                   ImportData(di, format.Where(x => x.ParentID == di.RowID && x.Seq >= 0).ToList());
               });
+            LogInfo("数据导入全部完成！");
+
+            var t = DateTime.Now - dt;
+            LogInfo("总耗时:" + t.TotalSeconds.ToString());
+
             return false;
         }
 
         private void ImportData(Models.DataItem di, List<DataFormat> diFormat)
         {
-            bool bRet = false;
+            int TotalFiles = 0;
+            int TotalItemData = 0;
+
             string dir = Properties.Settings.Default.WorkDir + di.Datapath + "\\";
-            //log.Info("导入:" + di.DataFullName + ", 路径:" + dir);
+
+            DataItemIndex++;
+            LogInfo("正在导入:" + di.DataFullName);
+            LogDebug("路径：" + dir);
+
             if (!Directory.Exists(dir))
+            {
+                LogError(di.DataFullName + "导入失败！路径(" + dir + ")不存在.");
                 return;
+            }
 
             DAL.MySqlite _sqliteDB = new DAL.MySqlite(_Env.ImportSqliteDBPath + di.dbTable + ".db", GlobalEnviroment.isCryt);
-
-           
-
-            int totalItemData = 0;
-            DirectoryInfo folder = new DirectoryInfo(dir);
+            LogDebug("数据库:" + _sqliteDB.sqliteConnectionString);
             try
             {
+
+                DirectoryInfo folder = new DirectoryInfo(dir);
+
                 if (!CreateInputDB(_sqliteDB, di))
+                {
+                    LogError("创建输入数据库" + di.dbTable + "失败!");
                     return;
+                }
 
                 var filelist = folder.GetFiles("*.xls");
                 foreach (FileInfo file in filelist)
                 {
-                    //log.Info("读取文件:" +　file.Name);
+                    LogDebug("读取文件:" + file.Name);
                     int readlines = ReadXLSToDBWithFormatEx(_sqliteDB, file.FullName, di, diFormat);
                     if (readlines > 0)
-                        totalItemData += readlines;
-                    // ReadXLSToDBWithFormat(file.FullName, di, dmg.GetDataFormatList(di));
+                        TotalItemData += readlines;
                 }
-
-                //if (filelist.Count() != 0)
-                //    log.Info("共导入: " + filelist.Count() + " 个.xls文件");
+                TotalFiles = filelist.Count();
 
                 filelist = folder.GetFiles("*.csv");
                 foreach (FileInfo file in filelist)
                 {
-                    //log.Info("读取文件:" + file.Name);
+                    LogDebug("读取文件:" + file.Name);
                     int readlines = ReadCSVToDBWithFormatEx(_sqliteDB, file.FullName, di, diFormat);
                     if (readlines > 0)
-                        totalItemData += readlines;
+                        TotalItemData += readlines;
                 }
-                //if (filelist.Count() != 0)
-                //    log.Info("共导入: " + filelist.Count() + " .csv个文件");
 
-                bRet = true;
+                TotalFiles += filelist.Count();
+
+                if (TotalFiles != 0)
+                    LogDebug(di.DataFullName + "导入完成， 共导入: " + TotalFiles + " 个文件, 总行数:" + TotalItemData);
+
+
+                var o =_sqliteDB.ExecuteScalar("Select count() from " + di.dbTable);
+                di.TotalNumbers = int.Parse(o.ToString());
             }
             catch (Exception ex)
             {
-                // log.Error(ex.Message);
+                LogError(ex.Message);
                 _sqliteDB.CloseConnection();
-                bRet = false;
                 return;
             }
 
+            
             _sqliteDB.CloseConnection();
+        }
+        
+        private void log(int level, string logMessage)
+        {
+            CompareEventArgs cea = new CompareEventArgs();
+            cea.ArgType = CompareEventEnum.Progress;
+            cea.MaxProgress = MaxImportNumber;
+            cea.Progress = DataItemIndex;
+            cea.ProgressMessage = logMessage;
+            cea.Level = level;
 
+            _Env.NotifyLogInfo(cea);
         }
 
+        private void LogDebug(string logMessage)
+        {
+            log(0, logMessage);
+        }
+        private void LogInfo(string logMessage)
+        {
+            log(1, logMessage);
+        }
+        private void LogWarnning(string logMessage)
+        {
+            log(2, logMessage);
+        }
+        private void LogError(string logMessage)
+        {
+            log(3, logMessage);
+        }
+
+        #region 日志Helper
+
+        #endregion
+
+        #region 导入数据库处理
         private bool CreateInputDB(DAL.MySqlite sqliteDB, Models.DataItem di)
         {
             if (di == null || di.dbTable.Length == 0)
@@ -216,18 +310,15 @@ namespace OnSiteFundComparer.Business
             System.Collections.IEnumerator rows = GlobalEnviroment.getExcelFileRows(FileName);
             if (rows == null)
             {
-             //   log.Error("文件" + Path.GetFileName(FileName) + "无法打开");
+                LogError("文件" + Path.GetFileName(FileName) + "无法打开");
                 return -1;
             }
 
             if (dataItem == null || dataFormat == null || dataFormat.Count == 0)
             {
-              //  log.Error("未找到文件格式!");
+                LogError("未找到文件格式!");
                 return -1;
             }
-
-            //double t1 = 0, t2 = 0, t3 = 0, t4 = 0, t5 = 0;
-
 
             SqliteDB.BeginTran();
             int readlines = 0;
@@ -238,12 +329,12 @@ namespace OnSiteFundComparer.Business
                     continue;
 
                 if (FileName.IndexOf("2014.10") != -1)
-                {
+                {//debug
                     if (readlines == 1957)
                     {
 
                     }
-                }//debug     
+                }     
 
                 string Lines = "";
                 IRow row = (HSSFRow)rows.Current;
@@ -263,11 +354,8 @@ namespace OnSiteFundComparer.Business
                         else if (cell.CellType == CellType.Blank)
                             Lines += "&";
                         else
-                        {
-                            //System.DateTime sdt1 = System.DateTime.Now;
-                            Lines += GlobalEnviroment.GetExcelValue(cell) + "&";
-                            //System.DateTime edt1 = System.DateTime.Now;
-                            //t1 += (edt1 - sdt1).TotalMilliseconds;
+                        {                             
+                            Lines += GlobalEnviroment.GetExcelValue(cell) + "&";                            
                             isAllNull = false;
                         }
                     }
@@ -279,15 +367,11 @@ namespace OnSiteFundComparer.Business
                     }
 
                     List<SQLiteParameter> pList = new List<SQLiteParameter>();
-                    string[] cols = Lines.Split('&');
-
-                    //System.DateTime sdt2 = System.DateTime.Now;
+                    string[] cols = Lines.Split('&');                     
                     Sql = GenerateInsertSqlWithFormat(cols, dataFormat, pList);
-                    //System.DateTime edt2 = System.DateTime.Now;
-                    // t2 += (edt2 - sdt2).TotalMilliseconds;
-                    var para = Sql.Split('-');
 
                     //add Item data name  如：城市低保/农村低保等
+                    var para = Sql.Split('-');
                     if (para.Length == 2)
                     {
                         para[1] += "@ItemType,";
@@ -295,39 +379,25 @@ namespace OnSiteFundComparer.Business
 
                         pList.Add(new SQLiteParameter("@ItemType", dataItem.DataShortName));
                     }
-
-
-                    //System.DateTime sdt3 = System.DateTime.Now;
                     Sql = GlobalEnviroment.GetInsertSql(dataItem.dbTable, para[0], para[1]);
                     SqliteDB.ExecuteNonQuery(CommandType.Text, Sql, pList.ToArray());
-                    //System.DateTime edt3 = System.DateTime.Now;
-                    //t3 += (edt3 - sdt3).TotalMilliseconds;
-
-
-
+                   
                     pList.Clear();
                 }
                 catch (Exception ex)
                 {
                     SqliteDB.RollBack();
-                   // log.Info("插入数据库失败, Sql = " + Sql);
-                   // log.Info("错误信息:" + ex.Message);
-                   // log.Info("文件" + FileName + "\r\n行号:" + readlines.ToString());
+                    LogError("插入数据库失败, Sql = " + Sql);
+                    LogError("错误信息:" + ex.Message);
+                    LogError("文件" + FileName + "\r\n行号:" + readlines.ToString());
                     return -1;
                 }
             }
             SqliteDB.Commit();
-
-
-
-
-
-
             readlines = readlines - dataFormat[0].colNumber;
-            //  log.Info("文件:<" + Path.GetFileName(FileName) + ">, 写入数据库成功, 共 " + readlines.ToString() + " 条记录!");
+            LogInfo("文件:<" + Path.GetFileName(FileName) + ">, 写入数据库成功, 共 " + readlines.ToString() + " 条记录!");
 
             SqliteDB.ExecuteNonQuery(@"delete from " + dataItem.dbTable + @" where length(id)=0 and name is null");
-
             return readlines < 0 ? readlines : 0;
         }
         private int ReadCSVToDBWithFormatEx(DAL.MySqlite SqliteDB, string FileName, Models.DataItem dataItem, List<Models.DataFormat> dataFormat)
@@ -339,8 +409,8 @@ namespace OnSiteFundComparer.Business
             }
             catch (Exception ex)
             {
-               // log.Error("读取CSV文件错误:" + FileName);
-               // log.Error(ex.Message);
+                LogError("读取CSV文件错误:" + FileName);
+                LogError(ex.Message);
                 return -1;
             }
 
@@ -370,12 +440,7 @@ namespace OnSiteFundComparer.Business
                         pList.Add(new SQLiteParameter("@ItemType", dataItem.DataShortName));
                     }
 
-                    //if (dataItem.parentItem != null && dataItem.parentItem.DataType != Models.FundItemTypes.SourceItems)
-                    //{//has comment
-                    //    Sql = GlobalEnviroment.GetInsertSql(dataItem.dbTable, para[0] + "Type,", para[1] + "@Type");
-                    //    pList.Add(new SQLiteParameter("@Type", dataItem.DataShortName));
-                    //}
-                    //else
+                    
                     Sql = GlobalEnviroment.GetInsertSql(dataItem.dbTable, para[0], para[1]);
 
                     SqliteDB.ExecuteNonQuery(CommandType.Text, Sql, pList.ToArray());
@@ -384,8 +449,9 @@ namespace OnSiteFundComparer.Business
                 catch (Exception ex)
                 {
                     SqliteDB.RollBack();
-                   // log.Info("插入数据库失败, Sql = " + Sql);
-                   // log.Info("错误信息:" + ex.Message);
+                    LogError("插入数据库失败, Sql = " + Sql);
+                    LogError("错误信息:" + ex.Message);
+                    LogError("错误行数:" + readlines);
                     return -1;
                 }
 
@@ -393,10 +459,10 @@ namespace OnSiteFundComparer.Business
             SqliteDB.Commit();
 
             readlines = readlines - dataFormat[0].colNumber;
-            //log.Info("文件" + Path.GetFileName(FileName) + "写入数据库成功, 共 " + readlines.ToString() + " 条记录!");
+            LogInfo("文件" + Path.GetFileName(FileName) + "写入数据库成功, 共 " + readlines.ToString() + " 条记录!");
 
             SqliteDB.ExecuteNonQuery(@"delete from " + dataItem.dbTable + @" where length(id)=0 and name is null");
-            return readlines;
+            return readlines < 0 ? readlines : 0;
         }
         public string GenerateInsertSqlWithFormat(string[] cols, List<Models.DataFormat> formats, List<SQLiteParameter> para)
         {
@@ -484,6 +550,7 @@ namespace OnSiteFundComparer.Business
 
             return sqlColName + "-" + sqlValues;
         }
+        #endregion
     }
 
     public class DataAnalyer
@@ -528,29 +595,67 @@ namespace OnSiteFundComparer.Business
     }
     
     public class QuickComparer
-    {        
-        public delegate void Log(object target, int progress, string Message);  
+    {
+        CompareEnvirment Env = new CompareEnvirment();
+        public event CompareEnventHandler CompareInfo;
+        int CurrentStep = 0;
+
 
         public void Comparer(Models.RulesTypes tmpType)
-        {
-            CompareEnvirment Env = new CompareEnvirment();
+        {            
+            Env.CompareInfo += CompareInfo;
+
+            if (tmpType == RulesTypes.Compare)
+                LogInfo("成功完成数据校验!");
+            else LogInfo("成功完成比对!");
 
             Business.DataMgr dmg = new DataMgr(Env.MainSqliteDB);
             var aims = dmg.GetCompareAllAim(tmpType);
             var list = dmg.GetDataItemByAim(aims);
             var format = dmg.GetDataFormatList();
 
+            CurrentStep++;
+            LogStep("导入数据>>>>>>>>>>>>>>>");
             DataImporter dImp = new DataImporter(Env);
             dImp.ImportData(list, format);
+            //var str = String.Join("\r\n", list.Select(x => x.DataShortName + "," + x.TotalNumbers));
+            LogStep("导入数据完成");           
 
+            CurrentStep++;
+            LogStep("数据清洗>>>>>>>>>>>>>>>");
+            
 
-            //DataAnalyer dA = new DataAnalyer(Env);
-            //dA.Analyer(list);
+            LogStep("数据清洗完成");
 
             ReportGenerator rg = new ReportGenerator(Env);
             rg.GetReportfile();
+
+
+            if (tmpType == RulesTypes.Compare)
+                LogInfo("成功完成数据校验!");
+            else LogInfo("成功完成比对!"); 
         }
 
-        
+
+        protected void LogInfo(String logMessage)
+        {
+            CompareEventArgs cea = new CompareEventArgs();
+            cea.ArgType = CompareEventEnum.Info;
+            cea.Progress = 0;
+            cea.ProgressMessage = logMessage;
+
+            Env.NotifyLogInfo(cea);
+        }
+        protected void LogStep(String logMessage)
+        {
+            CompareEventArgs cea = new CompareEventArgs();
+            cea.ArgType = CompareEventEnum.Step;
+            cea.Progress = CurrentStep;
+            cea.ProgressMessage = logMessage;
+            cea.MaxProgress = 6;
+            cea.Level = 1;
+
+            Env.NotifyLogInfo(cea);
+        }
     }
 }
