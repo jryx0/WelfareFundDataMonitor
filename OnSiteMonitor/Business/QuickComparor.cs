@@ -577,6 +577,44 @@ namespace OnSiteFundComparer.Business
             
         }
 
+        public void CompareByAim()
+        {
+
+        }
+
+        public void CompareByAim(CompareAim aim)
+        {
+            try
+            {//结果 -->新数据库中
+                _Env.ImportSqliteDB.ExecuteNonQuery("create table  " + aim.TableName + " as " + GetParalleAim(aim));
+
+                //log.Info("成功获取 " + a.AimName + " 的比对结果!");
+            }
+            catch (Exception ex)
+            {
+                //log.Error(ex.Message + "AimName:" + a.AimName + " aim:" + a.Rules);
+            }
+        }
+        private string GetParalleAim(CompareAim aim)
+        {
+            String Sql = aim.Rules;
+
+            var di = _DataItemList.FirstOrDefault(x => x.RowID == aim.t1);
+            if (di != null)
+                Sql = Sql.Replace(di.dbTable, di.dbTable + "." + di.dbTable);
+
+            di = _DataItemList.FirstOrDefault(x => x.RowID == aim.t2);
+            if (di != null)
+                Sql = Sql.Replace(di.dbTable, di.dbTable + "." + di.dbTable);
+
+            di = _DataItemList.FirstOrDefault(x => x.RowID == aim.t3);
+            if (di != null)
+                Sql = Sql.Replace(di.dbTable, di.dbTable + "." + di.dbTable);
+
+            return Sql;
+        }
+
+
 
         private List<List<CompareAim>> GroupAimForParallel(List<CompareAim> aims)
         {
@@ -623,8 +661,6 @@ namespace OnSiteFundComparer.Business
 
             return false;
         }
-
-       
     }
 
     public class ReportGenerator
