@@ -48,7 +48,7 @@ namespace OnSiteFundComparer.UI
             Business.QuickComparer qc = new Business.QuickComparer();
             qc.CompareInfo += backgroundWorker.ReportProgress;
 
-            qc.Comparer(Models.RulesTypes.Compare);
+            qc.QuickStart(Models.RulesTypes.Compare);
         }
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

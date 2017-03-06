@@ -397,6 +397,9 @@ namespace OnSiteFundComparer.UI
                                  WHERE Rowid = @Rowid";
             try
             {
+                int seq = 0;
+                int.TryParse(tbSeq.Text, out seq);
+
                 var o = configDB.ExecuteScalar("Select rowid from CompareAim where rowid = " + CurrentRuleID.ToString());
 
                 if (o != null)
@@ -414,7 +417,7 @@ namespace OnSiteFundComparer.UI
                                                         new System.Data.SQLite.SQLiteParameter("@tmp", cbTemplate.SelectedValue.ToString()),
                                                         new System.Data.SQLite.SQLiteParameter("@Rowid", this.CurrentRuleID ),
                                                         new System.Data.SQLite.SQLiteParameter("@conditions", tbPara.Text),
-                                                        new System.Data.SQLite.SQLiteParameter("@seq", di1.Seq * 10000 + di2.Seq)
+                                                        new System.Data.SQLite.SQLiteParameter("@seq", seq)
                                                    });
                 }
                 

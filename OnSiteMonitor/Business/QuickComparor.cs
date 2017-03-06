@@ -553,28 +553,78 @@ namespace OnSiteFundComparer.Business
         #endregion
     }
 
-    public class DataAnalyer
+    public class DataCompare
     {
-
-        CompareEnvirment _Env;
-        public DataAnalyer(CompareEnvirment env)
+        private CompareEnvirment _Env;
+        private List<Models.DataItem> _DataItemList;
+        public DataCompare(CompareEnvirment env, List<Models.DataItem> diList)
         {
             _Env = env;
+            _DataItemList = diList;
         }
 
-        public bool Analyer()
+        internal void PreProcessData(List<CompareAim> aims)
         {
             
 
-            return false;
+
         }
 
-        public bool Analyer(List<Models.CompareAim> aims)
+        public void StartCompare(List<CompareAim> aims)
         {
+            var parallelAims = GroupAimForParallel(aims);
 
+            
+        }
+
+
+        private List<List<CompareAim>> GroupAimForParallel(List<CompareAim> aims)
+        {
+            List<List<CompareAim>> groupAims = new List<List<CompareAim>>();
+            
+            foreach( var a in aims)
+            {
+                bool grouped = false;
+                foreach(var ga in groupAims)
+                {
+                    if (ga.Where(x => IsSourceEqual(x, a)) != null)
+                    {
+                        ga.Add(a);
+                        grouped = true;
+                        break;
+                    }
+                }
+                if(!grouped)
+                {
+                    List<CompareAim> ca = new List<CompareAim>();
+                    ca.Add(a);
+                    groupAims.Add(ca);
+                }
+            }
+
+            return groupAims;
+        }
+
+        private bool IsSourceEqual(CompareAim aim1, CompareAim aim2)
+        {
+            List<int> di = new List<int>();
+
+            if (aim1.t1 != 0)
+                if (aim1.t1 == aim2.t1 || aim1.t1 == aim2.t2 || aim1.t1 == aim2.t2)
+                    return true;
+
+            if (aim1.t2 != 0)
+                if (aim1.t2 == aim2.t1 || aim1.t2 == aim2.t2 || aim1.t2 == aim2.t2)
+                    return true;
+
+            if (aim1.t3 != 0)
+                if (aim1.t3 == aim2.t1 || aim1.t3 == aim2.t2 || aim1.t3 == aim2.t2)
+                    return true;
 
             return false;
         }
+
+       
     }
 
     public class ReportGenerator
@@ -601,7 +651,7 @@ namespace OnSiteFundComparer.Business
         int CurrentStep = 0;
 
 
-        public void Comparer(Models.RulesTypes tmpType)
+        public void QuickStart(Models.RulesTypes tmpType)
         {            
             Env.CompareInfo += CompareInfo;
 
@@ -622,11 +672,21 @@ namespace OnSiteFundComparer.Business
             LogStep("导入数据完成");           
 
             CurrentStep++;
-            LogStep("数据清洗>>>>>>>>>>>>>>>");
-            
+            LogStep("数据预处理>>>>>>>>>>>>>>>");
+            DataCompare dcp = new DataCompare(Env, list);
+            dcp.PreProcessData(aims);
+            LogStep("预处理完成");
 
-            LogStep("数据清洗完成");
 
+            CurrentStep++;
+            LogStep("正在比对>>>>>>>>>>>>>>>");
+
+
+            LogStep("比对完成");
+
+
+            CurrentStep++;
+            LogStep("正在生成比对结果>>>>>>>>>>>>>>>");            
             ReportGenerator rg = new ReportGenerator(Env);
             rg.GetReportfile();
 
