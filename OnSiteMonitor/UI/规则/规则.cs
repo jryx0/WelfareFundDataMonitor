@@ -31,6 +31,8 @@ namespace OnSiteFundComparer.UI
 
             InitTmp(-1);
 
+            cbTB1.Focus();
+
             DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
 
             try

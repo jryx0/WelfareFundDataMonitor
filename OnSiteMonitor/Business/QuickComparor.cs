@@ -595,6 +595,7 @@ namespace OnSiteFundComparer.Business
                 //log.Error(ex.Message + "AimName:" + a.AimName + " aim:" + a.Rules);
             }
         }
+
         private string GetParalleAim(CompareAim aim)
         {
             String Sql = aim.Rules;
@@ -613,8 +614,6 @@ namespace OnSiteFundComparer.Business
 
             return Sql;
         }
-
-
 
         private List<List<CompareAim>> GroupAimForParallel(List<CompareAim> aims)
         {
