@@ -14,6 +14,13 @@ using System.Data.SQLite;
 using System.Data;
 using System.Text.RegularExpressions;
 
+
+
+/// <summary>
+/// 多线程比对
+/// 根据比对规则导入数据、根据项目合并输出结果
+/// </summary>
+
 namespace OnSiteFundComparer.Business
 {
     public enum CompareEventEnum
