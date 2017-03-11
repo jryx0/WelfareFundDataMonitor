@@ -9,12 +9,12 @@ using System.Windows.Forms;
 
 namespace OnSiteFundComparer.UI
 {
-    public partial class 比对数据格式编辑 : Form
+    public partial class 格式编辑 : Form
     {
         string[] colName = new string[] { "起始行号"                                          
                                          ,"身份证号"
                                          ,"姓名"
-            
+                                       ,"乡镇街道"
                                          ,"地址"
                                          ,"日期"
                                          ,"金额"
@@ -25,15 +25,17 @@ namespace OnSiteFundComparer.UI
                                          ,"型号"
                                          ,"编号"
                                          ,"面积"
-                                       ,"乡镇街道"
+                                         ,"日期1"
+                                         ,"编号1"
+                                        ,"编号2"
 
         };
 
         string[] colCode = new string[] { "RowStart"
                                          ,"InputID"
                                          ,"Name"
+                                         ,"Region"
                                          ,"Addr"
-            
                                          ,"DataDate"
                                          ,"Amount"
                                          ,"AmountType"
@@ -43,20 +45,58 @@ namespace OnSiteFundComparer.UI
                                          ,"Type"
                                          ,"Number"
                                          ,"Area"
-            ,"Region"
-
+                                        ,"DataDate1"
+                                        ,"Serial1"
+                                        ,"Serial2"
         };
 
 
-        int startIndex = 3;
-       
+        /// <summary>
+        /*CREATE TABLE IF NOT EXISTS refertable
+        (
+            RowID INTEGER      PRIMARY KEY AUTOINCREMENT,
+            ID VARCHAR(20),
+            sRelateID VARCHAR(20),
+            sDataDate DATETIME(0),
+            InputID VARCHAR(20),
+            Name VARCHAR(20),
+            Region VARCHAR(20),
+            Addr VARCHAR(20),
+            DataDate VARCHAR(20),
+            Amount DOUBLE(0),
+            AmountType VARCHAR(20),
+            RelateID VARCHAR(20),
+            RelateName VARCHAR(20),
+            Relation VARCHAR(20),
+            Type VARCHAR(20),
+            ItemType VARCHAR(20),
+            Number VARCHAR(20),
+            Area DOUBLE(0),
+            DataDate1 varchar(20),
+            Serial1 varchar(30),
+            Serial2 varchar(30)
+          );*/ 
+        /// </summary>
+
+        public int startIndex = 3;
+        
 
         public List<Models.DataFormat> dataFormats;
-        //public Models.DataFormat relationgCols;
-        public bool isRelationSetting;
+        public Models.DataFormat relation;
+        private bool isHaveRelation;
+        public bool isRelationSetting {
+            set {
+                isHaveRelation = value;
+                if (isHaveRelation)
+                    startIndex = 1;
+                else startIndex = 1;
+            }
+            get { return isHaveRelation; }
+        }
 
+        public string headtext = "格式编辑";
 
-        public 比对数据格式编辑()
+        public 格式编辑()
         {
             InitializeComponent();
             isRelationSetting = false;
@@ -65,7 +105,16 @@ namespace OnSiteFundComparer.UI
         protected override void OnLoad(EventArgs e)
         {
             initGridView();
-            initComboBox();          
+            initComboBox();    
+            
+            if(relation != null)
+            {
+                this.rlatTBName.Text = relation.Comment;
+                this.rlatCol.Text = relation.colNumber.ToString();
+            }
+
+            this.Text = headtext;      
+
             base.OnLoad(e);
         }
 
@@ -89,9 +138,15 @@ namespace OnSiteFundComparer.UI
 
             this.dataGridView1.Columns.Add("ColCode", "表列名");
             this.dataGridView1.Columns[3].Width = 100;
-            this.dataGridView1.Columns[3].Visible = true;
+            this.dataGridView1.Columns[3].Visible = false;
             this.dataGridView1.Columns[3].SortMode = DataGridViewColumnSortMode.NotSortable;
             this.dataGridView1.Columns[3].ReadOnly = true;
+
+            this.dataGridView1.Columns.Add("DisplayName", "显示名");
+            this.dataGridView1.Columns[3].Width = 100;
+            this.dataGridView1.Columns[3].Visible = true;
+            this.dataGridView1.Columns[3].SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.dataGridView1.Columns[3].ReadOnly = false;
 
             if (dataFormats == null || dataFormats.Count == 0)
             {
@@ -104,6 +159,7 @@ namespace OnSiteFundComparer.UI
                     this.dataGridView1.Rows[index].Cells[1].Value = i + 2;
                     this.dataGridView1.Rows[index].Cells[2].Value = i;
                     this.dataGridView1.Rows[index].Cells[3].Value = colCode[i];
+                    this.dataGridView1.Rows[index].Cells[4].Value = colName[i];
 
 
                     this.dataGridView1.Rows[index].Cells[1].ValueType = typeof(int);
@@ -122,6 +178,7 @@ namespace OnSiteFundComparer.UI
                     this.dataGridView1.Rows[index].Cells[1].Value = df.colNumber;
                     this.dataGridView1.Rows[index].Cells[2].Value = df.Seq;
                     this.dataGridView1.Rows[index].Cells[3].Value = df.colCode;
+                    this.dataGridView1.Rows[index].Cells[4].Value = df.DisplayName;
 
                     this.dataGridView1.Rows[index].Cells[1].ValueType = typeof(int);
                 }
@@ -143,14 +200,14 @@ namespace OnSiteFundComparer.UI
 
         public void initRelation()
         {
-            if (isRelationSetting)
-            {
-                this.rlatlabel1.Visible = true;
-                this.rlatlabel2.Visible = true;
-                this.rlatlabel3.Visible = true;
-                this.rlatTBName.Visible = true;
-                this.rlatCol.Visible = true;
-            }
+            //if (isRelationSetting)
+            //{
+            //    this.rlatlabel1.Visible = true;
+            //    this.rlatlabel2.Visible = true;
+            //    this.rlatlabel3.Visible = true;
+            //    this.rlatTBName.Visible = true;
+            //    this.rlatCol.Visible = true;
+            //}
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -169,6 +226,8 @@ namespace OnSiteFundComparer.UI
                 ff.Seq = Convert.ToInt32(r.Cells[2].Value);
 
                 ff.colCode = r.Cells[3].Value.ToString();
+                ff.DisplayName = r.Cells[4].Value.ToString();
+
                 dataFormats.Add(ff);
             }
 
@@ -179,16 +238,15 @@ namespace OnSiteFundComparer.UI
                 //relationgCols.colNumber = Convert.ToInt32(rlatCol.Text);
                 //relationgCols.Seq = -1;  
 
-                //Models.DataFormat ff = new Models.DataFormat();
+                Models.DataFormat ff = new Models.DataFormat();
 
-                //ff.colName = "关联列号";
-                //ff.Comment =  rlatTBName.Text;
-                //ff.colNumber = Convert.ToInt32(rlatCol.Text);
-                //ff.Seq = -1;
+                ff.colName = "关联列号";
+                ff.colCode = "LinkCol";
+                ff.Comment =  rlatTBName.Text;
+                Int32.TryParse(rlatCol.Text, out ff.colNumber);                
+                ff.Seq = -1;
 
-                //dataFormats.Add(ff);
-
-
+                dataFormats.Add(ff);
             }
 
             this.DialogResult = DialogResult.OK;
@@ -202,7 +260,6 @@ namespace OnSiteFundComparer.UI
                 int seq = -1;
 
                 Int32.TryParse(r.Cells[2].Value.ToString(), out seq);
-
 
                 if (seq >= startIndex)
                     this.dataGridView1.Rows.Remove(r);
@@ -253,6 +310,7 @@ namespace OnSiteFundComparer.UI
                 this.dataGridView1.Rows[index].Cells[1].Value = inputCol;
                 this.dataGridView1.Rows[index].Cells[2].Value = this.comboBox1.SelectedIndex + startIndex;
                 this.dataGridView1.Rows[index].Cells[3].Value = colCode[this.comboBox1.SelectedIndex + startIndex];
+                this.dataGridView1.Rows[index].Cells[4].Value = this.comboBox1.Text;
             }
             else MessageBox.Show(errStr, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

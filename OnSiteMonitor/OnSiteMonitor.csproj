@@ -73,24 +73,29 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\..\..\..\Downloads\NPOI binary 2.1.3.1\dotnet4\ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=2.0.7.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.7\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NPOI">
-      <HintPath>..\..\..\..\..\Downloads\NPOI binary 2.1.3.1\dotnet4\NPOI.dll</HintPath>
+    <Reference Include="NPOI, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NPOI.OOXML">
-      <HintPath>..\..\..\..\..\Downloads\NPOI binary 2.1.3.1\dotnet4\NPOI.OOXML.dll</HintPath>
+    <Reference Include="NPOI.OOXML, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>..\..\..\..\..\Downloads\NPOI binary 2.1.3.1\dotnet4\NPOI.OpenXml4Net.dll</HintPath>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>..\..\..\..\..\Downloads\NPOI binary 2.1.3.1\dotnet4\NPOI.OpenXmlFormats.dll</HintPath>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -132,7 +137,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\DataCheck.cs" />
     <Compile Include="Business\QuickComparor.cs" />
     <Compile Include="ImportExcelPO.cs" />
     <Compile Include="Models\Clues.cs" />
@@ -141,7 +145,6 @@
     <Compile Include="Models\ExcelHelper.cs" />
     <Compile Include="Service\CompareAimService.cs" />
     <Compile Include="Service\DataCheckService.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="Test\CheckComparing.cs" />
     <Compile Include="Test\Sql工具窗口.cs">
       <SubType>Form</SubType>
@@ -179,10 +182,10 @@
     <Compile Include="UI\CompareMonitorUI.Designer.cs">
       <DependentUpon>CompareMonitorUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\DataStandardize.cs">
+    <Compile Include="UI\数据录入\DataStandardize.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\DataStandardize.Designer.cs">
+    <Compile Include="UI\数据录入\DataStandardize.Designer.cs">
       <DependentUpon>DataStandardize.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\login\AddUser.cs">
@@ -228,34 +231,34 @@
     <Compile Include="Service\DataItemStuctServices.cs" />
     <Compile Include="Service\LoginServices.cs" />
     <Compile Include="UI\login\StartUp.cs" />
-    <Compile Include="UI\UploadResult.cs">
+    <Compile Include="UI\比对\UploadResult.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UploadResult.Designer.cs">
+    <Compile Include="UI\比对\UploadResult.Designer.cs">
       <DependentUpon>UploadResult.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\任务.cs">
+    <Compile Include="UI\比对\任务.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\任务.Designer.cs">
+    <Compile Include="UI\比对\任务.Designer.cs">
       <DependentUpon>任务.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\地区设置.cs">
+    <Compile Include="UI\设置\地区设置.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\地区设置.Designer.cs">
+    <Compile Include="UI\设置\地区设置.Designer.cs">
       <DependentUpon>地区设置.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\统计数据量\收集数据统计向导.cs">
+    <Compile Include="UI\数据统计\收集数据统计向导.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\统计数据量\收集数据统计向导.Designer.cs">
+    <Compile Include="UI\数据统计\收集数据统计向导.Designer.cs">
       <DependentUpon>收集数据统计向导.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\统计数据量\收集数据统计导入.cs">
+    <Compile Include="UI\数据统计\收集数据统计导入.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\统计数据量\收集数据统计导入.Designer.cs">
+    <Compile Include="UI\数据统计\收集数据统计导入.Designer.cs">
       <DependentUpon>收集数据统计导入.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\数据查询.cs">
@@ -264,17 +267,11 @@
     <Compile Include="UI\数据查询.Designer.cs">
       <DependentUpon>数据查询.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\数据比对.cs">
+    <Compile Include="UI\比对\数据比对.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\数据比对.Designer.cs">
+    <Compile Include="UI\比对\数据比对.Designer.cs">
       <DependentUpon>数据比对.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\数据设置.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\数据设置.Designer.cs">
-      <DependentUpon>数据设置.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\线索管理\ImportCluePO.cs" />
     <Compile Include="UI\线索管理\ImportCluePO_bak.cs" />
@@ -310,22 +307,16 @@
     <Compile Include="UI\线索管理\线索查询.Designer.cs">
       <DependentUpon>线索查询.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\结果上报.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\结果上报.Designer.cs">
-      <DependentUpon>结果上报.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\结果数据库管理.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\结果数据库管理.Designer.cs">
       <DependentUpon>结果数据库管理.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\统计数据量\显示收集数据统计结果.cs">
+    <Compile Include="UI\数据统计\显示收集数据统计结果.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\统计数据量\显示收集数据统计结果.Designer.cs">
+    <Compile Include="UI\数据统计\显示收集数据统计结果.Designer.cs">
       <DependentUpon>显示收集数据统计结果.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\规则\规则.cs">
@@ -334,10 +325,10 @@
     <Compile Include="UI\规则\规则.Designer.cs">
       <DependentUpon>规则.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\系统设置.cs">
+    <Compile Include="UI\设置\系统设置.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\系统设置.Designer.cs">
+    <Compile Include="UI\设置\系统设置.Designer.cs">
       <DependentUpon>系统设置.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\显示数据列表.cs">
@@ -346,16 +337,10 @@
     <Compile Include="UI\显示数据列表.Designer.cs">
       <DependentUpon>显示数据列表.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\添加文件分类.cs">
+    <Compile Include="UI\设置\目录设置.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\添加文件分类.Designer.cs">
-      <DependentUpon>添加文件分类.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\目录设置.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\目录设置.Designer.cs">
+    <Compile Include="UI\设置\目录设置.Designer.cs">
       <DependentUpon>目录设置.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\规则\规则模板.cs">
@@ -376,71 +361,29 @@
     <Compile Include="UI\规则\规则管理.Designer.cs">
       <DependentUpon>规则管理.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\设置时间范围.cs">
+    <Compile Include="UI\设置\输入目录设置.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\设置时间范围.Designer.cs">
-      <DependentUpon>设置时间范围.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\输入目录设置.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\输入目录设置.Designer.cs">
+    <Compile Include="UI\设置\输入目录设置.Designer.cs">
       <DependentUpon>输入目录设置.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\输出目录设置.cs">
+    <Compile Include="UI\设置\输出目录设置.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\输出目录设置.Designer.cs">
+    <Compile Include="UI\设置\输出目录设置.Designer.cs">
       <DependentUpon>输出目录设置.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\项目管理\项目管理.cs">
+    <Compile Include="UI\数据录入\项目管理.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\项目管理\项目管理.Designer.cs">
+    <Compile Include="UI\数据录入\项目管理.Designer.cs">
       <DependentUpon>项目管理.cs</DependentUpon>
     </Compile>
-    <Compile Include="比对数据管理\UI\CompareDataSettingForm.cs">
+    <Compile Include="UI\数据录入\格式编辑.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="比对数据管理\UI\CompareDataSettingForm.Designer.cs">
-      <DependentUpon>CompareDataSettingForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="比对数据管理\UI\比对数据格式编辑.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="比对数据管理\UI\比对数据格式编辑.Designer.cs">
-      <DependentUpon>比对数据格式编辑.cs</DependentUpon>
-    </Compile>
-    <Compile Include="源数据管理\UI\SourceDataSettingForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="源数据管理\UI\SourceDataSettingForm.Designer.cs">
-      <DependentUpon>SourceDataSettingForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="源数据管理\UI\日期标签管理.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="源数据管理\UI\日期标签管理.Designer.cs">
-      <DependentUpon>日期标签管理.cs</DependentUpon>
-    </Compile>
-    <Compile Include="源数据管理\UI\添加源数据文件.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="源数据管理\UI\添加源数据文件.Designer.cs">
-      <DependentUpon>添加源数据文件.cs</DependentUpon>
-    </Compile>
-    <Compile Include="源数据管理\UI\源数据格式编辑.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="源数据管理\UI\源数据格式编辑.Designer.cs">
-      <DependentUpon>源数据格式编辑.cs</DependentUpon>
-    </Compile>
-    <Compile Include="源数据管理\UI\选择标签.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="源数据管理\UI\选择标签.Designer.cs">
-      <DependentUpon>选择标签.cs</DependentUpon>
+    <Compile Include="UI\数据录入\格式编辑.Designer.cs">
+      <DependentUpon>格式编辑.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Test\Sql工具窗口.resx">
       <DependentUpon>Sql工具窗口.cs</DependentUpon>
@@ -460,7 +403,7 @@
     <EmbeddedResource Include="UI\CompareMonitorUI.resx">
       <DependentUpon>CompareMonitorUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\DataStandardize.resx">
+    <EmbeddedResource Include="UI\数据录入\DataStandardize.resx">
       <DependentUpon>DataStandardize.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\login\AddUser.resx">
@@ -481,29 +424,26 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UploadResult.resx">
+    <EmbeddedResource Include="UI\比对\UploadResult.resx">
       <DependentUpon>UploadResult.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\任务.resx">
+    <EmbeddedResource Include="UI\比对\任务.resx">
       <DependentUpon>任务.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\地区设置.resx">
+    <EmbeddedResource Include="UI\设置\地区设置.resx">
       <DependentUpon>地区设置.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\统计数据量\收集数据统计向导.resx">
+    <EmbeddedResource Include="UI\数据统计\收集数据统计向导.resx">
       <DependentUpon>收集数据统计向导.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\统计数据量\收集数据统计导入.resx">
+    <EmbeddedResource Include="UI\数据统计\收集数据统计导入.resx">
       <DependentUpon>收集数据统计导入.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\数据查询.resx">
       <DependentUpon>数据查询.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\数据比对.resx">
+    <EmbeddedResource Include="UI\比对\数据比对.resx">
       <DependentUpon>数据比对.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\数据设置.resx">
-      <DependentUpon>数据设置.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\线索管理\ImportResult.resx">
       <DependentUpon>ImportResult.cs</DependentUpon>
@@ -517,28 +457,22 @@
     <EmbeddedResource Include="UI\线索管理\线索查询.resx">
       <DependentUpon>线索查询.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\结果上报.resx">
-      <DependentUpon>结果上报.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\结果数据库管理.resx">
       <DependentUpon>结果数据库管理.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\统计数据量\显示收集数据统计结果.resx">
+    <EmbeddedResource Include="UI\数据统计\显示收集数据统计结果.resx">
       <DependentUpon>显示收集数据统计结果.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\规则\规则.resx">
       <DependentUpon>规则.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\系统设置.resx">
+    <EmbeddedResource Include="UI\设置\系统设置.resx">
       <DependentUpon>系统设置.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\显示数据列表.resx">
       <DependentUpon>显示数据列表.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\添加文件分类.resx">
-      <DependentUpon>添加文件分类.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\目录设置.resx">
+    <EmbeddedResource Include="UI\设置\目录设置.resx">
       <DependentUpon>目录设置.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\规则\规则模板.resx">
@@ -550,38 +484,17 @@
     <EmbeddedResource Include="UI\规则\规则管理.resx">
       <DependentUpon>规则管理.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\设置时间范围.resx">
-      <DependentUpon>设置时间范围.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\输入目录设置.resx">
+    <EmbeddedResource Include="UI\设置\输入目录设置.resx">
       <DependentUpon>输入目录设置.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\输出目录设置.resx">
+    <EmbeddedResource Include="UI\设置\输出目录设置.resx">
       <DependentUpon>输出目录设置.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\项目管理\项目管理.resx">
+    <EmbeddedResource Include="UI\数据录入\项目管理.resx">
       <DependentUpon>项目管理.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="比对数据管理\UI\CompareDataSettingForm.resx">
-      <DependentUpon>CompareDataSettingForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="比对数据管理\UI\比对数据格式编辑.resx">
-      <DependentUpon>比对数据格式编辑.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="源数据管理\UI\SourceDataSettingForm.resx">
-      <DependentUpon>SourceDataSettingForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="源数据管理\UI\日期标签管理.resx">
-      <DependentUpon>日期标签管理.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="源数据管理\UI\添加源数据文件.resx">
-      <DependentUpon>添加源数据文件.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="源数据管理\UI\源数据格式编辑.resx">
-      <DependentUpon>源数据格式编辑.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="源数据管理\UI\选择标签.resx">
-      <DependentUpon>选择标签.cs</DependentUpon>
+    <EmbeddedResource Include="UI\数据录入\格式编辑.resx">
+      <DependentUpon>格式编辑.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
@@ -618,7 +531,6 @@
     <None Include="Resources\compare-xxl.ico" />
     <Content Include="Resources\details-icon.png" />
     <Content Include="Resources\file-explorer-icon.png" />
-    <None Include="Resources\config.js.Uncryt" />
     <None Include="Resources\Fillter.bmp" />
     <None Include="Resources\filter.png" />
     <None Include="Resources\filter %281%29.png" />

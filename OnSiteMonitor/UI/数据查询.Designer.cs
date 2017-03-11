@@ -44,9 +44,9 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 13);
+            this.label1.Location = new System.Drawing.Point(31, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 37);
+            this.label1.Size = new System.Drawing.Size(64, 37);
             this.label1.TabIndex = 0;
             this.label1.Text = "身份证号:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -55,9 +55,9 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(482, 21);
+            this.label2.Location = new System.Drawing.Point(478, 19);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 21);
+            this.label2.Size = new System.Drawing.Size(50, 24);
             this.label2.TabIndex = 0;
             this.label2.Text = "数据:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -68,7 +68,7 @@
             this.tbID.Location = new System.Drawing.Point(109, 16);
             this.tbID.MaxLength = 18;
             this.tbID.Name = "tbID";
-            this.tbID.Size = new System.Drawing.Size(335, 29);
+            this.tbID.Size = new System.Drawing.Size(335, 31);
             this.tbID.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -113,7 +113,7 @@
             this.cbDB.FormattingEnabled = true;
             this.cbDB.Location = new System.Drawing.Point(534, 16);
             this.cbDB.Name = "cbDB";
-            this.cbDB.Size = new System.Drawing.Size(325, 29);
+            this.cbDB.Size = new System.Drawing.Size(325, 32);
             this.cbDB.TabIndex = 2;
             // 
             // dataGridView1
@@ -155,7 +155,7 @@
             // 
             // 数据查询
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 471);
             this.Controls.Add(this.tableLayoutPanel1);

@@ -10,11 +10,6 @@ namespace OnSiteFundComparer.Business
 {
     class DataMgr
     {
-        //string MainDB = Application.StartupPath + "\\" +
-        //    OnSiteFundComparer.Properties.Settings.Default.MainDBFile;
-
-        // string MainDB = GlobalEnviroment.MainDBFile;
-
         DAL.MySqlite MainSqliteDB;
 
         int treeDeep = 0;
@@ -363,28 +358,5 @@ namespace OnSiteFundComparer.Business
         //    var cas = new Service.CollisionAimService(MainDB);
         //    cas.DeleteAimbyID(ca.RowID.ToString());
         //}
-    }
-    
-
-    class CompareMgr 
-    {
-        public List<Models.DataItem> GetDataItemByAim(List<Models.CompareAim> aims)
-        {
-            var AimDi = new List<Models.DataItem>();
-            if (aims == null || aims.Count == 0)
-                return AimDi;
-
-            using (var dss = new Service.DataItemStuctServices(GlobalEnviroment.MainDBFile))
-            {
-                var diList = dss.GetDataItems();
-
-                AimDi = (from di in diList
-                         from a in aims
-                         where (di.RowID == a.t1 || di.RowID == a.t2 || di.RowID == a.t3)
-                         select di).ToList();
-            }
-
-            return AimDi;
-        }
     }
 }

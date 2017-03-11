@@ -392,7 +392,7 @@ namespace OnSiteFundComparer.UI
             if (di.DataType == Models.FundItemTypes.SourceData || di.DataType == Models.FundItemTypes.ReferenceData)
             {
 
-                源数据格式编辑 format = new 源数据格式编辑();
+                格式编辑 format = new 格式编辑();
                 Business.DataMgr referMgr = new Business.DataMgr();
                 format.dataFormats = referMgr.GetDataFormatList(di);
                 format.relation = referMgr.GetDataRelation(di);

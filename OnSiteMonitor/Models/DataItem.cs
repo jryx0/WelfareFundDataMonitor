@@ -5,7 +5,6 @@ using System.Text;
 
 namespace OnSiteFundComparer.Models
 {
-
     public enum FundItemTypes
     {
         /// <summary>
@@ -36,6 +35,7 @@ namespace OnSiteFundComparer.Models
         /// </summary>
         File = 50
     }
+
     public enum SourceDataTypes
     {
         /// <summary>
@@ -71,6 +71,7 @@ namespace OnSiteFundComparer.Models
         /// </summary>
         SourceAgriMaterials = 80
     }
+
     public enum RefenceDataTypes
     {
         /// <summary>
@@ -138,6 +139,7 @@ namespace OnSiteFundComparer.Models
         /// </summary>
         HouseInfo = 1160
     }
+
     public enum RulesTypes
     {
         Compare = 0,
@@ -316,26 +318,7 @@ namespace OnSiteFundComparer.Models
 
        
     }
-
-    //public class CollisionAim
-    //{
-    //    public int RowID;
-    //    public int SourceID;        
-
-    //    public String AimName;
-    //    public string AimDesc;
-
-    //    public string TableName;
-    //    public string Rules;
-    //    public string Rules2;
-
-
-    //    public int seq;
-    //    public int status = 1;
-
-    //}
-
-
+    
     public class CompareAim
     {
         public int RowID;
@@ -366,7 +349,6 @@ namespace OnSiteFundComparer.Models
         /// </summary>
         public RulesTypes TmpType;  
     }
-
 
     public class User
     {
