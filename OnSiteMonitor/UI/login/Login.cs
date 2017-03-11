@@ -103,7 +103,8 @@ where Status = 1 and username=@usernam and password=@password",
                     }
                     catch (Exception ex)
                     {
-
+                        MessageBox.Show(ex.Message);
+                        this.Cursor = Cursors.Arrow;
                     }
                 }
                 else

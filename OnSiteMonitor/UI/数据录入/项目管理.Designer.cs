@@ -59,114 +59,114 @@
             // 
             // tbShortName
             // 
-            this.tbShortName.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbShortName.Location = new System.Drawing.Point(523, 150);
+            this.tbShortName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbShortName.Location = new System.Drawing.Point(554, 150);
             this.tbShortName.Name = "tbShortName";
-            this.tbShortName.Size = new System.Drawing.Size(233, 26);
+            this.tbShortName.Size = new System.Drawing.Size(257, 28);
             this.tbShortName.TabIndex = 1;
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(438, 15);
+            this.label1.Location = new System.Drawing.Point(454, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 20);
+            this.label1.Size = new System.Drawing.Size(90, 21);
             this.label1.TabIndex = 2;
             this.label1.Text = "项目类型：";
             // 
             // comboBox1
             // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "源数据",
             "比对数据"});
-            this.comboBox1.Location = new System.Drawing.Point(523, 12);
+            this.comboBox1.Location = new System.Drawing.Point(554, 12);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(233, 28);
+            this.comboBox1.Size = new System.Drawing.Size(257, 28);
             this.comboBox1.TabIndex = 3;
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(438, 51);
+            this.label2.Location = new System.Drawing.Point(454, 51);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 20);
+            this.label2.Size = new System.Drawing.Size(90, 21);
             this.label2.TabIndex = 2;
             this.label2.Text = "项目名称：";
             // 
             // tbFullName
             // 
-            this.tbFullName.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbFullName.Location = new System.Drawing.Point(523, 48);
+            this.tbFullName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbFullName.Location = new System.Drawing.Point(554, 48);
             this.tbFullName.Name = "tbFullName";
-            this.tbFullName.Size = new System.Drawing.Size(233, 26);
+            this.tbFullName.Size = new System.Drawing.Size(257, 28);
             this.tbFullName.TabIndex = 1;
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(438, 153);
+            this.label3.Location = new System.Drawing.Point(454, 153);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 20);
+            this.label3.Size = new System.Drawing.Size(90, 21);
             this.label3.TabIndex = 2;
             this.label3.Text = "项目简称：";
             // 
             // tbTable
             // 
-            this.tbTable.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbTable.Location = new System.Drawing.Point(523, 82);
+            this.tbTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbTable.Location = new System.Drawing.Point(554, 82);
             this.tbTable.Name = "tbTable";
-            this.tbTable.Size = new System.Drawing.Size(233, 26);
+            this.tbTable.Size = new System.Drawing.Size(257, 28);
             this.tbTable.TabIndex = 1;
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(438, 85);
+            this.label4.Location = new System.Drawing.Point(454, 85);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 20);
+            this.label4.Size = new System.Drawing.Size(90, 21);
             this.label4.TabIndex = 2;
             this.label4.Text = "存储表名：";
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(438, 187);
+            this.label5.Location = new System.Drawing.Point(454, 187);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 20);
+            this.label5.Size = new System.Drawing.Size(90, 21);
             this.label5.TabIndex = 2;
             this.label5.Text = "存储路径：";
             // 
             // tbPath
             // 
-            this.tbPath.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbPath.Location = new System.Drawing.Point(523, 184);
+            this.tbPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbPath.Location = new System.Drawing.Point(554, 184);
             this.tbPath.Name = "tbPath";
-            this.tbPath.Size = new System.Drawing.Size(233, 26);
+            this.tbPath.Size = new System.Drawing.Size(257, 28);
             this.tbPath.TabIndex = 1;
             // 
             // tbDesc
             // 
-            this.tbDesc.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbDesc.Location = new System.Drawing.Point(523, 218);
+            this.tbDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbDesc.Location = new System.Drawing.Point(554, 218);
             this.tbDesc.Name = "tbDesc";
-            this.tbDesc.Size = new System.Drawing.Size(233, 26);
+            this.tbDesc.Size = new System.Drawing.Size(257, 28);
             this.tbDesc.TabIndex = 1;
             // 
             // label6
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(438, 221);
+            this.label6.Location = new System.Drawing.Point(454, 221);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(79, 20);
+            this.label6.Size = new System.Drawing.Size(90, 21);
             this.label6.TabIndex = 2;
             this.label6.Text = "项目描述：";
             // 
@@ -222,27 +222,27 @@
             this.cbStatuts.AutoSize = true;
             this.cbStatuts.Location = new System.Drawing.Point(523, 286);
             this.cbStatuts.Name = "cbStatuts";
-            this.cbStatuts.Size = new System.Drawing.Size(56, 24);
+            this.cbStatuts.Size = new System.Drawing.Size(62, 25);
             this.cbStatuts.TabIndex = 5;
             this.cbStatuts.Text = "启用";
             this.cbStatuts.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(438, 255);
+            this.label7.Location = new System.Drawing.Point(454, 255);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(79, 20);
+            this.label7.Size = new System.Drawing.Size(90, 21);
             this.label7.TabIndex = 2;
             this.label7.Text = "项目顺序：";
             // 
             // tbOrder
             // 
-            this.tbOrder.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbOrder.Location = new System.Drawing.Point(523, 252);
+            this.tbOrder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbOrder.Location = new System.Drawing.Point(554, 252);
             this.tbOrder.Name = "tbOrder";
-            this.tbOrder.Size = new System.Drawing.Size(233, 26);
+            this.tbOrder.Size = new System.Drawing.Size(257, 28);
             this.tbOrder.TabIndex = 6;
             // 
             // imageList1
@@ -277,20 +277,20 @@
             // 
             // label8
             // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(438, 119);
+            this.label8.Location = new System.Drawing.Point(454, 119);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(79, 20);
+            this.label8.Size = new System.Drawing.Size(90, 21);
             this.label8.TabIndex = 2;
             this.label8.Text = "前处理表：";
             // 
             // tbTablePre
             // 
-            this.tbTablePre.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbTablePre.Location = new System.Drawing.Point(523, 116);
+            this.tbTablePre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbTablePre.Location = new System.Drawing.Point(554, 116);
             this.tbTablePre.Name = "tbTablePre";
-            this.tbTablePre.Size = new System.Drawing.Size(233, 26);
+            this.tbTablePre.Size = new System.Drawing.Size(257, 28);
             this.tbTablePre.TabIndex = 8;
             // 
             // tbDataPreSql
@@ -302,15 +302,15 @@
             this.tbDataPreSql.Multiline = true;
             this.tbDataPreSql.Name = "tbDataPreSql";
             this.tbDataPreSql.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbDataPreSql.Size = new System.Drawing.Size(314, 196);
+            this.tbDataPreSql.Size = new System.Drawing.Size(369, 196);
             this.tbDataPreSql.TabIndex = 9;
             this.tbDataPreSql.WordWrap = false;
             // 
             // 项目管理
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(777, 570);
+            this.ClientSize = new System.Drawing.Size(832, 570);
             this.Controls.Add(this.tbDataPreSql);
             this.Controls.Add(this.tbTablePre);
             this.Controls.Add(this.btnDisplay);

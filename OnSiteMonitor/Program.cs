@@ -59,7 +59,7 @@ namespace OnSiteFundComparer
         public static string ResultOutputDir; //结果目录 Excle
 
         public static bool LocalVersion = true;
-        public static bool isCryt = false;
+        public static bool isCryt = true;
         public static int MaxThreadNum = Environment.ProcessorCount;
 
 

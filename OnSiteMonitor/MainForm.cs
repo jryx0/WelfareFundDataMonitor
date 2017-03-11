@@ -413,9 +413,16 @@ namespace OnSiteFundComparer
         private void radTileElement4_Click(object sender, EventArgs e)
         {//自动比对
             this.Cursor = Cursors.WaitCursor;
+
+            if(GlobalEnviroment.LoginedUser.Name.ToLower() == "admin")
+            {//显示比对规则目录
+
+            }
+
+
+
             
             var dlg = new UI.任务();
-
             var ret = dlg.ShowDialog();
             if (ret == DialogResult.OK)
             {

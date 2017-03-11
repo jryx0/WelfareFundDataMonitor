@@ -42,10 +42,10 @@
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(91, 11);
+            this.tbName.Location = new System.Drawing.Point(101, 11);
             this.tbName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(359, 26);
+            this.tbName.Size = new System.Drawing.Size(359, 28);
             this.tbName.TabIndex = 0;
             // 
             // label1
@@ -55,7 +55,7 @@
             this.label1.Location = new System.Drawing.Point(15, 14);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 20);
+            this.label1.Size = new System.Drawing.Size(78, 21);
             this.label1.TabIndex = 1;
             this.label1.Text = "模板名称:";
             // 
@@ -77,16 +77,16 @@
             this.label2.Location = new System.Drawing.Point(43, 86);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 20);
+            this.label2.Size = new System.Drawing.Size(46, 21);
             this.label2.TabIndex = 1;
             this.label2.Text = "形式:";
             // 
             // tbType
             // 
-            this.tbType.Location = new System.Drawing.Point(89, 85);
+            this.tbType.Location = new System.Drawing.Point(101, 85);
             this.tbType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbType.Name = "tbType";
-            this.tbType.Size = new System.Drawing.Size(361, 26);
+            this.tbType.Size = new System.Drawing.Size(359, 28);
             this.tbType.TabIndex = 0;
             // 
             // label3
@@ -94,7 +94,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(15, 50);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 20);
+            this.label3.Size = new System.Drawing.Size(78, 21);
             this.label3.TabIndex = 3;
             this.label3.Text = "模板类型:";
             // 
@@ -106,9 +106,9 @@
             "比对模板",
             "校验模板",
             "预处理模板"});
-            this.comboBox1.Location = new System.Drawing.Point(89, 47);
+            this.comboBox1.Location = new System.Drawing.Point(101, 47);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(361, 28);
+            this.comboBox1.Size = new System.Drawing.Size(359, 28);
             this.comboBox1.TabIndex = 4;
             // 
             // button2
@@ -123,9 +123,9 @@
             // 
             // tbSeq
             // 
-            this.tbSeq.Location = new System.Drawing.Point(89, 121);
+            this.tbSeq.Location = new System.Drawing.Point(101, 121);
             this.tbSeq.Name = "tbSeq";
-            this.tbSeq.Size = new System.Drawing.Size(361, 26);
+            this.tbSeq.Size = new System.Drawing.Size(359, 28);
             this.tbSeq.TabIndex = 6;
             this.tbSeq.Text = "99999999";
             // 
@@ -136,13 +136,13 @@
             this.label4.Location = new System.Drawing.Point(43, 122);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 20);
+            this.label4.Size = new System.Drawing.Size(46, 21);
             this.label4.TabIndex = 1;
             this.label4.Text = "顺序:";
             // 
             // 规则模板添加
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(483, 217);
             this.Controls.Add(this.tbSeq);

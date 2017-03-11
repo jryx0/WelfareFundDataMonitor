@@ -45,8 +45,8 @@
             this.lbInfo = new System.Windows.Forms.Label();
             this.btnEditFormat = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.button2 = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -224,7 +224,7 @@
             // 
             this.btnAddItem.Location = new System.Drawing.Point(111, 459);
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(81, 31);
+            this.btnAddItem.Size = new System.Drawing.Size(100, 31);
             this.btnAddItem.TabIndex = 5;
             this.btnAddItem.Text = "编辑项目";
             this.btnAddItem.UseVisualStyleBackColor = true;
@@ -245,7 +245,7 @@
             // 
             this.btnEditFormat.Location = new System.Drawing.Point(11, 459);
             this.btnEditFormat.Name = "btnEditFormat";
-            this.btnEditFormat.Size = new System.Drawing.Size(83, 31);
+            this.btnEditFormat.Size = new System.Drawing.Size(94, 31);
             this.btnEditFormat.TabIndex = 5;
             this.btnEditFormat.Text = "编辑格式";
             this.btnEditFormat.UseVisualStyleBackColor = true;
@@ -261,6 +261,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(231, 459);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(107, 31);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "打开目录";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -269,19 +279,9 @@
             this.imageList1.Images.SetKeyName(1, "wenjian.png");
             this.imageList1.Images.SetKeyName(2, "Floder.png");
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(231, 459);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 31);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "打开目录";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
-            // 
             // DataStandardize
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1050, 508);
             this.Controls.Add(this.tableLayoutPanel1);

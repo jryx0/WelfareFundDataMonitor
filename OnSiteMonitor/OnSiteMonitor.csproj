@@ -243,6 +243,12 @@
     <Compile Include="UI\比对\任务.Designer.cs">
       <DependentUpon>任务.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\规则\规则设计.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\规则\规则设计.Designer.cs">
+      <DependentUpon>规则设计.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\设置\地区设置.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -429,6 +435,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\比对\任务.resx">
       <DependentUpon>任务.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\规则\规则设计.resx">
+      <DependentUpon>规则设计.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\设置\地区设置.resx">
       <DependentUpon>地区设置.cs</DependentUpon>
