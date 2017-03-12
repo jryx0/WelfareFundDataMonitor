@@ -9,12 +9,10 @@ namespace OnSiteFundComparer.Service
     public class CompareAimService : IDisposable
     {
         private DAL.MySqlite _sqliteDB;
-
         public CompareAimService(string connStr)
         {
             _sqliteDB = new DAL.MySqlite(connStr, GlobalEnviroment.isCryt);
         }
-
         public CompareAimService(DAL.MySqlite sqlitedb)
         {
             _sqliteDB = sqlitedb;
@@ -30,7 +28,7 @@ namespace OnSiteFundComparer.Service
             return fundList;
         }
 
-        public DataSet GetCompareAimsDS()
+        public DataSet GetAllAimsDS()
         {
             DataSet ds = null;
             String Sql = @"SELECT CompareAim.rowid,
@@ -69,14 +67,12 @@ namespace OnSiteFundComparer.Service
 
             return ds;
         }
-
-
-        public List<Models.CompareAim> GetCompareAllAim()
+        public List<Models.CompareAim> GetAllAim()
         {
             DataItemStuctServices diss = new DataItemStuctServices(GlobalEnviroment.MainDBFile);
             var fundList = diss.GetDisplayDataItems();
 
-            DataSet ds = GetCompareAimsDS();
+            DataSet ds = GetAllAimsDS();
             List<Models.CompareAim> cList = new List<Models.CompareAim>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
@@ -121,37 +117,19 @@ namespace OnSiteFundComparer.Service
             return cList;
         }
         
-        ///// <summary>
-        ///// 校验aim
-        ///// </summary>
-        ///// <returns></returns>
-        //public List<Models.CompareAim> GetDataCheckAim()
-        //{
-        //    var aList = GetCompareAllAim();
-        //    return aList.Where(x => x.RuleType > 1000).ToList();
-        //}
-        ///// <summary>
-        ///// 重复数据删除aim
-        ///// </summary>
-        ///// <returns></returns>
-        //public List<Models.CompareAim> GetDataAim()
-        //{
-        //    var aList = GetCompareAllAim();
-        //    return aList.Where(x => x.RuleType > 2000).ToList();
-        //}
+  
         /// <summary>
         /// 比对aim
         /// </summary>
         /// <returns></returns>
         public List<Models.CompareAim> GetCompareAim()
         {
-            var aList = GetCompareAllAim();
+            var aList = GetAllAim();
           //  return aList.Where(x => x.RuleType < 1000).ToList();
             return aList.Where(x => x.TmpType == Models.RulesTypes.Compare).ToList();
         }
 
         private string ReplaceAll(string rule, string type, string tablename, string para, Models.DataItem di1, Models.DataItem di2, Models.DataItem di3)
-        //private string ReplaceAll(string rule, string type, string tablename, int para, Models.DataItem di1, Models.DataItem di2, Models.DataItem di3)
         {
             rule = rule.Replace("@table1", di1?.dbTable);
             rule = rule.Replace("@tablepre1", di1?.dbTablePre);
@@ -181,33 +159,6 @@ namespace OnSiteFundComparer.Service
             }
 
             rule = rule.Replace("@para", para.ToString());
-
-
-            //rule = rule.Replace("@table1", di1.dbTable);
-            //rule = rule.Replace("@table2", di2.dbTable);
-            //rule = rule.Replace("@table3", di3.dbTable);
-            //rule = rule.Replace("@aimtype", type);
-            //rule = rule.Replace("@tablename", tablename);
-
-
-
-
-            //rule = rule.Replace("@t1p", di1.people);
-            //rule = rule.Replace("@t1s", di1.DataShortName);
-            //rule = rule.Replace("@t1f", di1.DataFullName);
-
-            //rule = rule.Replace("@t2p", di2.people);
-            //rule = rule.Replace("@t2s", di2.DataShortName);
-            //rule = rule.Replace("@t2f", di2.DataFullName);
-
-
-            //rule = rule.Replace("@t3p", di3.people);
-            //rule = rule.Replace("@t3s", di3.DataShortName);
-            //rule = rule.Replace("@t3f", di3.DataFullName);
-
-            //rule = rule.Replace("@para", para.ToString());
-
-
             return rule;
         }
 

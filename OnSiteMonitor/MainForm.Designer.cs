@@ -44,6 +44,9 @@ namespace OnSiteFundComparer
             this.radTitlesystemSetting = new Telerik.WinControls.UI.RadTileElement();
             this.radTitlehelp = new Telerik.WinControls.UI.RadTileElement();
             this.radTileElement2 = new Telerik.WinControls.UI.RadTileElement();
+
+            this.radTileNewRules = new RadTileElement();
+
             ((System.ComponentModel.ISupportInitialize)(this.radPanorama1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
@@ -265,39 +268,13 @@ namespace OnSiteFundComparer
             this.SettingGroup.Items.AddRange(new Telerik.WinControls.RadItem[] {
             //this.radTitledataSetting,
             this.radTitlesystemSetting,
-            this.radTitlehelp});
+            this.radTitlehelp,
+            this.radTileNewRules,});
             this.SettingGroup.Margin = new System.Windows.Forms.Padding(0, 130, 65, 0);
             this.SettingGroup.Name = "SettingGroup";
             this.SettingGroup.RowsCount = 2;
             this.SettingGroup.Text = "设置";
-            // 
-            // radTitledataSetting
-            // 
-            //this.radTitledataSetting.AccessibleDescription = "数据设置";
-            //this.radTitledataSetting.AccessibleName = "数据设置";
-            //this.radTitledataSetting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(161)))), ((int)(((byte)(209)))));
-            //this.radTitledataSetting.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(64)))), ((int)(((byte)(172)))));
-            //this.radTitledataSetting.BorderColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(64)))), ((int)(((byte)(172)))));
-            //this.radTitledataSetting.BorderColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(128)))), ((int)(((byte)(197)))));
-            //this.radTitledataSetting.BorderColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(128)))), ((int)(((byte)(197)))));
-            //this.radTitledataSetting.CellPadding = new System.Windows.Forms.Padding(5);
-            //this.radTitledataSetting.DrawBorder = true;
-            //this.radTitledataSetting.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            //this.radTitledataSetting.Image = global::OnSiteFundComparer.Properties.Resources.GridView;
-            //this.radTitledataSetting.ImageAlignment = System.Drawing.ContentAlignment.BottomLeft;
-            //this.radTitledataSetting.ImageLayout = System.Windows.Forms.ImageLayout.None;
-            //this.radTitledataSetting.Name = "radTitledataSetting";
-            //this.radTitledataSetting.Padding = new System.Windows.Forms.Padding(15, 15, 15, 10);
-            //this.radTitledataSetting.Text = "数据设置";
-            //this.radTitledataSetting.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            //this.radTitledataSetting.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            //this.radTitledataSetting.TextWrap = true;
-            //this.radTitledataSetting.Click += new System.EventHandler(this.radTitledataSetting_Click);
-            //this.radTitledataSetting.MouseEnter += new System.EventHandler(this.radTile_MouseEnter);
-            //this.radTitledataSetting.MouseLeave += new System.EventHandler(this.radTile_MouseLeave);
-            // 
-            // radTitlesystemSetting
-            // 
+           
             this.radTitlesystemSetting.AccessibleDescription = "系统设置";
             this.radTitlesystemSetting.AccessibleName = "系统设置";
             this.radTitlesystemSetting.BackColor = System.Drawing.Color.Empty;
@@ -323,11 +300,42 @@ namespace OnSiteFundComparer
             this.radTitlesystemSetting.Click += new System.EventHandler(this.radTitlesystemSetting_Click);
             this.radTitlesystemSetting.MouseEnter += new System.EventHandler(this.radTile_MouseEnter);
             this.radTitlesystemSetting.MouseLeave += new System.EventHandler(this.radTile_MouseLeave);
+
+            //
+            //radTitleNewRules
+            //
+            this.radTileNewRules.AccessibleDescription = "测试";
+            this.radTileNewRules.AccessibleName = "测试";
+            this.radTileNewRules.BackColor = System.Drawing.Color.Empty;
+            this.radTileNewRules.BackgroundImage = global::OnSiteFundComparer.Properties.Resources.magnifier_bg;
+            this.radTileNewRules.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.radTileNewRules.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(64)))), ((int)(((byte)(172)))));
+            this.radTileNewRules.BorderColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(64)))), ((int)(((byte)(172)))));
+            this.radTileNewRules.BorderColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(128)))), ((int)(((byte)(197)))));
+            this.radTileNewRules.BorderColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(128)))), ((int)(((byte)(197)))));
+            this.radTileNewRules.CellPadding = new System.Windows.Forms.Padding(5);
+            this.radTileNewRules.Column = 1;
+            this.radTileNewRules.Row = 1;
+            this.radTileNewRules.DrawBorder = true;
+            this.radTileNewRules.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radTileNewRules.Image = global::OnSiteFundComparer.Properties.Resources.magnifier_icon;
+            this.radTileNewRules.ImageAlignment = System.Drawing.ContentAlignment.BottomLeft;
+            this.radTileNewRules.ImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.radTileNewRules.Name = "radTileNewRules";
+            this.radTileNewRules.Padding = new System.Windows.Forms.Padding(15, 15, 15, 10);
+            this.radTileNewRules.Text = "测试";
+            this.radTileNewRules.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.radTileNewRules.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.radTileNewRules.Click += new System.EventHandler(this.radTileNewRules_Click);
+            this.radTileNewRules.MouseEnter += new System.EventHandler(this.radTile_MouseEnter);
+            this.radTileNewRules.MouseLeave += new System.EventHandler(this.radTile_MouseLeave);
+
+
             // 
             // radTitlehelp
             // 
-            this.radTitlehelp.AccessibleDescription = "使用说明";
-            this.radTitlehelp.AccessibleName = "使用说明";
+            this.radTitlehelp.AccessibleDescription = "比对规则管理";
+            this.radTitlehelp.AccessibleName = "比对规则管理";
             this.radTitlehelp.BackgroundImage = global::OnSiteFundComparer.Properties.Resources.qsf_bg;
             this.radTitlehelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.radTitlehelp.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(64)))), ((int)(((byte)(172)))));
@@ -416,6 +424,8 @@ namespace OnSiteFundComparer
         private RadTileElement radTileElement4;
         private RadTileElement radTileElement2;
         private RadTileElement radTileInputResult;
+
+        private RadTileElement radTileNewRules;
     }
 }
 

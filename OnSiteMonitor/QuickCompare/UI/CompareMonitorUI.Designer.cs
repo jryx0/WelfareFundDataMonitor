@@ -1,4 +1,4 @@
-﻿namespace OnSiteFundComparer.UI
+﻿namespace OnSiteFundComparer.QuickCompare.UI
 {
     partial class CompareMonitorUI
     {

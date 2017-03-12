@@ -7,29 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace OnSiteFundComparer.UI
+namespace OnSiteFundComparer.QuickCompare.UI
 {
     public partial class 规则管理 : Form
     {
-        public string configDB;
-        public string ImportDB;
-        public string resultDB;
-
         public 规则管理()
         {
-            InitializeComponent();
-            
+            InitializeComponent();            
 
             if (GlobalEnviroment.LoginedUser.Name!= "admin")
             {
-
                 button1.Visible = false;
                 button2.Visible = false;
                 button3.Visible = false;
                 button5.Visible = false;
                 btnTmp.Visible = false;
             }
-
         }
 
         private void Init(int index = -1)
@@ -101,8 +94,7 @@ namespace OnSiteFundComparer.UI
             }
 
         }
-
-
+        
         protected override void OnLoad(EventArgs e)
         {
             Init();
@@ -201,25 +193,12 @@ namespace OnSiteFundComparer.UI
             if (GlobalEnviroment.LoginedUser.Name != "admin")
                 return;
 
-            UI.规则 dlg = new 规则();
-            int.TryParse(rowid, out dlg.CurrentRuleID);
-            //规则设计 dlg = new 规则设计(rowid);
+            
+            规则设计 dlg = new 规则设计(rowid);
              
             dlg.ShowDialog();
 
             ReSetGridView();
-            //int index = dataGridView1.FirstDisplayedScrollingRowIndex;
-            //int cIndex = -1;
-            //if (this.dataGridView1.CurrentCell != null)
-            //    cIndex = this.dataGridView1.CurrentCell.RowIndex;
-
-            //Init();
-
-            //if (cIndex > 0 && cIndex < this.dataGridView1.Rows.Count)
-            //    this.dataGridView1.CurrentCell = this.dataGridView1.Rows[cIndex].Cells[1];
-            //if (index > -1)
-            //    dataGridView1.FirstDisplayedScrollingRowIndex = index;
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -317,7 +296,7 @@ namespace OnSiteFundComparer.UI
 
         private void btnTmp_Click(object sender, EventArgs e)
         {
-            new 规则模板().ShowDialog();
+            //new 规则模板().ShowDialog();
         }
     }
 }

@@ -280,7 +280,7 @@ namespace OnSiteFundComparer.Business
         public List<Models.CompareAim> GetCompareAllAim(Models.RulesTypes tmpType)
         {
             Service.CompareAimService cas = new Service.CompareAimService(MainSqliteDB);
-            return cas.GetCompareAllAim().Where(x => x.TmpType == tmpType).ToList();
+            return cas.GetAllAim().Where(x => x.TmpType == tmpType).ToList();
         }
 
         //public CollisionAim GetAimbyID(string id)

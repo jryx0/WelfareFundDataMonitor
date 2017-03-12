@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace OnSiteFundComparer.UI
+namespace OnSiteFundComparer.QuickCompare.UI
 {
     public partial class CompareMonitorUI : Form
     {
@@ -45,10 +45,10 @@ namespace OnSiteFundComparer.UI
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            Business.QuickComparer qc = new Business.QuickComparer();
+            Business.QuickComparing qc = new Business.QuickComparing();
             qc.CompareInfo += backgroundWorker.ReportProgress;
 
-            qc.QuickStart(Models.RulesTypes.Compare);
+            qc.QuickStart(OnSiteFundComparer.Models.RulesTypes.Compare);
         }
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

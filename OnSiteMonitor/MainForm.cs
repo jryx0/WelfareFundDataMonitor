@@ -20,7 +20,7 @@ namespace OnSiteFundComparer
 {
     public partial class MainForm : RadForm
     {
-       
+
 
         public const int WM_SIZE = 5;
 #if 试点
@@ -28,7 +28,7 @@ namespace OnSiteFundComparer
 #else
         public const String headerString = "精准扶贫政策落实情况监督检查软件(单机版)";  //大标题
 #endif
-        public   FileTranser.MTOM.ClassLibrary.WebServicesHelp theWebService;
+        public FileTranser.MTOM.ClassLibrary.WebServicesHelp theWebService;
 
         private RadButtonElement backButton;
         private LightVisualElement headerLabel;
@@ -38,11 +38,11 @@ namespace OnSiteFundComparer
 
         public Models.User currentUser = new Models.User();
 
-#region Initialization
+        #region Initialization
         public MainForm()
         {
 
-            
+
 
             InitializeComponent();
 
@@ -64,7 +64,7 @@ namespace OnSiteFundComparer
 
             this.PrepareHeader();
             this.PrepareTitleBar();
-            
+
             //InitGlobalPara();
         }
 
@@ -75,6 +75,11 @@ namespace OnSiteFundComparer
 
             PrepareUser();
             PrepareRegion();
+
+            if (GlobalEnviroment.LoginedUser.Name.ToLower() == "admin")
+                this.radTileNewRules.Visibility = ElementVisibility.Visible;
+            else this.radTileNewRules.Visibility = ElementVisibility.Hidden;
+
             this.Cursor = Cursors.Arrow;
         }
 
@@ -89,7 +94,7 @@ namespace OnSiteFundComparer
             titleBar.CloseButton.Parent.PositionOffset = new SizeF(0, -10);
             titleBar.CloseButton.MinSize = new Size(50, 50);
             titleBar.CloseButton.ButtonFillElement.Visibility = ElementVisibility.Collapsed;
-         
+
 
             titleBar.MinimizeButton.MinSize = new Size(50, 50);
             titleBar.MinimizeButton.ButtonFillElement.Visibility = ElementVisibility.Collapsed;
@@ -159,7 +164,7 @@ namespace OnSiteFundComparer
             //this.regionLabel.ShouldHandleMouseInput = false;
             //this.regionLabel.StretchHorizontally = false;
             this.regionLabel.Margin = new Padding(-150, 40, 28, 0);
-             
+
             //this.regionLabel.Click += new EventHandler(region_click);
 
 
@@ -190,16 +195,16 @@ namespace OnSiteFundComparer
             headerLayout.StretchHorizontally = false;
 
 
-         
+
             RadLabelElement rLabel = new RadLabelElement();
             rLabel.Font = new Font("微软雅黑", 13, GraphicsUnit.Point);
             rLabel.Text = "用户:  " + currentUser.Name;
             rLabel.ForeColor = Color.LightGray;
             rLabel.Margin = new Padding(-150, 40, 28, 0);
             rLabel.Click += new EventHandler(user_click);
-           
+
             headerLayout.Children.Add(rLabel);
-            
+
             this.radPanorama1.PanoramaElement.Children.Add(headerLayout);
 
             this.DoubleBuffered = true;
@@ -247,7 +252,7 @@ namespace OnSiteFundComparer
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            if(GlobalEnviroment.LocalVersion == false)
+            if (GlobalEnviroment.LocalVersion == false)
                 theWebService.Logout(currentUser.Name, currentUser.Password);
 
             base.OnFormClosed(e);
@@ -255,12 +260,12 @@ namespace OnSiteFundComparer
 
         protected override void OnClosed(EventArgs e)
         {
-            
+
             base.OnClosed(e);
         }
 
         protected override void OnClosing(CancelEventArgs e)
-        {            
+        {
             base.OnClosing(e);
         }
 
@@ -341,11 +346,11 @@ namespace OnSiteFundComparer
         {
             Application.Exit();
         }
-#endregion
+        #endregion
 
 
 
-#region 处理鼠标移动
+        #region 处理鼠标移动
         private void radTile_MouseEnter(object sender, EventArgs e)
         {
             setMouseEnter((RadTileElement)sender);
@@ -364,11 +369,11 @@ namespace OnSiteFundComparer
             element.BorderBoxStyle = Telerik.WinControls.BorderBoxStyle.SingleBorder;
         }
 
-#endregion
+        #endregion
 
-#endregion
+        #endregion
 
-#region 调用其他功能
+        #region 调用其他功能
 
 
 
@@ -393,15 +398,26 @@ namespace OnSiteFundComparer
         //{//使用帮助
 
         //}
-#endregion
+        #endregion
 
+
+
+        /// <summary>
+        /// //数据导入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radTileElement1_Click(object sender, EventArgs e)
-        {//数据导入
+        {
             new DataStandardize().ShowDialog();
         }
-
+        /// <summary>
+        /// 数据校验
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radTileElement3_Click(object sender, EventArgs e)
-        {// 数据校验
+        { 
             if (MessageBox.Show("请确认人口数据文件已导入!", "数据校验", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
 
@@ -410,45 +426,65 @@ namespace OnSiteFundComparer
             dlg.IsDataCheck = true;
             dlg.ShowDialog();
         }
+
+        /// <summary>
+        /// 自动比对
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radTileElement4_Click(object sender, EventArgs e)
-        {//自动比对
+        {
             this.Cursor = Cursors.WaitCursor;
 
-            if(GlobalEnviroment.LoginedUser.Name.ToLower() == "admin")
+            if (GlobalEnviroment.LoginedUser.Name.ToLower() == "admin")
             {//显示比对规则目录
 
             }
 
 
 
-            
+
             var dlg = new UI.任务();
             var ret = dlg.ShowDialog();
             if (ret == DialogResult.OK)
             {
-                new 数据比对(dlg.task).ShowDialog();                 
-            }       
-            else if(ret == DialogResult.Yes)
+                new 数据比对(dlg.task).ShowDialog();
+            }
+            else if (ret == DialogResult.Yes)
             {
-                new CompareMonitorUI().ShowDialog();
-            }     
+                new QuickCompare.UI.CompareMonitorUI().ShowDialog();
+            }
             this.Cursor = Cursors.Arrow;
         }
-
+        /// <summary>
+        /// 核查上传
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radTileInputResult_Click(object sender, EventArgs e)
-        {//核查上传
+        { 
             new 线索查询().ShowDialog();
         }
-
-
+        /// <summary>
+        /// 数据设置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radTitledataSetting_Click(object sender, EventArgs e)
-        {//数据设置
-          //  new 数据设置().ShowDialog();
+        {
+         //  new 数据设置().ShowDialog();
         }
+
+        /// <summary>
+        /// 系统设置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radTitlesystemSetting_Click(object sender, EventArgs e)
-        {//系统设置
+        {
             if (currentUser.Name.ToLower() == "admin")
             {
+
                 new Test.测试().Show();
             }
             else if (new 系统设置().ShowDialog() == DialogResult.OK)
@@ -459,21 +495,44 @@ namespace OnSiteFundComparer
             }
         }
 
+        /// <summary>
+        /// 规则管理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radTitlehelp_Click(object sender, EventArgs e)
-        {            
+        {
             new 规则管理().ShowDialog();
         }
 
+        /// <summary>
+        /// 结果数据库管理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radTileReport_Click(object sender, EventArgs e)
         {
-           new 结果数据库管理().ShowDialog();
+            new 结果数据库管理().ShowDialog();
         }
 
+        /// <summary>
+        /// 数据查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radTileDataQuery_Click(object sender, EventArgs e)
-        { //数据查询           
+        {           
             new 数据查询().ShowDialog();
         }
-
+        /// <summary>
+        /// 测试
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radTileNewRules_Click(object sender, EventArgs e)
+        {
+            new QuickCompare.UI.规则管理().ShowDialog();
+        }
     }
 
     public class MyFormBehavior : RadFormBehavior

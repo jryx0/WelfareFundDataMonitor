@@ -21,7 +21,7 @@ using System.Text.RegularExpressions;
 /// 根据比对规则导入数据、根据项目合并输出结果
 /// </summary>
 
-namespace OnSiteFundComparer.Business
+namespace OnSiteFundComparer.QuickCompare.Business
 {
     public enum CompareEventEnum
     {
@@ -149,7 +149,7 @@ namespace OnSiteFundComparer.Business
             return false;
         }
 
-        private void ImportData(Models.DataItem di, List<DataFormat> diFormat)
+        private void ImportData(OnSiteFundComparer.Models.DataItem di, List<DataFormat> diFormat)
         {
             int TotalFiles = 0;
             int TotalItemData = 0;
@@ -252,7 +252,7 @@ namespace OnSiteFundComparer.Business
         #endregion
 
         #region 导入数据库处理
-        private bool CreateInputDB(DAL.MySqlite sqliteDB, Models.DataItem di)
+        private bool CreateInputDB(DAL.MySqlite sqliteDB, OnSiteFundComparer.Models.DataItem di)
         {
             if (di == null || di.dbTable.Length == 0)
                 return false;
@@ -269,7 +269,7 @@ namespace OnSiteFundComparer.Business
             
             return true;
         }
-        private bool CreateInputDB(DAL.MySqlite sqliteDB, List<Models.DataItem> dilist)
+        private bool CreateInputDB(DAL.MySqlite sqliteDB, List<OnSiteFundComparer.Models.DataItem> dilist)
         {
             bool bRet = false;
 
@@ -278,7 +278,7 @@ namespace OnSiteFundComparer.Business
             try
             {
                 sqliteDB.BeginTran();
-                foreach (Models.DataItem di in dilist)
+                foreach (OnSiteFundComparer.Models.DataItem di in dilist)
                 {
 
                     CreateInputDB(sqliteDB, di);
@@ -312,7 +312,7 @@ namespace OnSiteFundComparer.Business
             return bRet;
         }
 
-        private int ReadXLSToDBWithFormatEx(DAL.MySqlite SqliteDB, string FileName, Models.DataItem dataItem, List<Models.DataFormat> dataFormat)
+        private int ReadXLSToDBWithFormatEx(DAL.MySqlite SqliteDB, string FileName, OnSiteFundComparer.Models.DataItem dataItem, List<OnSiteFundComparer.Models.DataFormat> dataFormat)
         {
             System.Collections.IEnumerator rows = GlobalEnviroment.getExcelFileRows(FileName);
             if (rows == null)
@@ -407,7 +407,7 @@ namespace OnSiteFundComparer.Business
             SqliteDB.ExecuteNonQuery(@"delete from " + dataItem.dbTable + @" where length(id)=0 and name is null");
             return readlines < 0 ? readlines : 0;
         }
-        private int ReadCSVToDBWithFormatEx(DAL.MySqlite SqliteDB, string FileName, Models.DataItem dataItem, List<Models.DataFormat> dataFormat)
+        private int ReadCSVToDBWithFormatEx(DAL.MySqlite SqliteDB, string FileName, OnSiteFundComparer.Models.DataItem dataItem, List<OnSiteFundComparer.Models.DataFormat> dataFormat)
         {
             StreamReader mysr;
             try
@@ -471,7 +471,7 @@ namespace OnSiteFundComparer.Business
             SqliteDB.ExecuteNonQuery(@"delete from " + dataItem.dbTable + @" where length(id)=0 and name is null");
             return readlines < 0 ? readlines : 0;
         }
-        public string GenerateInsertSqlWithFormat(string[] cols, List<Models.DataFormat> formats, List<SQLiteParameter> para)
+        public string GenerateInsertSqlWithFormat(string[] cols, List<OnSiteFundComparer.Models.DataFormat> formats, List<SQLiteParameter> para)
         {
             string sqlColName = "";
             string sqlValues = "";
@@ -563,8 +563,8 @@ namespace OnSiteFundComparer.Business
     public class DataCompare
     {
         private CompareEnvirment _Env;
-        private List<Models.DataItem> _DataItemList;
-        public DataCompare(CompareEnvirment env, List<Models.DataItem> diList)
+        private List<OnSiteFundComparer.Models.DataItem> _DataItemList;
+        public DataCompare(CompareEnvirment env, List<OnSiteFundComparer.Models.DataItem> diList)
         {
             _Env = env;
             _DataItemList = diList;
@@ -686,14 +686,14 @@ namespace OnSiteFundComparer.Business
         }
     }
     
-    public class QuickComparer
+    public class QuickComparing
     {
         CompareEnvirment Env = new CompareEnvirment();
         public event CompareEnventHandler CompareInfo;
         int CurrentStep = 0;
 
 
-        public void QuickStart(Models.RulesTypes tmpType)
+        public void QuickStart(OnSiteFundComparer.Models.RulesTypes tmpType)
         {            
             Env.CompareInfo += CompareInfo;
 
@@ -701,7 +701,7 @@ namespace OnSiteFundComparer.Business
                 LogInfo("成功完成数据校验!");
             else LogInfo("成功完成比对!");
 
-            Business.DataMgr dmg = new DataMgr(Env.MainSqliteDB);
+            OnSiteFundComparer.Business.DataMgr dmg = new OnSiteFundComparer.Business.DataMgr(Env.MainSqliteDB);
             var aims = dmg.GetCompareAllAim(tmpType);
             var list = dmg.GetDataItemByAim(aims);
             var format = dmg.GetDataFormatList();

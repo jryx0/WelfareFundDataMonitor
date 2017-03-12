@@ -137,12 +137,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\QuickComparor.cs" />
+    <Compile Include="QuickCompare\Business\QuickComparing.cs" />
     <Compile Include="ImportExcelPO.cs" />
     <Compile Include="Models\Clues.cs" />
     <Compile Include="Models\DataHelper.cs" />
     <Compile Include="Models\DataSetting.cs" />
     <Compile Include="Models\ExcelHelper.cs" />
+    <Compile Include="QuickCompare\Models\CompareDataItem.cs" />
+    <Compile Include="QuickCompare\Models\CompareRule.cs" />
+    <Compile Include="QuickCompare\Models\CompareRuleAtrr.cs" />
+    <Compile Include="QuickCompare\Models\CompareRuleTmp.cs" />
+    <Compile Include="QuickCompare\Models\CompareRuleTmpAttr.cs" />
+    <Compile Include="QuickCompare\Services\CompareDataItemServices.cs" />
+    <Compile Include="QuickCompare\Services\CompareRuleMgr.cs" />
+    <Compile Include="QuickCompare\Services\CompareRuleServices.cs" />
+    <Compile Include="QuickCompare\Services\CompareServices.cs" />
+    <Compile Include="QuickCompare\UI\规则管理.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuickCompare\UI\规则管理.Designer.cs">
+      <DependentUpon>规则管理.cs</DependentUpon>
+    </Compile>
     <Compile Include="Service\CompareAimService.cs" />
     <Compile Include="Service\DataCheckService.cs" />
     <Compile Include="Test\CheckComparing.cs" />
@@ -176,10 +191,10 @@
     <Compile Include="Test\生成测试库.Designer.cs">
       <DependentUpon>生成测试库.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\CompareMonitorUI.cs">
+    <Compile Include="QuickCompare\UI\CompareMonitorUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\CompareMonitorUI.Designer.cs">
+    <Compile Include="QuickCompare\UI\CompareMonitorUI.Designer.cs">
       <DependentUpon>CompareMonitorUI.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\数据录入\DataStandardize.cs">
@@ -243,10 +258,10 @@
     <Compile Include="UI\比对\任务.Designer.cs">
       <DependentUpon>任务.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\规则\规则设计.cs">
+    <Compile Include="QuickCompare\UI\规则设计.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\规则\规则设计.Designer.cs">
+    <Compile Include="QuickCompare\UI\规则设计.Designer.cs">
       <DependentUpon>规则设计.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\设置\地区设置.cs">
@@ -391,6 +406,9 @@
     <Compile Include="UI\数据录入\格式编辑.Designer.cs">
       <DependentUpon>格式编辑.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="QuickCompare\UI\规则管理.resx">
+      <DependentUpon>规则管理.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Test\Sql工具窗口.resx">
       <DependentUpon>Sql工具窗口.cs</DependentUpon>
     </EmbeddedResource>
@@ -406,7 +424,7 @@
     <EmbeddedResource Include="Test\生成测试库.resx">
       <DependentUpon>生成测试库.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\CompareMonitorUI.resx">
+    <EmbeddedResource Include="QuickCompare\UI\CompareMonitorUI.resx">
       <DependentUpon>CompareMonitorUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\数据录入\DataStandardize.resx">
@@ -436,7 +454,7 @@
     <EmbeddedResource Include="UI\比对\任务.resx">
       <DependentUpon>任务.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\规则\规则设计.resx">
+    <EmbeddedResource Include="QuickCompare\UI\规则设计.resx">
       <DependentUpon>规则设计.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\设置\地区设置.resx">
