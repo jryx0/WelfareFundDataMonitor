@@ -5,7 +5,7 @@
         public int RowID { set; get; }
         public CompareRule Rule { set; get; }
 
-        public bool Status { set; get; }
+        public int Status { set; get; }
         public int Seq { set; get; }
 
         public RuleAttrType AttrType { set; get; }
@@ -14,6 +14,21 @@
 
         public string AttrDesc { set; get; }
         public string AttrDetail { set; get; }
+
+        public static string SelectSql()
+        {
+            return @"SELECT CompRuleAttr.RowID,
+                           CompRuleAttr.RulesID,
+                           CompRuleAttr.AttrType,
+                           CompRuleAttr.AttrName,
+                           CompRuleAttr.AttrValue,
+                           CompRuleAttr.AttrDesc,
+                           CompRuleAttr.AttrDetails,
+                           CompRuleAttr.Seq,
+                           CompRuleAttr.Status
+                      FROM CompRuleAttr
+                      WHERE 1=1 @para";
+        }
 
     }
 

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace OnSiteFundComparer.QuickCompare.Services
 {
-    public class CompareServices : IDisposable
+    public abstract class CompareServices<T> : IDisposable where T :class
     {
         protected DAL.MySqlite MainSqliteDB;
         #region Init
@@ -27,6 +30,27 @@ namespace OnSiteFundComparer.QuickCompare.Services
                 MainSqliteDB = _sqlite;
         }
         #endregion
+
+        protected abstract T Mapor(SQLiteDataReader reader);
+        protected abstract String SelectSql();
+
+        public virtual DataSet GetDataSet()
+        {
+            return MainSqliteDB.ExecuteDataset(SelectSql());
+        }
+        public virtual List<T> GetAll()
+        {
+            List<T> sList = new List<T>();
+            SQLiteDataReader reader = MainSqliteDB.ExecuteReader(SelectSql());
+            if (reader.HasRows)
+                while (reader.Read())
+                {
+                    sList.Add(Mapor(reader));
+                }
+
+            return sList;
+
+        }
 
         #region IDisposable Support
         private bool disposedValue = false; // 要检测冗余调用

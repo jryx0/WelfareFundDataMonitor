@@ -79,7 +79,7 @@ namespace OnSiteFundComparer.Service
                 }
             }
 
-            BuildDataItemStruct(fiList);
+            BuildDataItemStruct(fiList);// (fiList.OrderBy(x=>x.parentItem?.Seq).ThenBy(x => x.Seq).ToList());
 
 
             return fiList;

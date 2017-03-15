@@ -45,7 +45,7 @@ namespace OnSiteFundComparer.QuickCompare.Models
         public string DataFullName { get; set; }
         public int DataLink { get; set; }
         public string Datapath { get; set; } //Data File Path
-        public bool Status { get; set; }
+        public int Status { get; set; }
         public int Seq { get; set; }
         public string dbTable { get; set; }
         public string dbTablePre { get; set; }

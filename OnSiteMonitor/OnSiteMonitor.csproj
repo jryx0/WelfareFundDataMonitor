@@ -137,6 +137,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="QuickCompare\Services\CompareRuleAttrServices.cs" />
     <Compile Include="QuickCompare\Business\QuickComparing.cs" />
     <Compile Include="ImportExcelPO.cs" />
     <Compile Include="Models\Clues.cs" />
@@ -149,9 +150,11 @@
     <Compile Include="QuickCompare\Models\CompareRuleTmp.cs" />
     <Compile Include="QuickCompare\Models\CompareRuleTmpAttr.cs" />
     <Compile Include="QuickCompare\Services\CompareDataItemServices.cs" />
-    <Compile Include="QuickCompare\Services\CompareRuleMgr.cs" />
+    <Compile Include="QuickCompare\Services\CompareRuleProxy.cs" />
     <Compile Include="QuickCompare\Services\CompareRuleServices.cs" />
     <Compile Include="QuickCompare\Services\CompareServices.cs" />
+    <Compile Include="QuickCompare\Services\CompareTmpAttrServices.cs" />
+    <Compile Include="QuickCompare\Services\CompareTmpServices.cs" />
     <Compile Include="QuickCompare\UI\规则管理.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,7 +216,6 @@
     <Compile Include="Business\FundComparing.cs" />
     <Compile Include="DAL\MySqlite.cs" />
     <Compile Include="DAL\MySqliteORM.cs" />
-    <Compile Include="UI\login\ConnectService.cs" />
     <Compile Include="UI\login\Login.cs">
       <SubType>Form</SubType>
     </Compile>

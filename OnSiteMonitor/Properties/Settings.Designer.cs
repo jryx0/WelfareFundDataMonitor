@@ -76,49 +76,6 @@ namespace OnSiteFundComparer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"CREATE TABLE IF NOT EXISTS refertable
-(
-RowID      INTEGER      PRIMARY KEY AUTOINCREMENT,
-ID         VARCHAR (20),
-sRelateID  VARCHAR (20),
-sDataDate  DATETIME (0),
-InputID    VARCHAR (20),
-Name       VARCHAR (20),
-Region       VARCHAR (20),
-Addr       VARCHAR (20),
-DataDate   VARCHAR (20),
-Amount     DOUBLE (0),
-AmountType VARCHAR (20),
-RelateID   VARCHAR (20),
-RelateName VARCHAR (20),
-Relation   VARCHAR (20),
-Type       VARCHAR (20),
-ItemType       VARCHAR (20),
-Number     VARCHAR (20),
-Area       DOUBLE (0),
-DataDate1 varchar(20),
-Serial1    varchar(30),
-Serial2    varchar(30) 
-); 
-
-DROP INDEX IF EXISTS index_refertable; 
-
-CREATE INDEX index_refertable ON refertable
-(
-RowID ASC,
-ID ASC
-); ")]
-        public string ReferTableSql {
-            get {
-                return ((string)(this["ReferTableSql"]));
-            }
-            set {
-                this["ReferTableSql"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("ImportData")]
         public string ImportDBFile {
             get {
@@ -155,18 +112,6 @@ ID ASC
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.5")]
-        public string Version {
-            get {
-                return ((string)(this["Version"]));
-            }
-            set {
-                this["Version"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string IsFirst {
             get {
@@ -179,7 +124,7 @@ ID ASC
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data\\config.Uncryt")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data\\config.cryt")]
         public string MainDBFile {
             get {
                 return ((string)(this["MainDBFile"]));
@@ -188,7 +133,64 @@ ID ASC
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://156.18.1.93/")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"
+          CREATE TABLE IF NOT EXISTS refertable
+          (
+          RowID      INTEGER      PRIMARY KEY AUTOINCREMENT,
+          ID         VARCHAR (20),
+          sRelateID  VARCHAR (20),
+          sDataDate  DATETIME (0),
+          InputID    VARCHAR (20),
+          Name       VARCHAR (20),
+          Region       VARCHAR (20),
+          Addr       VARCHAR (20),
+          DataDate   VARCHAR (20),
+          Amount     DOUBLE (0),
+          AmountType VARCHAR (20),
+          RelateID   VARCHAR (20),
+          RelateName VARCHAR (20),
+          Relation   VARCHAR (20),
+          Type       VARCHAR (20),
+          ItemType       VARCHAR (20),
+          Number     VARCHAR (20),
+          Area       DOUBLE (0),
+          DataDate1 varchar(20),
+          Serial1    varchar(30),
+          Serial2    varchar(30)
+          );
+
+          DROP INDEX IF EXISTS index_refertable;
+
+          CREATE INDEX index_refertable ON refertable
+          (
+          RowID ASC,
+          ID ASC
+          );
+        ")]
+        public string ReferTableSql {
+            get {
+                return ((string)(this["ReferTableSql"]));
+            }
+            set {
+                this["ReferTableSql"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2.0")]
+        public string Version {
+            get {
+                return ((string)(this["Version"]));
+            }
+            set {
+                this["Version"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:63962/")]
         public string WebServicesUrl {
             get {
                 return ((string)(this["WebServicesUrl"]));

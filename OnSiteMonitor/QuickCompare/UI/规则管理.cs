@@ -11,6 +11,7 @@ namespace OnSiteFundComparer.QuickCompare.UI
 {
     public partial class 规则管理 : Form
     {
+        protected List<Models.CompareRule> compareRule;
         public 规则管理()
         {
             InitializeComponent();            
@@ -27,103 +28,61 @@ namespace OnSiteFundComparer.QuickCompare.UI
 
         private void Init(int index = -1)
         {
-            DAL.MySqlite configDB = new DAL.MySqlite(OnSiteFundComparer.GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
-
-            String _Sql = @"
-                                                SELECT CompareAim.RowID,   
-                                                    DataItem.DataShortName as 项目类型,   
-                                                    CompareAim.AimName as 规则名称,  CompareAim.AimDesc as 规则说明,
-                                                    CompareAim.TableName as 表名,
-                                                    CompareAim.t1,
-                                                    CompareAim.t2,
-                                                    CompareAim.t3,
-                                                    CompareAim.tmp,
-                                                    RulesTmp.TmpName AS 模板,
-                                                    CompareAim.Seq as 顺序
-                                                FROM CompareAim,
-                                                    DataItem,
-                                                    RulesTmp
-                                                WHERE CompareAim.status = 1 AND 
-                                                    CompareAim.SourceID = DataItem.RowID AND 
-                                                    RulesTmp.RowID = CompareAim.tmp @para
-                                                ORDER BY DataItem.parentid,
-                                                    DataItem.seq,
-                                                    CompareAim.Seq";
-
-            if (comboBox1.SelectedIndex < 3 && comboBox1.SelectedIndex > -1) //compare
-                _Sql = _Sql.Replace("@para", " and RulesTmp.TmpType = " + comboBox1.SelectedIndex);
-            
-            else
-                _Sql = _Sql.Replace("@para", " ");
+            Services.CompareRuleProxy crp = new Services.CompareRuleProxy();
 
             try
             {
+                compareRule = crp.GetAll();
+                if (compareRule == null) return;
 
-                var ds = configDB.ExecuteDataset(_Sql);
+                var displayList = from cr in compareRule
+                                  where index < (int)Models.CompareRulesTypes.Compare ||  index > (int)Models.CompareRulesTypes.Preprocess ?
+                                           true : cr.RuleType == (Models.CompareRulesTypes)index
+                                  orderby cr.ParentItem.ParentItem.Seq, cr.ParentItem.Seq, cr.Seq
+                                  select new
+                                  {
+                                      RowID = cr.RowID,
+                                      规则名称 = cr.RuleName,
+                                      规则描述 = cr.RuleDesc,
+                                      规则类型 = cr.RuleType == Models.CompareRulesTypes.Compare ? "比对规则" : (cr.RuleType == Models.CompareRulesTypes.Preprocess ? "预处理规则" : "校验规则"),
+                                  };
 
-                this.dataGridView1.DataSource = ds.Tables[0];
-
-                if (index > 0 && index < this.dataGridView1.Rows.Count)
-                {
-
-                    this.dataGridView1.ClearSelection();
-                    this.dataGridView1.Rows[index].Selected = true;
-                    this.dataGridView1.CurrentCell = this.dataGridView1.Rows[index].Cells[0];
-                }
-
-                if (this.dataGridView1.Columns.Count > 2)
-                {
-                    this.dataGridView1.Columns[0].Visible = false;
-
-
-                    this.dataGridView1.Columns[1].Width = 150;
-                    this.dataGridView1.Columns[2].Width = 300;
-                    this.dataGridView1.Columns[3].Width = 450;
-
-                    this.dataGridView1.Columns[4].Width = 200;
-                    this.dataGridView1.Columns[5].Visible = false;
-                    this.dataGridView1.Columns[6].Visible = false;
-                    this.dataGridView1.Columns[7].Visible = false;
-                    this.dataGridView1.Columns[8].Visible = false;
-                    this.dataGridView1.Columns[9].Width = 300;
-                }
+                this.dataGridView1.DataSource = displayList.ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
 
         }
         
         protected override void OnLoad(EventArgs e)
         {
-            Init();
-            comboBox1.SelectedIndex = 0;
+            //Init();
+            cbRuleType.SelectedIndex = 0;
 
             base.OnLoad(e);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {//new
-            ShowDetail("-1");
+            ShowDetail(-1);
         }
         
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {//modify
             if (e.RowIndex < 0)
                 return;
-
-            string rowid = this.dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-            ShowDetail(rowid);
+ 
+            ShowDetail((int)this.dataGridView1.Rows[e.RowIndex].Cells[0].Value);
             
         }
         private void button2_Click(object sender, EventArgs e)
         {//modify
             if (this.dataGridView1.SelectedRows.Count == 0)
                 return;
-
-            string rowid = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-            ShowDetail(rowid);
+            
+            ShowDetail((int)this.dataGridView1.SelectedRows[0].Cells[0].Value);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -188,13 +147,13 @@ namespace OnSiteFundComparer.QuickCompare.UI
             //}
         }
 
-        private void ShowDetail(string rowid)
+        private void ShowDetail(int rowid)
         {
             if (GlobalEnviroment.LoginedUser.Name != "admin")
                 return;
-
             
-            规则设计 dlg = new 规则设计(rowid);
+
+            规则设计 dlg = new 规则设计(compareRule.Find(x => x.RowID == rowid));
              
             dlg.ShowDialog();
 
@@ -291,7 +250,7 @@ namespace OnSiteFundComparer.QuickCompare.UI
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Init(comboBox1.SelectedIndex);
+            Init(cbRuleType.SelectedIndex);
         }
 
         private void btnTmp_Click(object sender, EventArgs e)

@@ -36,7 +36,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbRuleType = new System.Windows.Forms.ComboBox();
             this.btnTmp = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -65,7 +65,7 @@
             this.tableLayoutPanel1.Controls.Add(this.button4, 10, 7);
             this.tableLayoutPanel1.Controls.Add(this.button5, 2, 7);
             this.tableLayoutPanel1.Controls.Add(this.button6, 4, 7);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox1, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.cbRuleType, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.btnTmp, 3, 7);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -161,20 +161,20 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // comboBox1
+            // cbRuleType
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cbRuleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRuleType.FormattingEnabled = true;
+            this.cbRuleType.Items.AddRange(new object[] {
             "比对规则",
             "校验规则",
             "预处理规则",
             "全部"});
-            this.comboBox1.Location = new System.Drawing.Point(31, 469);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(119, 32);
-            this.comboBox1.TabIndex = 5;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cbRuleType.Location = new System.Drawing.Point(31, 469);
+            this.cbRuleType.Name = "cbRuleType";
+            this.cbRuleType.Size = new System.Drawing.Size(119, 32);
+            this.cbRuleType.TabIndex = 5;
+            this.cbRuleType.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // btnTmp
             // 
@@ -213,7 +213,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbRuleType;
         private System.Windows.Forms.Button btnTmp;
     }
 }

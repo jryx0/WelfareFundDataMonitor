@@ -17,40 +17,6 @@
     <Setting Name="ResultDir" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ReferTableSql" Type="System.String" Scope="User">
-      <Value Profile="(Default)">CREATE TABLE IF NOT EXISTS refertable
-(
-RowID      INTEGER      PRIMARY KEY AUTOINCREMENT,
-ID         VARCHAR (20),
-sRelateID  VARCHAR (20),
-sDataDate  DATETIME (0),
-InputID    VARCHAR (20),
-Name       VARCHAR (20),
-Region       VARCHAR (20),
-Addr       VARCHAR (20),
-DataDate   VARCHAR (20),
-Amount     DOUBLE (0),
-AmountType VARCHAR (20),
-RelateID   VARCHAR (20),
-RelateName VARCHAR (20),
-Relation   VARCHAR (20),
-Type       VARCHAR (20),
-ItemType       VARCHAR (20),
-Number     VARCHAR (20),
-Area       DOUBLE (0),
-DataDate1 varchar(20),
-Serial1    varchar(30),
-Serial2    varchar(30) 
-); 
-
-DROP INDEX IF EXISTS index_refertable; 
-
-CREATE INDEX index_refertable ON refertable
-(
-RowID ASC,
-ID ASC
-); </Value>
-    </Setting>
     <Setting Name="ImportDBFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">ImportData</Value>
     </Setting>
@@ -60,17 +26,53 @@ ID ASC
     <Setting Name="CurentRegionName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1.5</Value>
-    </Setting>
     <Setting Name="IsFirst" Type="System.String" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="MainDBFile" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Data\config.Uncryt</Value>
+      <Value Profile="(Default)">Data\config.cryt</Value>
+    </Setting>
+    <Setting Name="ReferTableSql" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+          CREATE TABLE IF NOT EXISTS refertable
+          (
+          RowID      INTEGER      PRIMARY KEY AUTOINCREMENT,
+          ID         VARCHAR (20),
+          sRelateID  VARCHAR (20),
+          sDataDate  DATETIME (0),
+          InputID    VARCHAR (20),
+          Name       VARCHAR (20),
+          Region       VARCHAR (20),
+          Addr       VARCHAR (20),
+          DataDate   VARCHAR (20),
+          Amount     DOUBLE (0),
+          AmountType VARCHAR (20),
+          RelateID   VARCHAR (20),
+          RelateName VARCHAR (20),
+          Relation   VARCHAR (20),
+          Type       VARCHAR (20),
+          ItemType       VARCHAR (20),
+          Number     VARCHAR (20),
+          Area       DOUBLE (0),
+          DataDate1 varchar(20),
+          Serial1    varchar(30),
+          Serial2    varchar(30)
+          );
+
+          DROP INDEX IF EXISTS index_refertable;
+
+          CREATE INDEX index_refertable ON refertable
+          (
+          RowID ASC,
+          ID ASC
+          );
+        </Value>
+    </Setting>
+    <Setting Name="Version" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2.0</Value>
     </Setting>
     <Setting Name="WebServicesUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://156.18.1.93/</Value>
+      <Value Profile="(Default)">http://localhost:63962/</Value>
     </Setting>
   </Settings>
 </SettingsFile>

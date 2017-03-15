@@ -56,6 +56,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tbPara = new System.Windows.Forms.TextBox();
             this.btnTmp = new System.Windows.Forms.Button();
+            this.cmbType = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tbSeq = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -79,7 +83,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbRuleName.Location = new System.Drawing.Point(74, 5);
             this.tbRuleName.Name = "tbRuleName";
-            this.tbRuleName.Size = new System.Drawing.Size(728, 27);
+            this.tbRuleName.Size = new System.Drawing.Size(794, 27);
             this.tbRuleName.TabIndex = 1;
             // 
             // tabControl1
@@ -91,10 +95,10 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(74, 270);
+            this.tabControl1.Location = new System.Drawing.Point(74, 255);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(728, 187);
+            this.tabControl1.Size = new System.Drawing.Size(794, 270);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPage1
@@ -103,7 +107,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(720, 154);
+            this.tabPage1.Size = new System.Drawing.Size(786, 237);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "明细";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -115,7 +119,7 @@
             this.tbDetail.Multiline = true;
             this.tbDetail.Name = "tbDetail";
             this.tbDetail.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbDetail.Size = new System.Drawing.Size(714, 148);
+            this.tbDetail.Size = new System.Drawing.Size(780, 231);
             this.tbDetail.TabIndex = 0;
             // 
             // tabPage2
@@ -207,13 +211,13 @@
             this.tbRulesComment.Multiline = true;
             this.tbRulesComment.Name = "tbRulesComment";
             this.tbRulesComment.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbRulesComment.Size = new System.Drawing.Size(728, 69);
+            this.tbRulesComment.Size = new System.Drawing.Size(794, 69);
             this.tbRulesComment.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 236);
+            this.label4.Location = new System.Drawing.Point(21, 222);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 21);
@@ -223,7 +227,7 @@
             // btnTest
             // 
             this.btnTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnTest.Location = new System.Drawing.Point(25, 488);
+            this.btnTest.Location = new System.Drawing.Point(25, 545);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(84, 32);
             this.btnTest.TabIndex = 6;
@@ -233,7 +237,7 @@
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(557, 488);
+            this.btnNew.Location = new System.Drawing.Point(623, 545);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(84, 32);
             this.btnNew.TabIndex = 6;
@@ -243,7 +247,7 @@
             // btnModify
             // 
             this.btnModify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnModify.Location = new System.Drawing.Point(368, 488);
+            this.btnModify.Location = new System.Drawing.Point(434, 545);
             this.btnModify.Name = "btnModify";
             this.btnModify.Size = new System.Drawing.Size(84, 32);
             this.btnModify.TabIndex = 6;
@@ -253,7 +257,7 @@
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.Location = new System.Drawing.Point(714, 488);
+            this.btnExit.Location = new System.Drawing.Point(780, 545);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(84, 32);
             this.btnExit.TabIndex = 6;
@@ -265,11 +269,13 @@
             // 
             this.cbTmp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbTmp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTmp.FormattingEnabled = true;
-            this.cbTmp.Location = new System.Drawing.Point(74, 233);
+            this.cbTmp.Location = new System.Drawing.Point(74, 219);
             this.cbTmp.Name = "cbTmp";
-            this.cbTmp.Size = new System.Drawing.Size(728, 28);
+            this.cbTmp.Size = new System.Drawing.Size(794, 28);
             this.cbTmp.TabIndex = 7;
+            this.cbTmp.SelectedIndexChanged += new System.EventHandler(this.cbTmp_SelectedIndexChanged);
             // 
             // cbTable1
             // 
@@ -277,13 +283,14 @@
             this.cbTable1.FormattingEnabled = true;
             this.cbTable1.Location = new System.Drawing.Point(74, 116);
             this.cbTable1.Name = "cbTable1";
-            this.cbTable1.Size = new System.Drawing.Size(180, 28);
+            this.cbTable1.Size = new System.Drawing.Size(215, 28);
             this.cbTable1.TabIndex = 8;
+            this.cbTable1.SelectedIndexChanged += new System.EventHandler(this.cbTable1_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(268, 119);
+            this.label5.Location = new System.Drawing.Point(306, 119);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 21);
@@ -296,16 +303,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbTable2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTable2.FormattingEnabled = true;
-            this.cbTable2.Location = new System.Drawing.Point(326, 116);
+            this.cbTable2.Location = new System.Drawing.Point(363, 116);
             this.cbTable2.Name = "cbTable2";
-            this.cbTable2.Size = new System.Drawing.Size(208, 28);
+            this.cbTable2.Size = new System.Drawing.Size(215, 28);
             this.cbTable2.TabIndex = 9;
+            this.cbTable2.SelectedIndexChanged += new System.EventHandler(this.cbTable1_SelectedIndexChanged);
             // 
             // label6
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(567, 119);
+            this.label6.Location = new System.Drawing.Point(591, 119);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 21);
@@ -317,10 +325,11 @@
             this.cbTable3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbTable3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTable3.FormattingEnabled = true;
-            this.cbTable3.Location = new System.Drawing.Point(622, 116);
+            this.cbTable3.Location = new System.Drawing.Point(653, 116);
             this.cbTable3.Name = "cbTable3";
-            this.cbTable3.Size = new System.Drawing.Size(180, 28);
+            this.cbTable3.Size = new System.Drawing.Size(215, 28);
             this.cbTable3.TabIndex = 9;
+            this.cbTable3.SelectedIndexChanged += new System.EventHandler(this.cbTable1_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -340,24 +349,66 @@
             this.tbPara.Multiline = true;
             this.tbPara.Name = "tbPara";
             this.tbPara.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbPara.Size = new System.Drawing.Size(728, 74);
+            this.tbPara.Size = new System.Drawing.Size(504, 58);
             this.tbPara.TabIndex = 10;
             // 
             // btnTmp
             // 
             this.btnTmp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnTmp.Location = new System.Drawing.Point(157, 488);
+            this.btnTmp.Location = new System.Drawing.Point(157, 545);
             this.btnTmp.Name = "btnTmp";
             this.btnTmp.Size = new System.Drawing.Size(84, 32);
             this.btnTmp.TabIndex = 6;
             this.btnTmp.Text = "生成模板";
             this.btnTmp.UseVisualStyleBackColor = true;
             // 
+            // cmbType
+            // 
+            this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Items.AddRange(new object[] {
+            "比对规则",
+            "校验规则",
+            "预处理规则"});
+            this.cmbType.Location = new System.Drawing.Point(653, 183);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(215, 28);
+            this.cmbType.TabIndex = 11;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(600, 190);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(46, 21);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "类型:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(600, 156);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(46, 21);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "顺序:";
+            // 
+            // tbSeq
+            // 
+            this.tbSeq.Location = new System.Drawing.Point(653, 150);
+            this.tbSeq.Name = "tbSeq";
+            this.tbSeq.Size = new System.Drawing.Size(215, 27);
+            this.tbSeq.TabIndex = 12;
+            // 
             // 规则设计
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 534);
+            this.ClientSize = new System.Drawing.Size(880, 591);
+            this.Controls.Add(this.tbSeq);
+            this.Controls.Add(this.cmbType);
             this.Controls.Add(this.tbPara);
             this.Controls.Add(this.cbTable3);
             this.Controls.Add(this.cbTable2);
@@ -372,6 +423,8 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tbRuleName);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -426,5 +479,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbPara;
         private System.Windows.Forms.Button btnTmp;
+        private System.Windows.Forms.ComboBox cmbType;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox tbSeq;
     }
 }

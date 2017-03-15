@@ -10,6 +10,20 @@
         public string TmpSql { set; get; }
 
         public int Seq { set; get; }
-        public bool Status { set; get; }
+        public int Status { set; get; }
+
+        public static string GetSql()
+        {
+            return @"
+                        SELECT CompRuleTmpAttr.RowID,
+                               CompRuleTmpAttr.TmpID,
+                               CompRuleTmpAttr.Name,
+                               CompRuleTmpAttr.TmpSql,
+                               CompRuleTmpAttr.Status,
+                               CompRuleTmpAttr.Seq
+                          FROM CompRuleTmpAttr
+                         WHERE 1 = 1 @para
+                         ORDER BY CompRuleTmpAttr.Seq";
+        }
     }
 }

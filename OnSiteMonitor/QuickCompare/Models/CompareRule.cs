@@ -16,7 +16,9 @@ namespace OnSiteFundComparer.QuickCompare.Models
         public string TableName { set; get; }
 
         public int Seq { set; get; }
-        public bool Status { set; get; }
+        public int Status { set; get; }
+
+        public CompareRulesTypes RuleType { set; get; }
 
         public CompareRuleTmp RuleTmp { set; get; }
         public List<CompareRuleAtrr> Attriutes { set; get; }
@@ -25,17 +27,24 @@ namespace OnSiteFundComparer.QuickCompare.Models
         {
             return @"SELECT CompRule.RowID,
                            CompRule.SourceID,
-                           CompRule.RuleName,
-                           CompRule.RuleDesc,
-                           CompRule.TableName,
-                           CompRule.RuleTmp,
+                           CompRule.RuleName 规则名称,
+                           CompRule.RuleDesc 规则描述,
+                           CompRule.TableName 存储表,
+                           CompRule.RuleTmp  ,
                            CompRule.Status,
+                           CompRule.RuleType 规则类型,
                            CompRule.Seq
                       FROM CompRule
-                     WHERE 1 = 1 AND 
-                           status = 1
+                     WHERE 1 = 1 @para
                      ORDER BY CompRule.SourceID,
                               CompRule.Seq";
         }
+    }
+
+    public enum CompareRulesTypes
+    {
+        Compare = 0,
+        Check = 1,
+        Preprocess = 2 
     }
 }

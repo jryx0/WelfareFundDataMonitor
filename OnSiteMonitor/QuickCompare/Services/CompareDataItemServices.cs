@@ -8,13 +8,17 @@ using OnSiteFundComparer.DAL;
 
 namespace OnSiteFundComparer.QuickCompare.Services
 {
-    public class CompareDataItemServices : CompareServices
+    public class CompareDataItemServices : CompareServices<Models.CompareDataItem>
     {
+        public CompareDataItemServices() : base()
+        {
+        }
+
         public CompareDataItemServices(MySqlite _sqlite) : base(_sqlite)
         {
         }
 
-        public List<Models.CompareDataItem> GetAllDataItems()
+        private List<Models.CompareDataItem> GetAllDataItems()
         {
             List<Models.CompareDataItem> diList = new List<Models.CompareDataItem>();
 
@@ -30,7 +34,7 @@ namespace OnSiteFundComparer.QuickCompare.Services
         }
         public List<Models.CompareDataItem> GetDisplayDataItems()
         {
-            var cdiList = GetAllDataItems().Where(x => x.Status).ToList();
+            var cdiList = GetAllDataItems().Where(x => x.Status == 1 ).ToList();
 
             BuildDataItemStruct(cdiList);
             return cdiList;             
@@ -97,8 +101,9 @@ namespace OnSiteFundComparer.QuickCompare.Services
 
             return strRet;
         }
-
-        private Models.CompareDataItem Mapor(SQLiteDataReader reader)
+        
+        
+        override protected Models.CompareDataItem Mapor(SQLiteDataReader reader)
         {
             Models.CompareDataItem cdi = new Models.CompareDataItem();
 
@@ -114,7 +119,7 @@ namespace OnSiteFundComparer.QuickCompare.Services
             cdi.DataFullName = reader.GetValue(4).ToString();
             cdi.DataLink = Convert.ToInt32(reader.GetValue(5));
             cdi.Datapath = reader.GetValue(6).ToString();
-            cdi.Status = (bool)reader.GetValue(7);
+            cdi.Status = Convert.ToInt32( reader.GetValue(7));
             cdi.Seq = Convert.ToInt32(reader.GetValue(8));
             //fi.CreateDate = reader.GetValue(9).ToString();
             cdi.dbTable = reader.GetValue(10).ToString();
@@ -126,6 +131,11 @@ namespace OnSiteFundComparer.QuickCompare.Services
 
 
             return cdi;
+        }
+
+        protected override string SelectSql()
+        {
+            return Models.CompareDataItem.SelectSql();
         }
     }
 }

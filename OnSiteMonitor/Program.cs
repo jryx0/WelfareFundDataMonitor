@@ -25,31 +25,14 @@ namespace OnSiteFundComparer
         [STAThread]
         static void Main(String[] args)
         {
-            //if (args.Length == 0)
-            //    return;
-
-            //var para = args[0].Split(';');
-            //if (para.Length != 3)
-            //    return;
-
-            //MessageBox.Show("Para:" + para[0] + para[1] + para[2]);
-
             GlobalEnviroment.InitEnviroment();
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //Application.Run(new Test.测试());
-            
-            //Application.Run(new MainForm());
-
-
-            Application.Run(new LoginContext()); 
-           
-            
-            
+            Application.Run(new LoginContext());             
         }
     }
+
     public class GlobalEnviroment
     {
     
