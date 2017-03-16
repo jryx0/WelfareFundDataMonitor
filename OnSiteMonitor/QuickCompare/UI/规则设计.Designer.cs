@@ -128,7 +128,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(720, 154);
+            this.tabPage2.Size = new System.Drawing.Size(786, 237);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "汇总";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -140,7 +140,7 @@
             this.tbReport.Multiline = true;
             this.tbReport.Name = "tbReport";
             this.tbReport.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbReport.Size = new System.Drawing.Size(714, 148);
+            this.tbReport.Size = new System.Drawing.Size(780, 231);
             this.tbReport.TabIndex = 0;
             // 
             // tabPage3
@@ -148,7 +148,7 @@
             this.tabPage3.Controls.Add(this.tbPreProcess);
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(720, 154);
+            this.tabPage3.Size = new System.Drawing.Size(786, 237);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "预处理";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -160,7 +160,7 @@
             this.tbPreProcess.Multiline = true;
             this.tbPreProcess.Name = "tbPreProcess";
             this.tbPreProcess.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbPreProcess.Size = new System.Drawing.Size(720, 154);
+            this.tbPreProcess.Size = new System.Drawing.Size(786, 237);
             this.tbPreProcess.TabIndex = 0;
             // 
             // tabPage4
@@ -168,7 +168,7 @@
             this.tabPage4.Controls.Add(this.tbPostProcess);
             this.tabPage4.Location = new System.Drawing.Point(4, 29);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(720, 154);
+            this.tabPage4.Size = new System.Drawing.Size(786, 237);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "后处理";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -180,7 +180,7 @@
             this.tbPostProcess.Multiline = true;
             this.tbPostProcess.Name = "tbPostProcess";
             this.tbPostProcess.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbPostProcess.Size = new System.Drawing.Size(720, 154);
+            this.tbPostProcess.Size = new System.Drawing.Size(786, 237);
             this.tbPostProcess.TabIndex = 0;
             // 
             // label2
@@ -399,6 +399,7 @@
             // 
             this.tbSeq.Location = new System.Drawing.Point(653, 150);
             this.tbSeq.Name = "tbSeq";
+            this.tbSeq.ReadOnly = true;
             this.tbSeq.Size = new System.Drawing.Size(215, 27);
             this.tbSeq.TabIndex = 12;
             // 
