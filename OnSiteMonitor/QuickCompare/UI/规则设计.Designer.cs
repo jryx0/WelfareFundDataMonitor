@@ -399,9 +399,9 @@
             // 
             this.tbSeq.Location = new System.Drawing.Point(653, 150);
             this.tbSeq.Name = "tbSeq";
-            this.tbSeq.ReadOnly = true;
             this.tbSeq.Size = new System.Drawing.Size(215, 27);
             this.tbSeq.TabIndex = 12;
+            this.tbSeq.Text = "0";
             // 
             // 规则设计
             // 
