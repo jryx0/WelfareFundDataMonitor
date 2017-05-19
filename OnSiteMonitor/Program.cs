@@ -154,7 +154,7 @@ namespace OnSiteFundComparer
 
             DataTable dt = new DataTable();
             int readlines = 0;
-            int colnumbers = 15;
+            int colnumbers = 20;
             string ext = Path.GetExtension(FileName);
 
             
@@ -718,18 +718,21 @@ namespace OnSiteFundComparer
                 }
             else if (cell.CellType == CellType.Numeric)
             {
-                short format = cell.CellStyle.DataFormat;
-                if (format == 14 || format == 31 || format == 57 || format == 58 || format == 27 || format == 176)
-                    try
-                    {
+                try
+                {
+                    short format = cell.CellStyle.DataFormat;
+                    if (format == 14 || format == 31 || format == 57 || format == 58 || format == 27 || format == 176)
                         strValue = cell.DateCellValue.ToShortDateString();
-                    }
-                    catch (Exception ex)
-                    {
-                        strValue = cell.ToString();
-                    }
-                else
-                    strValue = cell.NumericCellValue.ToString();
+                    else
+                        strValue = cell.NumericCellValue.ToString();
+                }
+                catch (Exception ex)
+                {
+                    if (cell.DateCellValue != null)
+                        strValue = cell.DateCellValue.ToShortDateString();
+                    else strValue = "";
+
+                }
                 //strValue = cell.ToString();
             }
             else if (cell.CellType == CellType.Error)

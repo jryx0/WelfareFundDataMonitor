@@ -90,6 +90,9 @@ namespace OnSiteFundComparer.UI.线索管理
             if (er.dataRow == null)
                 return;
 
+            if (er.dataRow.ItemArray.Count() < 11)
+                return;
+
             if (er.dataRow[2].ToString().Length < 15)
                 return;
 

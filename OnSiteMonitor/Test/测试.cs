@@ -313,6 +313,9 @@ namespace OnSiteFundComparer.Test
 
         private void SetTestPass(int rowIndex)
         {
+            if (dataGridView1.Rows[rowIndex].Cells[4].Value == null || dataGridView1.Rows[rowIndex].Cells[5].Value == null)
+                return;
+
             SetTestPass(rowIndex, dataGridView1.Rows[rowIndex].Cells[4].Value.ToString()
                     , dataGridView1.Rows[rowIndex].Cells[5].Value.ToString());
         }

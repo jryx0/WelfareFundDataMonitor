@@ -9,7 +9,7 @@ namespace OnSiteFundComparer.QuickCompare.Models
     {
         public int RowID { set; get; }
         public CompareDataItem ParentItem { set; get; }
-
+        
         public string RuleName { set; get; }
         public string RuleDesc { set; get; }
 

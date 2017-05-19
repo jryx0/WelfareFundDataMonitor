@@ -108,9 +108,10 @@ namespace OnSiteFundComparer.QuickCompare.UI
             CurrentRule.RuleType = (Models.CompareRulesTypes)cmbType.SelectedIndex;
             CurrentRule.Status = 1;
 
+            CurrentRule.ParentItem =  (Models.CompareDataItem)cbTable1.SelectedItem;
+
             int Seq = 0;
-            int.TryParse(tbSeq.Text, out Seq);
-            Seq = GetRuleSeq() | (Seq & 0x000F);
+            int.TryParse(tbSeq.Text, out Seq);            
             CurrentRule.Seq = Seq;
 
             CurrentRule.TableName = "tb" + Seq.ToString("X");
@@ -141,18 +142,23 @@ namespace OnSiteFundComparer.QuickCompare.UI
             
         }
 
-        private int GetRuleSeq()
-        {
-            int Seq = 0;
-            var cdi1 = (Models.CompareDataItem)cbTable1.SelectedItem;
-            if (cdi1 != null && cdi1.ParentItem != null)
-                Seq = Seq | (cdi1.ParentItem.Seq & 0x000F) << 24 | (cdi1.ParentItem.Seq) << 16;
+        //private int GetRuleSeq()
+        //{
+        //    int Seq = 0;
+          
+        //    var cdi2 = (Models.CompareDataItem)cbTable2.SelectedItem;
+        //    if (cdi2 != null && cdi2.ParentItem != null)
+        //        Seq = Seq | (cdi2.ParentItem.Seq & 0x000F) << 30 | (cdi2.ParentItem.Seq) << 24;
 
-            var tmp = (Models.CompareRuleTmp)cbTmp.SelectedItem;
-            if (tmp != null)
-                Seq = Seq | (tmp.Seq & 0x000F) << 8; 
+        //    var cdi3 = (Models.CompareDataItem)cbTable3.SelectedItem;
+        //    if (cdi3 != null && cdi3.ParentItem != null)
+        //        Seq = Seq | (cdi3.ParentItem.Seq & 0x000F) << 28 | (cdi3.ParentItem.Seq) << 16;
 
-            return Seq;
-        }
+        //    var tmp = (Models.CompareRuleTmp)cbTmp.SelectedItem;
+        //    if (tmp != null)
+        //        Seq = Seq | (tmp.Seq & 0x000F) << 8; 
+
+        //    return Seq;
+        //}
     }
 }
