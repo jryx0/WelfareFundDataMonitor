@@ -217,7 +217,7 @@ namespace OnSiteFundComparer
             {
                 IRow row;
                 if (ext == ".xls") row = (HSSFRow)rows.Current;
-                else row = (XSSFRow)rows.Current;
+                else   return null;
 
                 if (readlines == 0)
                     for (int j = 0; j < dataFormat.Count - 1; j++)
@@ -225,7 +225,7 @@ namespace OnSiteFundComparer
 
                // if (readlines++ > top) break;
                 if (readlines++ < dataFormat[0].colNumber - 1) continue;
-                if (readlines == 95)
+                if (readlines == 221)
                 {
                 }//for debug 
 
@@ -722,18 +722,30 @@ namespace OnSiteFundComparer
                 {
                     short format = cell.CellStyle.DataFormat;
                     if (format == 14 || format == 31 || format == 57 || format == 58 || format == 27 || format == 176)
-                        strValue = cell.DateCellValue.ToShortDateString();
-                    else
-                        strValue = cell.NumericCellValue.ToString();
+                        try
+                        {
+                            strValue = cell.DateCellValue.ToShortDateString();
+                        }
+                        catch
+                        {
+                            strValue = cell.ToString();
+                        }
+                    else try
+                        {
+                            strValue = cell.NumericCellValue.ToString();
+                        }
+                        catch
+                        {
+                            strValue = cell.ToString();
+                        } 
                 }
                 catch (Exception ex)
                 {
                     if (cell.DateCellValue != null)
                         strValue = cell.DateCellValue.ToShortDateString();
-                    else strValue = "";
-
+                    else
+                        strValue = String.Empty;
                 }
-                //strValue = cell.ToString();
             }
             else if (cell.CellType == CellType.Error)
                 strValue = cell.ErrorCellValue.ToString();

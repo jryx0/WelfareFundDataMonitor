@@ -259,7 +259,7 @@ namespace OnSiteFundComparer.UI
 
 
                 Erik.Utilities.Lib.StartProgressiveOperation(xlsCluePO, this);
-                if (xlsCluePO.resultDT == null)
+                if (xlsCluePO.resultDT == null )
                 {
                     MessageBox.Show("未发现核查数据");
                     return;
@@ -338,7 +338,7 @@ namespace OnSiteFundComparer.UI
             this.Cursor = Cursors.AppStarting;
             try
             {
-                //get clue to list
+                //get clue to list              
                 var ds = result.ExecuteDataset(SqlSelect);
                 if (ds == null || ds.Tables[0].Rows.Count == 0)
                 {
@@ -356,7 +356,7 @@ namespace OnSiteFundComparer.UI
                     c.RowID = tmpi;
 
                     c.ID = dr[1].ToString();
-                    c.Addr = dr[2].ToString();
+                    c.Addr = dr[2].ToString(); 
                     c.Region = dr[3].ToString();
 
                     tmpi = 0;
@@ -368,7 +368,7 @@ namespace OnSiteFundComparer.UI
                     c.IsCP = tmpi;
                     
 
-                    c.Fact = dr[6].ToString();
+                    c.Fact = dr[6].ToString(); 
 
                     float tmpf = 0.0f;
                     float.TryParse(dr[7].ToString(), out tmpf);
@@ -384,8 +384,8 @@ namespace OnSiteFundComparer.UI
                         c.CheckDate = dt;
                     }
 
-                    c.CheckByName1 = dr[9].ToString();
-                    c.CheckByName2 = dr[10].ToString();
+                    c.CheckByName1 = dr[9].ToString() ;
+                    c.CheckByName2 = dr[10].ToString() ;
 
                     c.ReCheckFact = dr[11].ToString();
 
@@ -422,6 +422,7 @@ namespace OnSiteFundComparer.UI
 
                 btnQuery_Click(null, null);
                 MessageBox.Show("上传数据：" + cList.Count + ", 成功：" + success);
+
             }
             catch(Exception ex )
             {
@@ -429,9 +430,9 @@ namespace OnSiteFundComparer.UI
             }
 
             this.Cursor = Cursors.Arrow;
-        } 
+        }
 
-        public static int UpdateRemoteClues(String _dbFile, IEnumerable< WFM.JW.HB.Models.Clues> _clues, IWin32Window owner)
+        public static int UpdateRemoteClues(String _dbFile, IEnumerable<WFM.JW.HB.Models.Clues> _clues, IWin32Window owner)
         {
             String SqlUpdate = @"Update Clue_Report set isuploaded = @isuploaded where rowid = @rowid";
 
@@ -440,17 +441,22 @@ namespace OnSiteFundComparer.UI
 
             DAL.MySqlite result = new DAL.MySqlite(_dbFile, GlobalEnviroment.isCryt);
             int success = 0;
-            try { 
-            foreach (var c in uploader.returnList)
-            {//update local db
-                if (c.IsConfirmed == 1) success++;
-                string sql = SqlUpdate.Replace("@rowid", c.RowID.ToString());
-                sql = sql.Replace("@isuploaded", c.IsConfirmed.ToString());
-                result.ExecuteNonQuery(sql);
-            }
-            }catch(Exception ex)
+            try
             {
-
+                result.BeginTran();
+                foreach (var c in uploader.returnList)
+                {//update local db
+                    
+                    if (c.IsConfirmed == 1) success++;
+                    string sql = SqlUpdate.Replace("@rowid", c.RowID.ToString());
+                    sql = sql.Replace("@isuploaded", c.IsConfirmed.ToString());
+                    result.ExecuteNonQuery(sql);
+                }
+                result.Commit();
+            }
+            catch (Exception ex)
+            {
+                result.RollBack();
             }
             return success;
         }
@@ -603,7 +609,7 @@ namespace OnSiteFundComparer.UI
                                                             new System.Data.SQLite.SQLiteParameter("@ID", condition)
                                                         });
 
-                
+
                 int total = 0;
                 int.TryParse(count.ToString(), out total);
 

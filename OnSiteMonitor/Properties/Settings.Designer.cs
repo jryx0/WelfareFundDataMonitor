@@ -122,15 +122,6 @@ namespace OnSiteFundComparer.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data\\config.cryt")]
-        public string MainDBFile {
-            get {
-                return ((string)(this["MainDBFile"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"
@@ -176,27 +167,36 @@ namespace OnSiteFundComparer.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2.0")]
-        public string Version {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data\\config.js.cryt")]
+        public string MainDBFile {
             get {
-                return ((string)(this["Version"]));
-            }
-            set {
-                this["Version"] = value;
+                return ((string)(this["MainDBFile"]));
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:63962/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://156.18.1.93/")]
         public string WebServicesUrl {
             get {
                 return ((string)(this["WebServicesUrl"]));
             }
             set {
                 this["WebServicesUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.0")]
+        public string Version {
+            get {
+                return ((string)(this["Version"]));
+            }
+            set {
+                this["Version"] = value;
             }
         }
     }

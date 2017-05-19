@@ -174,8 +174,28 @@ where Status = 1 and username=@usernam and password=@password",
 
             if (versioninfo.Length != 0)
             {
-                MessageBox.Show(versioninfo, "版本升级", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
+                var sqls = versioninfo.Split(';');
+                if (sqls.Length > 1)
+                {
+                    DAL.MySqlite _sqlite = new DAL.MySqlite(GlobalEnviroment.MainDBFile, GlobalEnviroment.isCryt);
+                    try
+                    {
+                        Properties.Settings.Default.Version = sqls[1];
+                        Properties.Settings.Default.Save();
+
+                        for (int i = 2; i < sqls.Length; i++)
+                            _sqlite.ExecuteNonQuery(sqls[i]);
+                    }
+                    catch
+                    {
+
+                    }                    
+                }
+                else
+                {
+                    MessageBox.Show(sqls[0], "版本升级", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
             }
 
 

@@ -11,7 +11,7 @@ namespace OnSiteFundComparer.UI.线索管理
     public class UploadCluePO : BaseProgressiveOperation
     {
         private List<WFM.JW.HB.Models.Clues> _clueList;
-        private int pageSize = 5;
+        private int pageSize = 15;
 
         public List<WFM.JW.HB.Models.Clues> returnList = new List<WFM.JW.HB.Models.Clues>();
         public UploadCluePO(List<WFM.JW.HB.Models.Clues> cList)
@@ -27,6 +27,7 @@ namespace OnSiteFundComparer.UI.线索管理
 
         public override void Start()
         {
+            double _currentProgress = 0.0f;
             _currentStep = 0;
             OnOperationProgress(EventArgs.Empty);
 
@@ -53,7 +54,12 @@ namespace OnSiteFundComparer.UI.线索管理
 
                 returnList.AddRange(rlist);
 
-                _currentStep += (i+1) * pageSize;
+                _currentProgress += (pageSize) * 100.0f / _totalSteps;
+                _currentStep = (int)(_currentProgress);
+
+                if (_currentStep > 100) _currentStep = 9;
+
+                OnOperationProgress(EventArgs.Empty);
             }
             OnOperationEnd(EventArgs.Empty);
 

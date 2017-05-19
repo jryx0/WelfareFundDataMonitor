@@ -482,12 +482,7 @@ namespace OnSiteFundComparer
         /// <param name="e"></param>
         private void radTitlesystemSetting_Click(object sender, EventArgs e)
         {
-            if (currentUser.Name.ToLower() == "admin")
-            {
-
-                new Test.测试().Show();
-            }
-            else if (new 系统设置().ShowDialog() == DialogResult.OK)
+            if (new 系统设置().ShowDialog() == DialogResult.OK)
             {
                 this.regionLabel.Text = "地区:  " + Properties.Settings.Default.CurentRegionName; //"Demo Apps Hub";
                 //headerLabel.Text = headerString + Properties.Settings.Default.CurentRegionName;
@@ -531,7 +526,12 @@ namespace OnSiteFundComparer
         /// <param name="e"></param>
         private void radTileNewRules_Click(object sender, EventArgs e)
         {
-            new QuickCompare.UI.规则管理().ShowDialog();
+            if (currentUser.Name.ToLower() == "admin")
+            {
+
+                new Test.测试().Show();
+            }
+           
         }
     }
 

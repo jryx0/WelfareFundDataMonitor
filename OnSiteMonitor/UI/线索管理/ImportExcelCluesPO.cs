@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Data.SQLite;
 using System.Data;
+using System.Windows.Forms;
 
 namespace OnSiteFundComparer.UI.线索管理
 {
@@ -29,7 +30,9 @@ namespace OnSiteFundComparer.UI.线索管理
 
             OperationProgress += (sender, e) =>
              {
-                 DoWork(e);
+                 
+                     DoWork(e);
+                  
              };
 
             OperationEnd += (sender, e) =>
@@ -90,8 +93,12 @@ namespace OnSiteFundComparer.UI.线索管理
             if (er.dataRow == null)
                 return;
 
-            if (er.dataRow.ItemArray.Count() < 11)
+            if(er.dataRow.ItemArray.Length < 11)
+            {
+                throw new Exception("文件格式出错，可能文件损坏，请另存文件，再次导入！");
+                //MessageBox.Show("文件格式出错，可能文件损坏，请另存文件，再次导入！", "错误", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                 return;
+            }
 
             if (er.dataRow[2].ToString().Length < 15)
                 return;

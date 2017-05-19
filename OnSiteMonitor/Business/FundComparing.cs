@@ -452,7 +452,7 @@ namespace OnSiteFundComparer.Business
             var summaryDT = ImportSqliteDB.ExecuteDataset(summarySql);
             if (summaryDT != null && summaryDT.Tables[0].Rows.Count != 0)
             {
-                 SaveToExcelFile(ResultExcelDir ,  regionName + "惠民政策监督检查问题线索总表", summaryDT.Tables[0]);
+                 SaveToExcelFile(ResultExcelDir ,  regionName + "精准扶贫政策落实情况大数据检查问题线索总表", summaryDT.Tables[0]);
 
                 //reportFile.AddSummarySheet(regionName + "惠民政策监督检查问题线索统计表", summaryDT.Tables[0]);
                 //reportFile.SaveExcelXml(ResultExcelDir + regionName + "惠民政策监督检查问题线索总表.xls");
@@ -463,7 +463,7 @@ namespace OnSiteFundComparer.Business
                 var dt = GetDataTable(ImportSqliteDB, ItemSql.Replace("@table1", di.RowID.ToString()));
                 if (dt != null && dt.Rows.Count != 0)
                 {
-                    var newdt = SreeenDataTable(dt, "线索类型 LIKE '%不一致%' AND 线索类型 NOT LIKE '%+%'", "乡镇街道, 地址, 身份证号");
+                    var newdt = SreeenDataTable(dt, "线索类型 LIKE '%不一致%' AND 线索类型 NOT LIKE '%+%'  ", "乡镇街道, 地址, 身份证号");
                     if (newdt.Rows != null || newdt.Rows.Count != 0)
                         SaveToExcelFile(ResultExcelDir + di.DataShortName + "\\", regionName + "数据录入问题", newdt);
 
@@ -590,14 +590,14 @@ namespace OnSiteFundComparer.Business
                                                    table1
                                               FROM Clue_report
                                              WHERE type LIKE '%不一致%' AND 
-                                                   type NOT LIKE '%+%'
+                                                   type NOT LIKE '%+%' And table1 != 51
                                              GROUP BY table1) b ON a.table1 = b.table1
                                            left JOIN
                                            (SELECT count() 问题数,
                                                    table1
                                               FROM Clue_report
                                              WHERE (type NOT LIKE '%不一致%' OR 
-                                                    type LIKE '%+%') 
+                                                    type LIKE '%+%' or table1 = 51) 
                                              GROUP BY table1) c ON a.table1 = c.table1";
 
             string TableSql = @"INSERT INTO Clue_report(Region,ID, Name, Addr, Type,DateRange,Comment,Table1) 
@@ -613,7 +613,7 @@ namespace OnSiteFundComparer.Business
                                         GROUP BY id,  table1
                                         ORDER BY region,type,id";
             string InputError = @"Update Clue_Report Set InputError = 1 where type LIKE '%不一致%' AND 
-                                                   type NOT LIKE '%+%'";
+                                                   type NOT LIKE '%+%' And table1 != 51";
 
             try
             {
